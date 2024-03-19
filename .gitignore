@@ -12,9 +12,10 @@ qinst-lite-linux-23.1std-991.run
 **/*.zip
 virtual_prototype/programms/camera/external/printf/
 
-virtual_prototype/systems/sandbox/
+virtual_prototype/systems/singleCore/sandbox/
 virtual_prototype/programms/external/printf/
 
 virtual_prototype/programms/grayscale/external/printf/
 
 virtual_prototype/programms/helloWorld/external/printf/
+
