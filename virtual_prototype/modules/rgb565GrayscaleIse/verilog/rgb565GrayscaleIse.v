@@ -15,9 +15,9 @@ module rgb565GrayscaleIse #(parameter [7:0] customInstructionId = 8'd0)
 
 
 
-    assign red = {27'b0, valueA[15:11]};
-    assign green = {26'b0, valueA[10:5]};
-    assign blue = {27'b0, valueA[4:0]};
+    assign red = {24'b0, valueA[15:11], 3'b0};
+    assign green = {24'b0, valueA[10:5], 2'b0};
+    assign blue = {24'b0, valueA[4:0], 3'b0};
     
     assign redMult = (red * 54);
     assign greenMult = (green * 183);

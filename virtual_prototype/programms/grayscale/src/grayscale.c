@@ -47,17 +47,21 @@ int main () {
     for (int line = 0; line < camParams.nrOfLinesPerImage; line++) {
       for (int pixel = 0; pixel < camParams.nrOfPixelsPerLine; pixel++) {
         uint16_t rgb = swap_u16(rgb565[line*camParams.nrOfPixelsPerLine+pixel]);
-
+        
+        uint32_t rgb32 = (uint32_t) rgb;
         uint32_t gray;
-        asm volatile("l.nios_rrr %[out1], r0,%[in2],0x0C":
+        asm volatile("l.nios_rrr %[out1],%[in1],r0,0x0C":
                           [out1]"=r"(gray):
-                          [in2]"r"(rgb));
-
-        //uint32_t red1 = ((rgb >> 11) & 0x1F) << 3;
-        //uint32_t green1 = ((rgb >> 5) & 0x3F) << 2;
-        //uint32_t blue1 = (rgb & 0x1F) << 3;
-        //uint32_t gray = ((red1*54+green1*183+blue1*19) >> 8)&0xFF;
+                          [in1]"r"(rgb32));
+        
+      /*
+        uint32_t red1 = ((rgb >> 11) & 0x1F) << 3;
+        uint32_t green1 = ((rgb >> 5) & 0x3F) << 2;
+        uint32_t blue1 = (rgb & 0x1F) << 3;
+        uint32_t gray = ((red1*54+green1*183+blue1*19) >> 8)&0xFF;
+        */
         grayscale[line*camParams.nrOfPixelsPerLine+pixel] = gray;
+        //printf("GRAY = %d\n", gray);
       }
     }
 
