@@ -25,7 +25,7 @@ module rgb565GrayscaleIse #(parameter [7:0] customInstructionId = 8'd0)
 
     assign grayscaleMult = redMult + greenMult + blueMult;
 
-    assign result = {24'b0, grayscaleMult[15:8]}
+    assign result = enableGeneral ? {24'b0, grayscaleMult[15:8]} : 32'b0;
 
     assign enableGeneral = (iseId == customInstructionId && start == 1'b1);
     assign done = enableGeneral;
