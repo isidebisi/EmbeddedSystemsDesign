@@ -595,7 +595,7 @@ rgb565GrayscaleIse #(.customInstructionId(8'h0C)) yourFatrgbGrayscaleBySugarDadd
                   .valueA(s_cpu1CiDataA),
                   .iseId(s_cpu1CiN),
                   .done(s_rgb565GrayscaleIseDone),
-                  .result(s_rgb565GrayscaleIseResult))
+                  .result(s_rgb565GrayscaleIseResult));
 
 
   /*
