@@ -9,7 +9,7 @@ module rgb565GrayscaleIse #(parameter [7:0] customInstructionId = 8'd0)
 
 
     wire enableGeneral;
-    wire [31:0] red, green, blue;
+    wire [31:0] red, green, blue, redMult, greenMult, blueMult grayscaleMult;
 
 
 
@@ -18,8 +18,17 @@ module rgb565GrayscaleIse #(parameter [7:0] customInstructionId = 8'd0)
     assign red = {27'b0, valueA[15:11]};
     assign green = {26'b0, valueA[10:5]};
     assign blue = {27'b0, valueA[4:0]};
+    
+    assign redMult = (red * 54)[31:0];
+    assign greenMult = (green * 183)[31:0];
+    assign blueMult = (blue * 19)[31:0];
+
+    assign grayscaleMult = redMult + greenMult + blueMult;
+
+    assign result = {24'b0, grayscaleMult[15:8]}
 
     assign enableGeneral = (iseId == customInstructionId && start == 1'b1);
+    assign done = enableGeneral;
 
 endmodule
 
