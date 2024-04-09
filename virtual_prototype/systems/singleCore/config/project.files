@@ -53,4 +53,6 @@
 ../../../modules/profile/verilog/counter.v
 ../../../modules/profile/verilog/profile.v
 ../../../modules/rgb565GrayscaleIse/verilog/rgb565GrayscaleIse.v
+../../../modules/ramDma/verilog/dualPortSSRAM.v
+../../../modules/ramDma/verilog/ramDmaCi.v
 ../verilog/or1420SingleCore.v
