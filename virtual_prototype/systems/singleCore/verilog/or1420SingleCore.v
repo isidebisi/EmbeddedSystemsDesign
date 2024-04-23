@@ -317,8 +317,8 @@ module or1420SingleCore ( input wire         clock12MHz,
   wire [7:0]  s_cpu1CiN;
   wire        s_cpu1CiRa, s_cpu1CiRb, s_cpu1CiRc, s_cpu1CiStart, s_cpu1CiCke, s_cpu1CiDone, s_i2cCiDone, s_delayCiDone;
   wire [4:0]  s_cpu1CiA, s_cpu1CiB, s_cpu1CiC;
-  wire        s_cpu1IcacheRequestBus, s_cpu1DcacheRequestBus, s_camCiDone;
-  wire        s_cpu1IcacheBusAccessGranted, s_cpu1DcacheBusAccessGranted;
+  wire        s_cpu1IcacheRequestBus, s_cpu1DcacheRequestBus, s_ramDmaRequestBus, s_camCiDone;
+  wire        s_cpu1IcacheBusAccessGranted, s_cpu1DcacheBusAccessGranted, s_ramDmaBusAccessGranted;
   wire        s_cpu1BeginTransaction, s_cpu1EndTransaction, s_cpu1ReadNotWrite;
   wire [31:0] s_cpu1AddressData, s_i2cCiResult;
   wire [3:0]  s_cpu1byteEnables;
@@ -598,16 +598,37 @@ rgb565GrayscaleIse #(.customInstructionId(8'h0C)) yourFatrgbGrayscaleBySugarDadd
                   .result(s_rgb565GrayscaleIseResult));
 
 
+
+wire s_DmaCiBusEndTransaction, s_DmaCiBusBeginTransaction, s_DmaCiBusReadNotWrite, s_DmaCiBusDataValid, s_DmaCiBusBusy;
+wire [3:0] s_DmaCiBusByteEnable;
+wire[31:0] s_DmaCiBusAddressData;
+wire[7:0] s_DmaCiburstSize;
+
 ramDmaCi #(.customId(8'h0D)) yourFatRamDmaBySuggarDaddy
           (.start(s_cpu1CiStart),
           .clock(s_systemClock),
           .reset(s_cpuReset),
+          .in_busGranted(s_ramDmaBusAccessGranted),
+          .in_busError(s_busError)
+          .in_busBusy(s_busy),
+          .in_busEndTransaction(s_endTransaction),
+          .in_busDataValid(s_dataValid),
           .valueA(s_cpu1CiDataA),
           .valueB(s_cpu1CiDataB),
+          .in_busAdressData(s_addressData),
           .ciN(s_cpu1CiN),
           .done(s_ramDmaCiDone),
-          .result(s_ramDmaCiResult));
-
+          .reg_outBusRequest(s_ramDmaRequestBus),
+          .reg_outBusByteEnable(s_DmaCiBusByteEnable)
+          .reg_outBusBeginTransaction(s_DmaCiBusBeginTransaction),
+          .reg_outBusEndTransaction(s_DmaCiBusEndTransaction),
+          .reg_outBusReadWrite(s_DmaCiBusReadNotWrite),
+          .reg_outBusDataValid(s_DmaCiBusDataValid),
+          .reg_outBusBusy(s_DmaCiBusBusy),
+          .result(s_ramDmaCiResult),
+          .reg_outBusAddressData(s_DmaCiBusAddressData),
+          .reg_outBusBurstSize(s_DmaCiburstSize)
+          );
   /*
    *
    * Here we define the bios
@@ -641,13 +662,15 @@ ramDmaCi #(.customId(8'h0D)) yourFatRamDmaBySuggarDaddy
  assign s_busRequests[31] = s_cpu1DcacheRequestBus;
  assign s_busRequests[30] = s_cpu1IcacheRequestBus;
  assign s_busRequests[29] = s_hdmiRequestBus;
- assign s_busRequests[28] =  s_camReqBus;
- assign s_busRequests[27:0] = 29'd0;
+ assign s_busRequests[28] = s_camReqBus;
+ assign s_busRequests[27] = s_ramDmaRequestBus;
+ assign s_busRequests[26:0] = 29'd0;
  
  assign s_cpu1DcacheBusAccessGranted = s_busGrants[31];
  assign s_cpu1IcacheBusAccessGranted = s_busGrants[30];
  assign s_hdmiBusgranted             = s_busGrants[29];
  assign s_camAckBus                  = s_busGrants[28];
+assign s_ramDmaBusAccessGranted      = s_busGrants[27];
 
  busArbiter arbiter ( .clock(s_systemClock),
                       .reset(s_reset),
@@ -669,17 +692,17 @@ ramDmaCi #(.customId(8'h0D)) yourFatRamDmaBySuggarDaddy
    *
    */
  assign s_busError         = s_arbBusError | s_biosBusError | s_uartBusError | s_sdramBusError | s_flashBusError;
- assign s_beginTransaction = s_cpu1BeginTransaction | s_hdmiBeginTransaction | s_camBeginTransaction;
+ assign s_beginTransaction = s_cpu1BeginTransaction | s_hdmiBeginTransaction | s_camBeginTransaction | s_DmaCiBusBeginTransaction;
  assign s_endTransaction   = s_cpu1EndTransaction | s_arbEndTransaction | s_biosEndTransaction | s_uartEndTransaction |
-                             s_sdramEndTransaction | s_hdmiEndTransaction | s_flashEndTransaction | s_camEndTransaction;
+                             s_sdramEndTransaction | s_hdmiEndTransaction | s_flashEndTransaction | s_camEndTransaction | s_endTransaction;
  assign s_addressData      = s_cpu1AddressData | s_biosAddressData | s_uartAddressData | s_sdramAddressData | s_hdmiAddressData |
-                             s_flashAddressData | s_camAddressData;
- assign s_byteEnables      = s_cpu1byteEnables | s_hdmiByteEnables | s_camByteEnables;
- assign s_readNotWrite     = s_cpu1ReadNotWrite | s_hdmiReadNotWrite;
+                             s_flashAddressData | s_camAddressData | s_DmaCiBusAddressData;
+ assign s_byteEnables      = s_cpu1byteEnables | s_hdmiByteEnables | s_camByteEnables | s_DmaCiBusByteEnable;
+ assign s_readNotWrite     = s_cpu1ReadNotWrite | s_hdmiReadNotWrite | s_DmaCiBusReadNotWrite;
  assign s_dataValid        = s_cpu1DataValid | s_biosDataValid | s_uartDataValid | s_sdramDataValid | s_hdmiDataValid | 
-                             s_flashDataValid | s_camDataValid;
+                             s_flashDataValid | s_camDataValid | s_DmaCiBusDataValid;
  assign s_busy             = s_sdramBusy;
- assign s_burstSize        = s_cpu1BurstSize | s_hdmiBurstSize | s_camBurstSize;
+ assign s_burstSize        = s_cpu1BurstSize | s_hdmiBurstSize | s_camBurstSize | s_DmaCiburstSize;
  
 
 
