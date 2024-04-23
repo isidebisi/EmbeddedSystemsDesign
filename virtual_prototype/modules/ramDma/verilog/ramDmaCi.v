@@ -50,7 +50,7 @@ wire [31:0] dataInA, dataOutA;
 
 // DMA variables for cpu DMA transactions
 reg [31:0] busStartAddress, memStartAdress, blockSize, burstSize, statReg, ctrlReg;
-wire [31:0] resultDMA;
+reg [31:0] resultDMA;
 reg dmaDone;
 
 // DMA variables for bus DMA transactions and final state machine
@@ -193,9 +193,9 @@ always @(posedge clock or posedge reset) begin
             
         endcase
     end
-    if (statReg[0] == 1) begin
-        ctrlReg[1:0] <= 2'b00;
-    end
+    
+    ctrlReg[1:0] <= 2'b00 ? (statReg[0] == 1'b1) : ctrlReg[1:0];
+    
 end
 
 
@@ -227,7 +227,7 @@ always @(posedge clock or posedge reset) begin
         reg_outBusBusy <= 1'b0;
         reg_outBusAddressData <= 32'h00000000;
         reg_outBusBurstSize <= 8'h00;
-        burstCount <= 8h'00;
+        burstCount <= 8'h00;
         readOrWrite <= 2'b00;
         burstNumber <= 9'h000;
         currentMemAddress <= 9'h000;
@@ -238,10 +238,12 @@ always @(posedge clock or posedge reset) begin
         
     end else begin
         reg_outBusByteEnable <= 4'h0;
+        reg_outBusBusy <= 1'b0;
+        
 
         case (state)
             IDLE: begin
-                if (ctrlReg[1:0] == 2'b10 or ctrlReg[1:0] == 2'b01) begin
+                if (ctrlReg[1:0] == 2'b10 | ctrlReg[1:0] == 2'b01) begin
                     state <= REQUEST;
                     readOrWrite <= ctrlReg[1:0];
                     reg_outBusEndTransaction <= 1'b0;
@@ -265,8 +267,8 @@ always @(posedge clock or posedge reset) begin
                 reg_outBusBurstSize <= burstSize[8:0];
                 reg_outBusAddressData <= busStartAddress;
                 
-                reg_outBusReadWrite <=  1b'0 ? readOrWrite == 2'b10 :
-                                        1b'1 ? readOrWrite == 2'b01 : 1'b0;
+                reg_outBusReadWrite <=  1'b0 ? readOrWrite == 2'b10 :
+                                        1'b1 ? readOrWrite == 2'b01 : 1'b0;
 
                 if (in_busError) begin
                     state <= ERROR;
@@ -345,7 +347,7 @@ always @(posedge clock or posedge reset) begin
                 reg_outBusEndTransaction <= 1'b0;
 
                 readOrWrite <= 2'b00;
-                reg_outBusAddressData;
+                reg_outBusAddressData <= 32'h00000000;
 
                 if (burstNumber*(burstSize+1) >= blockSize) begin
                     statReg <= 32'h00000000;

@@ -609,7 +609,7 @@ ramDmaCi #(.customId(8'h0D)) yourFatRamDmaBySuggarDaddy
           .clock(s_systemClock),
           .reset(s_cpuReset),
           .in_busGranted(s_ramDmaBusAccessGranted),
-          .in_busError(s_busError)
+          .in_busError(s_busError),
           .in_busBusy(s_busy),
           .in_busEndTransaction(s_endTransaction),
           .in_busDataValid(s_dataValid),
@@ -619,7 +619,7 @@ ramDmaCi #(.customId(8'h0D)) yourFatRamDmaBySuggarDaddy
           .ciN(s_cpu1CiN),
           .done(s_ramDmaCiDone),
           .reg_outBusRequest(s_ramDmaRequestBus),
-          .reg_outBusByteEnable(s_DmaCiBusByteEnable)
+          .reg_outBusByteEnable(s_DmaCiBusByteEnable),
           .reg_outBusBeginTransaction(s_DmaCiBusBeginTransaction),
           .reg_outBusEndTransaction(s_DmaCiBusEndTransaction),
           .reg_outBusReadWrite(s_DmaCiBusReadNotWrite),
@@ -627,8 +627,7 @@ ramDmaCi #(.customId(8'h0D)) yourFatRamDmaBySuggarDaddy
           .reg_outBusBusy(s_DmaCiBusBusy),
           .result(s_ramDmaCiResult),
           .reg_outBusAddressData(s_DmaCiBusAddressData),
-          .reg_outBusBurstSize(s_DmaCiburstSize)
-          );
+          .reg_outBusBurstSize(s_DmaCiburstSize));
   /*
    *
    * Here we define the bios
