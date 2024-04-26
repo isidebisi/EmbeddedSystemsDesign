@@ -40,7 +40,7 @@ void read_from_bus(uint32_t memoryAddress, uint32_t blockSize) {
     
 }
 
-void write_to_bus(uint32_t memoryArray, uint32_t blockSize, uint32_t write_to){
+void write_to_bus(uint32_t* memoryArray, uint32_t blockSize, uint32_t write_to){
     CONFIG_BUS_ADDRESS((uint32_t) &memoryArray[write_to]); 
     CONFIG_BLOCK_SIZE(blockSize);
 
