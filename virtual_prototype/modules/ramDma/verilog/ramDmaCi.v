@@ -63,12 +63,11 @@ reg[7:0] burstCount;
 
 reg [2:0] state;
 reg [1:0] readOrWrite; // 10 = write, 01 = read, else none
-reg [8:0] burstNumber, currentMemAddress;
-
+reg [8:0] currBurstSize, burstNumber, currentMemAddress;
 
 
 // Instanciation of SSRAM
-dualPortSSRAM #(.bitwidth(32), .nrOfEntries(256), .readAfterWrite(0)) ramDmaCi
+dualPortSSRAM #(.bitwidth(32), .nrOfEntries(512), .readAfterWrite(0)) ramDmaCi
 (
     .clockA(clock),
     .clockB(~clock),
@@ -100,12 +99,12 @@ end
 
 
 assign addressA = valueA[8:0];
-assign writeEnableA = valueA[9] ? bypassEnable : 1'b0;
+assign writeEnableA = bypassEnable ? valueA[9] : 1'b0;
 assign dataInA = valueB;
-assign result = dataOutA ? (bypassEnable & done) : resultDMA ? (dmaEnable & done) : 32'h00000000;
-assign done =  1'b1 ? (bypassEnable & writeEnableA) :
-                1'b1 ? (bypassEnable & ~writeEnableA & readOutputReady) :
-                dmaDone ? (dmaEnable) : 1'b0;
+assign result = (bypassEnable & done) ? dataOutA : (dmaEnable & done) ? resultDMA : 32'h00000000;
+assign done =  (bypassEnable & writeEnableA) ? 1'b1 :
+                (bypassEnable & ~writeEnableA & readOutputReady) ? 1'b1:
+                dmaEnable ? dmaDone : 1'b0;
 
 
 
@@ -140,6 +139,9 @@ always @(posedge clock or posedge reset) begin
         dmaDone <= 1'b0;
 
     end else if (dmaEnable) begin
+        
+        ctrlReg[1:0] <= (statReg[0] == 1'b1) ? 2'b00 : ctrlReg[1:0];
+
         case (dmaControl)
             RBUSSTADDR: begin
                 resultDMA <= busStartAddress;
@@ -194,7 +196,7 @@ always @(posedge clock or posedge reset) begin
         endcase
     end
     
-    ctrlReg[1:0] <= 2'b00 ? (statReg[0] == 1'b1) : ctrlReg[1:0];
+
     
 end
 
@@ -229,54 +231,69 @@ always @(posedge clock or posedge reset) begin
         reg_outBusBurstSize <= 8'h00;
         burstCount <= 8'h00;
         readOrWrite <= 2'b00;
-        burstNumber <= 9'h000;
+        burstNumber <= 9'h001;
         currentMemAddress <= 9'h000;
         statReg <= 32'h00000000;
         writeEnableB <= 1'b0;
         addressB <= 9'h000;
         dataInB <= 32'h00000000;
-        
+        currBurstSize <= 8'h00;
+
     end else begin
         reg_outBusByteEnable <= 4'h0;
         reg_outBusBusy <= 1'b0;
-        
 
         case (state)
             IDLE: begin
-                if (ctrlReg[1:0] == 2'b10 | ctrlReg[1:0] == 2'b01) begin
+                if (ctrlReg[1:0] == 2'b10 | ctrlReg[1:0] == 2'b01 | statReg[0]) begin
                     state <= REQUEST;
-                    readOrWrite <= ctrlReg[1:0];
+                    readOrWrite <= statReg[0] ? readOrWrite : ctrlReg[1:0];
                     reg_outBusEndTransaction <= 1'b0;
-                    statReg[0] <= 1'b1;
-                    currentMemAddress <= memStartAdress[8:0] + (burstSize+1)*burstNumber;
+                    statReg[0] <= 1'b1; //busy
+                    statReg[1] <= 1'b0; //no error
+                    currentMemAddress <= memStartAdress[8:0] + (burstSize+1)*(burstNumber-1);
                 end
             end
             
             REQUEST: begin
                 reg_outBusRequest <= 1'b1;
 
+                //check for blockSize that is not exact multiple of burstSize
+                if ((burstSize+1) * burstNumber > blockSize) begin 
+                currBurstSize <= blockSize - ((burstSize+1) * (burstNumber-1)) -1;
+                end else begin
+                    currBurstSize <= burstSize[8:0];    
+                end
+
                 if (in_busGranted) begin
-                    state <= BEGIN_TRANSACTION;
+                    
                     reg_outBusRequest <= 1'b0;
+                    reg_outBusBeginTransaction <= 1'b1;
+                    reg_outBusBurstSize <= currBurstSize;
+                    reg_outBusAddressData <= busStartAddress;
+                    reg_outBusReadWrite <=  (readOrWrite == 2'b10) ? 1'b0 :
+                                            (readOrWrite == 2'b01) ? 1'b1 : 1'b0;
+                    reg_outBusByteEnable <= 4'hF;
+                    addressB <= currentMemAddress;
+                    writeEnableB <= 1'b0;
+                    state <= BURST;
                 end
             end
 
-            BEGIN_TRANSACTION: begin
-                // begin transaction, burst size, bus address, readWrite
-                reg_outBusBeginTransaction <= 1'b1;
-                reg_outBusBurstSize <= burstSize[8:0];
-                reg_outBusAddressData <= busStartAddress;
-                
-                reg_outBusReadWrite <=  1'b0 ? readOrWrite == 2'b10 :
-                                        1'b1 ? readOrWrite == 2'b01 : 1'b0;
+
+            BEGIN_TRANSACTION: begin //CURRENTLY NOT IN USE !!!
+                reg_outBusBeginTransaction <= 1'b0;
+                reg_outBusBurstSize <= 8'h00;
+                reg_outBusReadWrite <= 1'b0;
+                reg_outBusByteEnable <= 4'h0;
 
                 if (in_busError) begin
                     state <= ERROR;
                     reg_outBusEndTransaction <= 1'b1;
                 end else begin
                     state <= BURST;
-                    addressB <= currentMemAddress;
-                    writeEnableB <= 1'b0;
+                    addressB <= currentMemAddress + burstCount;
+                    reg_outBusDataValid <= 1'b1;
                 end
             end
             
@@ -284,15 +301,25 @@ always @(posedge clock or posedge reset) begin
                 reg_outBusBeginTransaction <= 1'b0;
                 reg_outBusBurstSize <= 8'h00;
                 reg_outBusReadWrite <= 1'b0;
+                reg_outBusByteEnable <= 4'h0;
 
                 if (readOrWrite == 2'b10) begin
                     //write
-                    reg_outBusDataValid <= 1'b1;
                     reg_outBusAddressData <= dataOutB;
+                    addressB <= currentMemAddress + burstCount;
                     //check if slave busy
-                    if (~in_busBusy) begin   //slave not busy
-                        addressB <= currentMemAddress + burstCount;
+                    if (in_busBusy) begin   //slave not busy
+                        burstCount <= burstCount;
+                        //in case slave is busy while receiving begin message signal
+                        reg_outBusBeginTransaction <= reg_outBusBeginTransaction;
+                        reg_outBusBurstSize <= reg_outBusBurstSize;
+                        reg_outBusReadWrite <= reg_outBusReadWrite;
+                        reg_outBusByteEnable <= reg_outBusByteEnable;
+                        reg_outBusAddressData <= reg_outBusAddressData;
+                    end else begin
                         burstCount <= burstCount + 1;
+                        reg_outBusDataValid <= 1'b1;
+
                     end
                     
                     if (in_busError) begin
@@ -300,7 +327,7 @@ always @(posedge clock or posedge reset) begin
                         reg_outBusEndTransaction <= 1'b1;
                         burstCount <= 8'h00;
                         reg_outBusDataValid <= 1'b0;
-                    end else if (burstCount >= burstSize+1) begin
+                    end else if (burstCount >= burstSize) begin
                         state <= END_TRANSACTION;
                         reg_outBusEndTransaction <= 1'b1;
                         burstCount <= 8'h00;
@@ -315,10 +342,13 @@ always @(posedge clock or posedge reset) begin
                     reg_outBusAddressData <= 32'h00000000;
                     writeEnableB <= 1'b1;
                     dataInB <= in_busAdressData;
+                    addressB <= currentMemAddress + burstCount;
 
                     if (in_busDataValid) begin 
-                        addressB <= currentMemAddress + burstCount;
                         burstCount <= burstCount + 1;
+                    end else begin
+                        writeEnableB <= 1'b0;
+                        burstCount <= burstCount;
                     end
 
                     if (in_busError) begin
@@ -337,19 +367,35 @@ always @(posedge clock or posedge reset) begin
             end
             
             ERROR: begin
-                statReg <= 32'h00000001;    //finished but with error
+                statReg <= 32'h00000002;    //finished but with error
                 reg_outBusAddressData <= 32'h00000000;
                 state <= IDLE;
+                burstCount <= 8'h00;
+                reg_outBusDataValid <= 1'b0;
+                state <= IDLE;
+                reg_outBusRequest <= 1'b0;
+                reg_outBusByteEnable <= 4'h0;
+                reg_outBusBeginTransaction <= 1'b0;
+                reg_outBusEndTransaction <= 1'b0;
+                reg_outBusReadWrite <= 1'b0;
+                reg_outBusBusy <= 1'b0;
+                reg_outBusBurstSize <= 8'h00;
+                readOrWrite <= 2'b00;
+                burstNumber <= 9'h001;
+                currentMemAddress <= 9'h000;
+                writeEnableB <= 1'b0;
+                addressB <= 9'h000;
+                dataInB <= 32'h00000000;
             end
 
             END_TRANSACTION: begin
                 state <= IDLE;
                 reg_outBusEndTransaction <= 1'b0;
 
-                readOrWrite <= 2'b00;
                 reg_outBusAddressData <= 32'h00000000;
 
                 if (burstNumber*(burstSize+1) >= blockSize) begin
+                    burstNumber <= 9'h001;
                     statReg <= 32'h00000000;
                 end else begin
                     burstNumber <= burstNumber+1;
