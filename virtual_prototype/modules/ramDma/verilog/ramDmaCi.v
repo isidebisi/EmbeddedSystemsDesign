@@ -141,7 +141,9 @@ always @(posedge clock or posedge reset) begin
     end else if (dmaEnable) begin
         
         ctrlReg[1:0] <= (statReg[0] == 1'b1) ? 2'b00 : ctrlReg[1:0];
-
+        dmaDone <= 1'b0;
+        resultDMA <= 32'h00000000;
+        
         case (dmaControl)
             RBUSSTADDR: begin
                 resultDMA <= busStartAddress;
