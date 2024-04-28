@@ -21,8 +21,8 @@ module ramDmaCi #(parameter [7:0] customId = 8'h00)
                         reg_outBusBusy,
     output reg[3:0]     reg_outBusByteEnable,
     output wire [31:0]  result,
-    output reg [31:0]  reg_outBusAddressData,
-    output reg [7:0]   reg_outBusBurstSize
+    output reg [31:0]   reg_outBusAddressData,
+    output reg [7:0]    reg_outBusBurstSize
 );
 
 
@@ -143,7 +143,7 @@ always @(posedge clock or posedge reset) begin
         ctrlReg[1:0] <= (statReg[0] == 1'b1) ? 2'b00 : ctrlReg[1:0];
         dmaDone <= 1'b0;
         resultDMA <= 32'h00000000;
-        
+
         case (dmaControl)
             RBUSSTADDR: begin
                 resultDMA <= busStartAddress;
