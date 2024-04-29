@@ -58,10 +58,8 @@ void write_to_bus(uint32_t* memoryArray, uint32_t blockSize, uint32_t write_to){
 
 int main () {
 
-
-
   CONFIG_BURST_SIZE(BURST_SIZE);
-  printf("Start Program\n");
+
   // array used as a slave to read and write on the bus
   uint32_t arraySize = 512;
   volatile uint32_t memoryArray[512];
@@ -70,10 +68,6 @@ int main () {
   }
 
   CONFIG_BUS_ADDRESS((uint32_t)&memoryArray[0]);
-
-    volatile unsigned int *vga = (unsigned int *) 0X50000020;
-  camParameters camParams;
-  vga_clear();
 
   // WRITE FROM BUS TO CI MEMORY
 

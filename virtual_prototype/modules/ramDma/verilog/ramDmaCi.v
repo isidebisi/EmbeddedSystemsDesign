@@ -35,8 +35,7 @@ wire cpuEnable = start & (ciN == customId);
 wire readWriteIn = valueA[9];
 wire [2:0] mode = valueA[12:10];
 wire [3:0] dmaControl = {mode, readWriteIn};
-wire bypassEnable = cpuEnable & (mode == 3'b000);
-wire dmaEnable = cpuEnable & (mode != 3'b000);
+reg bypassEnable, dmaEnable;
 
 
 reg readOutputReady;
@@ -88,11 +87,25 @@ dualPortSSRAM #(.bitwidth(32), .nrOfEntries(512), .readAfterWrite(0)) ramDmaCi
  *
  */
 
+// always block for all enable and ready and signals
 always @(posedge clock or posedge reset) begin
     if (reset) begin
         readOutputReady <= 0;
     end else begin
-        readOutputReady <= cpuEnable ? ~readOutputReady : 1'b0;
+        readOutputReady <= bypassEnable ? ~readOutputReady : 1'b0;
+
+        if (cpuEnable & (mode == 3'b000)) begin
+            bypassEnable = 1'b1;
+        end
+        
+        if (cpuEnable & (mode != 3'b000)) begin
+            dmaEnable = 1'b1;
+        end
+
+        if (done) begin
+            bypassEnable = 1'b0;
+            dmaEnable = 1'b0;
+        end
     end
 end
 
