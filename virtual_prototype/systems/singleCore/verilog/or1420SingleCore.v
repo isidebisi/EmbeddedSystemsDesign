@@ -625,7 +625,7 @@ ramDmaCi #(.customId(8'h0D)) yourFatRamDmaBySuggarDaddy
           .reg_outBusDataValid(s_DmaCiBusDataValid),
           .reg_outBusBusy(s_DmaCiBusBusy),
           .result(s_ramDmaCiResult),
-          .reg_outBusAddressData(s_DmaCiBusAddressData),
+          .outBusAddressData(s_DmaCiBusAddressData),
           .reg_outBusBurstSize(s_DmaCiburstSize));
 
   /*
