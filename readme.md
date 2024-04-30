@@ -23,7 +23,15 @@ CPU bus-idle cycles | 16930928 | 11858230
 
 
 ## Practical Work 4
-The complete folder path for the Verilog code from the virtual_prototype are the following: \
+
+All the exercices are completed: \
+2.2 CI-attached memory (3.5 points) \
+2.3 DMA to the CI-memory (8 points) \
+2.4 DMA from the CI-memory (6 points)
+
+
+The complete folder path for the Verilog code from the virtual_prototype are the following:
+
 
 `modules/ramDma/verilog`
 
