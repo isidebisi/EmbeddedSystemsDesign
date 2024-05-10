@@ -1,5 +1,5 @@
 Analysis & Synthesis report for or1420SingleCore
-Tue May  7 12:15:20 2024
+Fri May 10 13:43:13 2024
 Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 
 
@@ -150,7 +150,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                        ;
 +------------------------------------+------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Tue May  7 12:15:20 2024          ;
+; Analysis & Synthesis Status        ; Successful - Fri May 10 13:43:13 2024          ;
 ; Quartus Prime Version              ; 23.1std.0 Build 991 11/28/2023 SC Lite Edition ;
 ; Revision Name                      ; or1420SingleCore                               ;
 ; Top-level Entity Name              ; or1420SingleCore                               ;
@@ -295,6 +295,13 @@ https://fpgasoftware.intel.com/eula.
 ; ../../../modules/spi/verilog/spiBus.v                   ; yes             ; User Verilog HDL File                                 ; /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/spi/verilog/spiBus.v                                                 ;         ;
 ; ../../../modules/i2c/verilog/i2cMaster.v                ; yes             ; User Verilog HDL File                                 ; /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/i2c/verilog/i2cMaster.v                                              ;         ;
 ; ../../../modules/i2c/verilog/i2cCustomInstr.v           ; yes             ; User Verilog HDL File                                 ; /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/i2c/verilog/i2cCustomInstr.v                                         ;         ;
+; ../../../modules/profileCi/verilog/counter.v            ; yes             ; User Verilog HDL File                                 ; /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/profileCi/verilog/counter.v                                          ;         ;
+; ../../../modules/profileCi/verilog/profileCi.v          ; yes             ; User Verilog HDL File                                 ; /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/profileCi/verilog/profileCi.v                                        ;         ;
+; ../../../modules/grayscaleCi/verilog/rgb565Grayscale.v  ; yes             ; User Verilog HDL File                                 ; /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/grayscaleCi/verilog/rgb565Grayscale.v                                ;         ;
+; ../../../modules/grayscaleCi/verilog/rgb565ISE.v        ; yes             ; User Verilog HDL File                                 ; /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/grayscaleCi/verilog/rgb565ISE.v                                      ;         ;
+; ../../../modules/gpio/verilog/gpio.v                    ; yes             ; User Verilog HDL File                                 ; /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/gpio/verilog/gpio.v                                                  ;         ;
+; ../../../modules/ramDmaCi/verilog/dualPortSSram.v       ; yes             ; User Verilog HDL File                                 ; /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/ramDmaCi/verilog/dualPortSSram.v                                     ;         ;
+; ../../../modules/ramDmaCi/verilog/ramDmaCi.v            ; yes             ; User Verilog HDL File                                 ; /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/ramDmaCi/verilog/ramDmaCi.v                                          ;         ;
 ; ../../../modules/camera/verilog/camera.v                ; yes             ; User Verilog HDL File                                 ; /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/camera/verilog/camera.v                                              ;         ;
 ; ../../../modules/delay/verilog/delayIse.v               ; yes             ; User Verilog HDL File                                 ; /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/delay/verilog/delayIse.v                                             ;         ;
 ; ../../../modules/swapbyteIse/verilog/swapByteIse.v      ; yes             ; User Verilog HDL File                                 ; /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/swapbyteIse/verilog/swapByteIse.v                                    ;         ;
@@ -325,13 +332,6 @@ https://fpgasoftware.intel.com/eula.
 ; ../../../modules/support/verilog/processorId.v          ; yes             ; User Verilog HDL File                                 ; /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/support/verilog/processorId.v                                        ;         ;
 ; ../../../modules/support/verilog/synchroFlop.v          ; yes             ; User Verilog HDL File                                 ; /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/support/verilog/synchroFlop.v                                        ;         ;
 ; ../../../modules/support/verilog/sram_512x32_dp.v       ; yes             ; User Verilog HDL File                                 ; /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/support/verilog/sram_512x32_dp.v                                     ;         ;
-; ../../../modules/profileCi/verilog/counter.v            ; yes             ; User Verilog HDL File                                 ; /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/profileCi/verilog/counter.v                                          ;         ;
-; ../../../modules/profileCi/verilog/profileCi.v          ; yes             ; User Verilog HDL File                                 ; /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/profileCi/verilog/profileCi.v                                        ;         ;
-; ../../../modules/grayscaleCi/verilog/rgb565ISE.v        ; yes             ; User Verilog HDL File                                 ; /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/grayscaleCi/verilog/rgb565ISE.v                                      ;         ;
-; ../../../modules/grayscaleCi/verilog/rgb565Grayscale.v  ; yes             ; User Verilog HDL File                                 ; /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/grayscaleCi/verilog/rgb565Grayscale.v                                ;         ;
-; ../../../modules/gpio/verilog/gpio.v                    ; yes             ; User Verilog HDL File                                 ; /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/gpio/verilog/gpio.v                                                  ;         ;
-; ../../../modules/ramDmaCi/verilog/dualPortSSram.v       ; yes             ; User Verilog HDL File                                 ; /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/ramDmaCi/verilog/dualPortSSram.v                                     ;         ;
-; ../../../modules/ramDmaCi/verilog/ramDmaCi.v            ; yes             ; User Verilog HDL File                                 ; /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/ramDmaCi/verilog/ramDmaCi.v                                          ;         ;
 ; ../verilog/or1420SingleCore.v                           ; yes             ; User Verilog HDL File                                 ; /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/systems/singleCore/verilog/or1420SingleCore.v                                ;         ;
 ; altpll.tdf                                              ; yes             ; Megafunction                                          ; /home/ismael/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/altpll.tdf                                                                ;         ;
 ; aglobal231.inc                                          ; yes             ; Megafunction                                          ; /home/ismael/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/aglobal231.inc                                                            ;         ;
@@ -4022,7 +4022,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:27     ;
+; Top            ; 00:00:33     ;
 +----------------+--------------+
 
 
@@ -4046,7 +4046,7 @@ Info: Running Quartus Prime Analysis & Synthesis
     Info: Intel and sold by Intel or its authorized distributors.  Please
     Info: refer to the applicable agreement for further details, at
     Info: https://fpgasoftware.intel.com/eula.
-    Info: Processing started: Tue May  7 12:14:44 2024
+    Info: Processing started: Fri May 10 13:42:28 2024
 Info: Command: quartus_map --family="Cyclone IV E" or1420SingleCore
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 6 of the 6 processors detected
@@ -4084,6 +4084,20 @@ Info (12021): Found 1 design units, including 1 entities, in source file /home/i
     Info (12023): Found entity 1: i2cMaster File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/i2c/verilog/i2cMaster.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/i2c/verilog/i2cCustomInstr.v
     Info (12023): Found entity 1: i2cCustomInstr File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/i2c/verilog/i2cCustomInstr.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/profileCi/verilog/counter.v
+    Info (12023): Found entity 1: counter File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/profileCi/verilog/counter.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/profileCi/verilog/profileCi.v
+    Info (12023): Found entity 1: profileCi File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/profileCi/verilog/profileCi.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/grayscaleCi/verilog/rgb565Grayscale.v
+    Info (12023): Found entity 1: rgb565Grayscale File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/grayscaleCi/verilog/rgb565Grayscale.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/grayscaleCi/verilog/rgb565ISE.v
+    Info (12023): Found entity 1: rgb565GrayscaleIse File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/grayscaleCi/verilog/rgb565ISE.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/gpio/verilog/gpio.v
+    Info (12023): Found entity 1: gpio File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/gpio/verilog/gpio.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/ramDmaCi/verilog/dualPortSSram.v
+    Info (12023): Found entity 1: dualPortSSRAM File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/ramDmaCi/verilog/dualPortSSram.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/ramDmaCi/verilog/ramDmaCi.v
+    Info (12023): Found entity 1: ramDmaCi File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/ramDmaCi/verilog/ramDmaCi.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/camera/verilog/camera.v
     Info (12023): Found entity 1: camera File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/camera/verilog/camera.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/delay/verilog/delayIse.v
@@ -4154,20 +4168,6 @@ Info (12021): Found 1 design units, including 1 entities, in source file /home/i
     Info (12023): Found entity 1: sram1024X16Dp File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/support/verilog/sram_1024x16_dp.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/support/verilog/sram2048x8Dp.v
     Info (12023): Found entity 1: sram2048X8Dp File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/support/verilog/sram2048x8Dp.v Line: 1
-Info (12021): Found 1 design units, including 1 entities, in source file /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/profileCi/verilog/counter.v
-    Info (12023): Found entity 1: counter File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/profileCi/verilog/counter.v Line: 1
-Info (12021): Found 1 design units, including 1 entities, in source file /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/profileCi/verilog/profileCi.v
-    Info (12023): Found entity 1: profileCi File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/profileCi/verilog/profileCi.v Line: 1
-Info (12021): Found 1 design units, including 1 entities, in source file /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/grayscaleCi/verilog/rgb565ISE.v
-    Info (12023): Found entity 1: rgb565GrayscaleIse File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/grayscaleCi/verilog/rgb565ISE.v Line: 1
-Info (12021): Found 1 design units, including 1 entities, in source file /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/grayscaleCi/verilog/rgb565Grayscale.v
-    Info (12023): Found entity 1: rgb565Grayscale File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/grayscaleCi/verilog/rgb565Grayscale.v Line: 1
-Info (12021): Found 1 design units, including 1 entities, in source file /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/gpio/verilog/gpio.v
-    Info (12023): Found entity 1: gpio File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/gpio/verilog/gpio.v Line: 1
-Info (12021): Found 1 design units, including 1 entities, in source file /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/ramDmaCi/verilog/dualPortSSram.v
-    Info (12023): Found entity 1: dualPortSSRAM File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/ramDmaCi/verilog/dualPortSSram.v Line: 1
-Info (12021): Found 1 design units, including 1 entities, in source file /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/ramDmaCi/verilog/ramDmaCi.v
-    Info (12023): Found entity 1: ramDmaCi File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/ramDmaCi/verilog/ramDmaCi.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/systems/singleCore/verilog/or1420SingleCore.v
     Info (12023): Found entity 1: or1420SingleCore File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/systems/singleCore/verilog/or1420SingleCore.v Line: 1
 Info (12127): Elaborating entity "or1420SingleCore" for the top level hierarchy
@@ -4823,10 +4823,10 @@ Info (21057): Implemented 16012 device resources after synthesis - the final res
     Info (21065): Implemented 1 PLLs
     Info (21062): Implemented 9 DSP elements
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 20 warnings
-    Info: Peak virtual memory: 551 megabytes
-    Info: Processing ended: Tue May  7 12:15:20 2024
-    Info: Elapsed time: 00:00:36
-    Info: Total CPU time (on all processors): 00:00:46
+    Info: Peak virtual memory: 539 megabytes
+    Info: Processing ended: Fri May 10 13:43:13 2024
+    Info: Elapsed time: 00:00:45
+    Info: Total CPU time (on all processors): 00:00:56
 
 
 +------------------------------------------+

@@ -15,6 +15,13 @@
 ../../../modules/spi/verilog/spiBus.v
 ../../../modules/i2c/verilog/i2cMaster.v
 ../../../modules/i2c/verilog/i2cCustomInstr.v
+../../../modules/profileCi/verilog/counter.v
+../../../modules/profileCi/verilog/profileCi.v
+../../../modules/grayscaleCi/verilog/rgb565Grayscale.v
+../../../modules/grayscaleCi/verilog/rgb565ISE.v
+../../../modules/gpio/verilog/gpio.v
+../../../modules/ramDmaCi/verilog/dualPortSSram.v
+../../../modules/ramDmaCi/verilog/ramDmaCi.v
 ../../../modules/camera/verilog/camera.v
 ../../../modules/delay/verilog/delayIse.v
 ../../../modules/swapbyteIse/verilog/swapByteIse.v
@@ -50,12 +57,4 @@
 ../../../modules/support/verilog/sram_512x32.v
 ../../../modules/support/verilog/sram_1024x16_dp.v
 ../../../modules/support/verilog/sram2048x8Dp.v
-../../../modules/profileCi/verilog/counter.v
-../../../modules/profileCi/verilog/profileCi.v
-../../../modules/grayscaleCi/verilog/rgb565ISE.v
-../../../modules/grayscaleCi/verilog/rgb565Grayscale.v
-../../../modules/gpio/verilog/gpio.v
-../../../modules/ramDmaCi/verilog/dualPortSSram.v
-../../../modules/ramDmaCi/verilog/ramDmaCi.v
 ../verilog/or1420SingleCore.v
-

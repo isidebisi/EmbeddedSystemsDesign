@@ -19,7 +19,7 @@
 #
 # Quartus Prime
 # Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
-# Date created = 12:14:43  May 07, 2024
+# Date created = 13:42:27  May 10, 2024
 #
 # -------------------------------------------------------------------------- #
 #
@@ -40,7 +40,7 @@
 set_global_assignment -name FAMILY "Cyclone IV E"
 set_global_assignment -name DEVICE EP4CE30F23C8
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 23.1STD.0
-set_global_assignment -name PROJECT_CREATION_TIME_DATE "12:14:43  MAY 07, 2024"
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "13:42:27  MAY 10, 2024"
 set_global_assignment -name LAST_QUARTUS_VERSION "23.1std.0 Lite Edition"
 set_global_assignment -name TOP_LEVEL_ENTITY or1420SingleCore
 
@@ -77,6 +77,20 @@ set_global_assignment -name VERILOG_FILE ../../../modules/spi/verilog/spiBus.v
 set_global_assignment -name VERILOG_FILE ../../../modules/i2c/verilog/i2cMaster.v
 
 set_global_assignment -name VERILOG_FILE ../../../modules/i2c/verilog/i2cCustomInstr.v
+
+set_global_assignment -name VERILOG_FILE ../../../modules/profileCi/verilog/counter.v
+
+set_global_assignment -name VERILOG_FILE ../../../modules/profileCi/verilog/profileCi.v
+
+set_global_assignment -name VERILOG_FILE ../../../modules/grayscaleCi/verilog/rgb565Grayscale.v
+
+set_global_assignment -name VERILOG_FILE ../../../modules/grayscaleCi/verilog/rgb565ISE.v
+
+set_global_assignment -name VERILOG_FILE ../../../modules/gpio/verilog/gpio.v
+
+set_global_assignment -name VERILOG_FILE ../../../modules/ramDmaCi/verilog/dualPortSSram.v
+
+set_global_assignment -name VERILOG_FILE ../../../modules/ramDmaCi/verilog/ramDmaCi.v
 
 set_global_assignment -name VERILOG_FILE ../../../modules/camera/verilog/camera.v
 
@@ -148,20 +162,6 @@ set_global_assignment -name VERILOG_FILE ../../../modules/support/verilog/sram_1
 
 set_global_assignment -name VERILOG_FILE ../../../modules/support/verilog/sram2048x8Dp.v
 
-set_global_assignment -name VERILOG_FILE ../../../modules/profileCi/verilog/counter.v
-
-set_global_assignment -name VERILOG_FILE ../../../modules/profileCi/verilog/profileCi.v
-
-set_global_assignment -name VERILOG_FILE ../../../modules/grayscaleCi/verilog/rgb565ISE.v
-
-set_global_assignment -name VERILOG_FILE ../../../modules/grayscaleCi/verilog/rgb565Grayscale.v
-
-set_global_assignment -name VERILOG_FILE ../../../modules/gpio/verilog/gpio.v
-
-set_global_assignment -name VERILOG_FILE ../../../modules/ramDmaCi/verilog/dualPortSSram.v
-
-set_global_assignment -name VERILOG_FILE ../../../modules/ramDmaCi/verilog/ramDmaCi.v
-
 set_global_assignment -name VERILOG_FILE ../verilog/or1420SingleCore.v
 #######################################################################
 ##           Files from project.qsf configuration file                ##
@@ -190,6 +190,14 @@ set_location_assignment PIN_R17 -to camVsync
 set_location_assignment PIN_M22 -to camnReset
 set_location_assignment PIN_T22 -to clock12MHz
 set_location_assignment PIN_T1 -to clock50MHz
+set_location_assignment PIN_AA8 -to dipSwitch[0]
+set_location_assignment PIN_AB8 -to dipSwitch[1]
+set_location_assignment PIN_AA9 -to dipSwitch[2]
+set_location_assignment PIN_AB9 -to dipSwitch[3]
+set_location_assignment PIN_AA10 -to dipSwitch[4]
+set_location_assignment PIN_AB10 -to dipSwitch[5]
+set_location_assignment PIN_V10 -to dipSwitch[6]
+set_location_assignment PIN_V11 -to dipSwitch[7]
 set_location_assignment PIN_U15 -to hdmiBlue[0]
 set_location_assignment PIN_U19 -to hdmiBlue[1]
 set_location_assignment PIN_V16 -to hdmiBlue[2]
@@ -244,6 +252,30 @@ set_location_assignment PIN_R1 -to sdramDqmN[0]
 set_location_assignment PIN_V3 -to sdramDqmN[1]
 set_location_assignment PIN_M4 -to sdramRasN
 set_location_assignment PIN_R2 -to sdramWeN
+set_location_assignment PIN_U11 -to sevenSegments[0]
+set_location_assignment PIN_V8 -to sevenSegments[10]
+set_location_assignment PIN_Y4 -to sevenSegments[11]
+set_location_assignment PIN_T11 -to sevenSegments[12]
+set_location_assignment PIN_Y10 -to sevenSegments[13]
+set_location_assignment PIN_T10 -to sevenSegments[14]
+set_location_assignment PIN_W7 -to sevenSegments[15]
+set_location_assignment PIN_K19 -to sevenSegments[16]
+set_location_assignment PIN_T9 -to sevenSegments[17]
+set_location_assignment PIN_E14 -to sevenSegments[18]
+set_location_assignment PIN_T5 -to sevenSegments[19]
+set_location_assignment PIN_G18 -to sevenSegments[1]
+set_location_assignment PIN_T7 -to sevenSegments[20]
+set_location_assignment PIN_R7 -to sevenSegments[21]
+set_location_assignment PIN_T4 -to sevenSegments[22]
+set_location_assignment PIN_T8 -to sevenSegments[23]
+set_location_assignment PIN_M8 -to sevenSegments[2]
+set_location_assignment PIN_L6 -to sevenSegments[3]
+set_location_assignment PIN_W10 -to sevenSegments[4]
+set_location_assignment PIN_U10 -to sevenSegments[5]
+set_location_assignment PIN_V9 -to sevenSegments[6]
+set_location_assignment PIN_L7 -to sevenSegments[7]
+set_location_assignment PIN_U9 -to sevenSegments[8]
+set_location_assignment PIN_W8 -to sevenSegments[9]
 set_location_assignment PIN_W14 -to spiIo2
 set_location_assignment PIN_U13 -to spiIo3
 set_location_assignment PIN_U14 -to spiNCs
@@ -255,6 +287,14 @@ set_global_assignment -name SOURCE_FILE ../scripts/gecko4_or1420.tcl
 set_global_assignment -name SDC_FILE ../scripts/clocks_sdc.tcl
 set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to SCL
 set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to SDA
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to dipSwitch[0]
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to dipSwitch[1]
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to dipSwitch[2]
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to dipSwitch[3]
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to dipSwitch[4]
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to dipSwitch[5]
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to dipSwitch[6]
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to dipSwitch[7]
 set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to spiIo2
 set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to spiIo3
 set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to spiSiIo0

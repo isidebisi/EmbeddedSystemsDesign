@@ -3,7 +3,7 @@
 #include <swap.h>
 #include <vga.h>
 
-//#define __WITH_CI
+#define __WITH_CI
 
 int main () {
   const uint8_t sevenSeg[10] = {0x3F,0x06,0x5B,0x4F,0x66,0x6D,0x7D,0x07,0x7F,0x6F};
@@ -44,11 +44,13 @@ int main () {
         uint32_t pixel1 = rgb[pixel];
         uint32_t pixel2 = rgb[pixel+1];
         asm volatile ("l.nios_rrr %[out1],%[in1],%[in2],0x9":[out1]"=r"(grayPixels):[in1]"r"(pixel1),[in2]"r"(pixel2));
+        /*      REMOVE DIP SWITCH PART FOR BETTER RESOLUTION
         uint32_t newGrayPixel = (grayPixels&0xFF) > dipswitch ? 0xFF : 0x00;
         newGrayPixel |= ((grayPixels >> 8)&0xFF) > dipswitch ? 0xFF00 : 0;
         newGrayPixel |= ((grayPixels >> 16)&0xFF) > dipswitch ? 0xFF0000 : 0;
         newGrayPixel |= ((grayPixels >> 24)&0xFF) > dipswitch ? 0xFF000000 : 0;
-        gray[0] = newGrayPixel;
+        */
+        gray[0] = grayPixels;
         gray++;
       }
 #else
