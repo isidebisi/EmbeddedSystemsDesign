@@ -162,47 +162,41 @@ module camera #(parameter [7:0] customInstructionId = 8'd0,
    * Here the grabber is defined
    *
    */
-  reg [7:0] s_byte3Reg,s_byte2Reg,s_byte1Reg;
+  reg [7:0] s_byte1Reg,s_byte2Reg,s_byte3Reg, s_byte4Reg, s_byte5Reg, s_byte6Reg, s_byte7Reg;
   reg [8:0] s_busSelectReg;
   wire [31:0] s_busPixelWord;
   wire [31:0] s_pixelWord = {s_byte1Reg,camData,s_byte3Reg,s_byte2Reg};
   wire s_weLineBuffer = (s_pixelCountReg[1:0] == 2'b11) ? hsync : 1'b0;
 
-  //PW6 TASK 2
+  //PW6 TASK 3
   wire [31:0] s_grayscalePixelWord;
 
-  wire [7:0] s_grayscalePixel1, s_grayscalePixel2;
-  wire [7:0] s_grayscalePixel1Red, s_grayscalePixel1Blue, s_grayscalePixel2Red, s_grayscalePixel2Blue;
-  wire [7:0] s_grayscalePixel1Green, s_grayscalePixel2Green;
+  //following code paragraph inspired from solution of rgb565ISE.v
+  rgb565Grayscale pixel1 ( .rgb565({s_byte1Reg,camData}),
+                           .grayscale(s_grayscalePixelWord[23:16]));
+  rgb565Grayscale pixel2 ( .rgb565({s_byte3Reg,s_byte2Reg}),
+                           .grayscale(s_grayscalePixelWord[31:24]));
+  rgb565Grayscale pixel3 ( .rgb565({s_byte5Reg,s_byte4Reg}),
+                           .grayscale(s_grayscalePixelWord[7:0]));
+  rgb565Grayscale pixel4 ( .rgb565({s_byte7Reg,s_byte6Reg}),
+                           .grayscale(s_grayscalePixelWord[15:8]));
 
-  assign s_grayscalePixel1Red   = {s_pixelWord[31:27],3'b0};
-  assign s_grayscalePixel1Green = {s_pixelWord[26:21],2'b0};
-  assign s_grayscalePixel1Blue  = {s_pixelWord[20:16],3'b0};
-  assign s_grayscalePixel2Red   = {s_pixelWord[15:11],3'b0};
-  assign s_grayscalePixel2Green = {s_pixelWord[10:5],2'b0};
-  assign s_grayscalePixel2Blue  = {s_pixelWord[4:0],3'b0};
 
-  assign s_grayscalePixel1 = ((s_grayscalePixel1Red*54 + s_grayscalePixel1Green*183 + s_grayscalePixel1Blue*19) >> 8);
-  assign s_grayscalePixel2 = ((s_grayscalePixel2Red*54 + s_grayscalePixel2Green*183 + s_grayscalePixel2Blue*19) >> 8);
-
-  assign s_grayscalePixelWord[31:27] = s_grayscalePixel1[7:3]; // Red channel for pixel 1
-  assign s_grayscalePixelWord[26:21] = s_grayscalePixel1[7:2]; // Green channel for pixel 1
-  assign s_grayscalePixelWord[20:16] = s_grayscalePixel1[7:3]; // Blue channel for pixel 1
-
-  assign s_grayscalePixelWord[15:11] = s_grayscalePixel2[7:3]; // Red channel for pixel 2
-  assign s_grayscalePixelWord[10:5]  = s_grayscalePixel2[7:2]; // Green channel for pixel 2
-  assign s_grayscalePixelWord[4:0]   = s_grayscalePixel2[7:3]; // Blue channel for pixel 2
 
   //Task 2 End
 
   always @(posedge pclk)
     begin
-      s_byte3Reg <= (s_pixelCountReg[1:0] == 2'b00 && hsync == 1'b1) ? camData : s_byte3Reg;
-      s_byte2Reg <= (s_pixelCountReg[1:0] == 2'b01 && hsync == 1'b1) ? camData : s_byte2Reg;
-      s_byte1Reg <= (s_pixelCountReg[1:0] == 2'b10 && hsync == 1'b1) ? camData : s_byte1Reg;
+      s_byte7Reg <= (s_pixelCountReg[2:0] == 2'b000 && hsync == 1'b1) ? camData : s_byte7Reg;
+      s_byte6Reg <= (s_pixelCountReg[2:0] == 2'b001 && hsync == 1'b1) ? camData : s_byte6Reg;
+      s_byte5Reg <= (s_pixelCountReg[2:0] == 2'b010 && hsync == 1'b1) ? camData : s_byte5Reg;
+      s_byte4Reg <= (s_pixelCountReg[2:0] == 2'b011 && hsync == 1'b1) ? camData : s_byte4Reg;
+      s_byte3Reg <= (s_pixelCountReg[2:0] == 2'b100 && hsync == 1'b1) ? camData : s_byte3Reg;
+      s_byte2Reg <= (s_pixelCountReg[2:0] == 2'b101 && hsync == 1'b1) ? camData : s_byte2Reg;
+      s_byte1Reg <= (s_pixelCountReg[2:0] == 2'b110 && hsync == 1'b1) ? camData : s_byte1Reg;
     end
   
-  dualPortRam2k lineBuffer ( .address1(s_pixelCountReg[10:2]),
+  dualPortRam2k lineBuffer ( .address1(s_pixelCountReg[10:3]),
                              .address2(s_busSelectReg),
                              .clock1(pclk),
                              .clock2(clock),
@@ -260,7 +254,7 @@ module camera #(parameter [7:0] customInstructionId = 8'd0,
       s_burstCountReg        <= (s_stateMachineReg == INIT_BURST1) ? s_burstSizeNext - 8'd1 :
                                 (s_doWrite == 1'b1) ? s_burstCountReg - 9'd1 : s_burstCountReg;
       s_busSelectReg         <= (s_stateMachineReg == IDLE) ? 9'd0 : (s_doWrite == 1'b1) ? s_busSelectReg + 9'd1 : s_busSelectReg;
-      s_nrOfPixelsPerLineReg <= (s_newLine == 1'b1) ? s_pixelCountValueReg[10:2] : 
+      s_nrOfPixelsPerLineReg <= (s_newLine == 1'b1) ? s_pixelCountValueReg[10:3] : 
                                 (s_stateMachineReg == INIT_BURST1) ? s_nrOfPixelsPerLineReg - {1'b0,s_burstSizeNext} : s_nrOfPixelsPerLineReg;
     end
   
