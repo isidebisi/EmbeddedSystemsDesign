@@ -9,12 +9,15 @@
 
 ## Practical Work 6
 
-Task 1: virtual_prototype_task_1
-Task 2: virtual_prototype_task_2
-Task 3: virtual_prototype_task_3
+Task 1: virtual_prototype_task_1.zip \
+Task 2: virtual_prototype_task_2.zip \
+Task 3: virtual_prototype_task_3.zip 
 
 
 ## Task 1
+
+File modified: \
+`programms/grayscale/src/grayscale.c`
 
 Results Task1 | cycles w/o pingPongBuffer | cycles with pingPongBuffer | with divided by w/o in %
 --- | --- | --- | ---
@@ -28,3 +31,11 @@ That might seem unintuitive at first because we start by putting all the rgb565 
 
 ## Task 2
 
+File modified: \
+`modules/camera/verilog/camera.v`
+
+## Task 3
+
+Files modified: \
+`modules/camera/verilog/camera.v` \
+`programms/streaming/src/streaming.c` (just commented the define)
