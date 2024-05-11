@@ -1,5 +1,5 @@
 Analysis & Synthesis report for or1420SingleCore
-Fri May 10 13:43:13 2024
+Sat May 11 20:03:06 2024
 Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 
 
@@ -98,32 +98,38 @@ Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
  90. Parameter Settings for Inferred Entity Instance: screens:hdmi|dualPortRam4k:asciiRam1|altsyncram:memory_rtl_0
  91. Parameter Settings for Inferred Entity Instance: screens:hdmi|dualPortRam4k:asciiRam2|altsyncram:memory_rtl_0
  92. Parameter Settings for Inferred Entity Instance: or1420Top:cpu1|executeStage:exe|multiplier:mul|lpm_mult:Mult0
- 93. Parameter Settings for Inferred Entity Instance: screens:hdmi|textController:textC1|lpm_mult:Mult0
- 94. Parameter Settings for Inferred Entity Instance: screens:hdmi|textController:textC1|lpm_mult:Mult2
- 95. Parameter Settings for Inferred Entity Instance: screens:hdmi|textController:textC1|lpm_mult:Mult1
- 96. altpll Parameter Settings by Entity Instance
- 97. altsyncram Parameter Settings by Entity Instance
- 98. lpm_mult Parameter Settings by Entity Instance
- 99. Port Connectivity Checks: "busArbiter:arbiter"
-100. Port Connectivity Checks: "screens:hdmi|dualPortRam4k:asciiRam2"
-101. Port Connectivity Checks: "screens:hdmi|dualPortRam4k:asciiRam1"
-102. Port Connectivity Checks: "screens:hdmi|textController:textC2"
-103. Port Connectivity Checks: "screens:hdmi"
-104. Port Connectivity Checks: "profileCi:profiler|counter:counter3"
-105. Port Connectivity Checks: "profileCi:profiler|counter:counter2"
-106. Port Connectivity Checks: "profileCi:profiler|counter:counter1"
-107. Port Connectivity Checks: "profileCi:profiler|counter:counter0"
-108. Port Connectivity Checks: "swapByte:ise1"
-109. Port Connectivity Checks: "processorId:cpuFreq|decimalCounter:cnt[5].dcount"
-110. Port Connectivity Checks: "processorId:cpuFreq|decimalCounter:cnt[0].dcount"
-111. Port Connectivity Checks: "or1420Top:cpu1"
-112. Port Connectivity Checks: "sdramController:sdram|sdramFifo:buffer|sram512X32Dp:readMem"
-113. Port Connectivity Checks: "sdramController:sdram"
-114. Port Connectivity Checks: "uartBus:uart1"
-115. Post-Synthesis Netlist Statistics for Top Partition
-116. Elapsed Time Per Partition
-117. Analysis & Synthesis Messages
-118. Analysis & Synthesis Suppressed Messages
+ 93. Parameter Settings for Inferred Entity Instance: camera:camIf|lpm_mult:Mult5
+ 94. Parameter Settings for Inferred Entity Instance: camera:camIf|lpm_mult:Mult2
+ 95. Parameter Settings for Inferred Entity Instance: camera:camIf|lpm_mult:Mult4
+ 96. Parameter Settings for Inferred Entity Instance: camera:camIf|lpm_mult:Mult3
+ 97. Parameter Settings for Inferred Entity Instance: camera:camIf|lpm_mult:Mult1
+ 98. Parameter Settings for Inferred Entity Instance: camera:camIf|lpm_mult:Mult0
+ 99. Parameter Settings for Inferred Entity Instance: screens:hdmi|textController:textC1|lpm_mult:Mult0
+100. Parameter Settings for Inferred Entity Instance: screens:hdmi|textController:textC1|lpm_mult:Mult2
+101. Parameter Settings for Inferred Entity Instance: screens:hdmi|textController:textC1|lpm_mult:Mult1
+102. altpll Parameter Settings by Entity Instance
+103. altsyncram Parameter Settings by Entity Instance
+104. lpm_mult Parameter Settings by Entity Instance
+105. Port Connectivity Checks: "busArbiter:arbiter"
+106. Port Connectivity Checks: "screens:hdmi|dualPortRam4k:asciiRam2"
+107. Port Connectivity Checks: "screens:hdmi|dualPortRam4k:asciiRam1"
+108. Port Connectivity Checks: "screens:hdmi|textController:textC2"
+109. Port Connectivity Checks: "screens:hdmi"
+110. Port Connectivity Checks: "profileCi:profiler|counter:counter3"
+111. Port Connectivity Checks: "profileCi:profiler|counter:counter2"
+112. Port Connectivity Checks: "profileCi:profiler|counter:counter1"
+113. Port Connectivity Checks: "profileCi:profiler|counter:counter0"
+114. Port Connectivity Checks: "swapByte:ise1"
+115. Port Connectivity Checks: "processorId:cpuFreq|decimalCounter:cnt[5].dcount"
+116. Port Connectivity Checks: "processorId:cpuFreq|decimalCounter:cnt[0].dcount"
+117. Port Connectivity Checks: "or1420Top:cpu1"
+118. Port Connectivity Checks: "sdramController:sdram|sdramFifo:buffer|sram512X32Dp:readMem"
+119. Port Connectivity Checks: "sdramController:sdram"
+120. Port Connectivity Checks: "uartBus:uart1"
+121. Post-Synthesis Netlist Statistics for Top Partition
+122. Elapsed Time Per Partition
+123. Analysis & Synthesis Messages
+124. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -150,13 +156,13 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                        ;
 +------------------------------------+------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri May 10 13:43:13 2024          ;
+; Analysis & Synthesis Status        ; Successful - Sat May 11 20:03:06 2024          ;
 ; Quartus Prime Version              ; 23.1std.0 Build 991 11/28/2023 SC Lite Edition ;
 ; Revision Name                      ; or1420SingleCore                               ;
 ; Top-level Entity Name              ; or1420SingleCore                               ;
 ; Family                             ; Cyclone IV E                                   ;
-; Total logic elements               ; 15,240                                         ;
-;     Total combinational functions  ; 13,249                                         ;
+; Total logic elements               ; 15,398                                         ;
+;     Total combinational functions  ; 13,407                                         ;
 ;     Dedicated logic registers      ; 6,563                                          ;
 ; Total registers                    ; 6563                                           ;
 ; Total pins                         ; 113                                            ;
@@ -364,6 +370,24 @@ https://fpgasoftware.intel.com/eula.
 ; bypassff.inc                                            ; yes             ; Megafunction                                          ; /home/ismael/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/bypassff.inc                                                              ;         ;
 ; altshift.inc                                            ; yes             ; Megafunction                                          ; /home/ismael/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/altshift.inc                                                              ;         ;
 ; db/mult_7dt.tdf                                         ; yes             ; Auto-Generated Megafunction                           ; /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/systems/singleCore/sandbox/db/mult_7dt.tdf                                   ;         ;
+; multcore.tdf                                            ; yes             ; Megafunction                                          ; /home/ismael/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/multcore.tdf                                                              ;         ;
+; csa_add.inc                                             ; yes             ; Megafunction                                          ; /home/ismael/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/csa_add.inc                                                               ;         ;
+; mpar_add.inc                                            ; yes             ; Megafunction                                          ; /home/ismael/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/mpar_add.inc                                                              ;         ;
+; muleabz.inc                                             ; yes             ; Megafunction                                          ; /home/ismael/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/muleabz.inc                                                               ;         ;
+; mul_lfrg.inc                                            ; yes             ; Megafunction                                          ; /home/ismael/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/mul_lfrg.inc                                                              ;         ;
+; mul_boothc.inc                                          ; yes             ; Megafunction                                          ; /home/ismael/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/mul_boothc.inc                                                            ;         ;
+; alt_ded_mult.inc                                        ; yes             ; Megafunction                                          ; /home/ismael/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/alt_ded_mult.inc                                                          ;         ;
+; alt_ded_mult_y.inc                                      ; yes             ; Megafunction                                          ; /home/ismael/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/alt_ded_mult_y.inc                                                        ;         ;
+; dffpipe.inc                                             ; yes             ; Megafunction                                          ; /home/ismael/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/dffpipe.inc                                                               ;         ;
+; mpar_add.tdf                                            ; yes             ; Megafunction                                          ; /home/ismael/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/mpar_add.tdf                                                              ;         ;
+; lpm_add_sub.tdf                                         ; yes             ; Megafunction                                          ; /home/ismael/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/lpm_add_sub.tdf                                                           ;         ;
+; addcore.inc                                             ; yes             ; Megafunction                                          ; /home/ismael/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/addcore.inc                                                               ;         ;
+; look_add.inc                                            ; yes             ; Megafunction                                          ; /home/ismael/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/look_add.inc                                                              ;         ;
+; alt_stratix_add_sub.inc                                 ; yes             ; Megafunction                                          ; /home/ismael/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/alt_stratix_add_sub.inc                                                   ;         ;
+; db/add_sub_bfh.tdf                                      ; yes             ; Auto-Generated Megafunction                           ; /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/systems/singleCore/sandbox/db/add_sub_bfh.tdf                                ;         ;
+; altshift.tdf                                            ; yes             ; Megafunction                                          ; /home/ismael/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/altshift.tdf                                                              ;         ;
+; db/add_sub_lgh.tdf                                      ; yes             ; Auto-Generated Megafunction                           ; /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/systems/singleCore/sandbox/db/add_sub_lgh.tdf                                ;         ;
+; db/add_sub_jgh.tdf                                      ; yes             ; Auto-Generated Megafunction                           ; /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/systems/singleCore/sandbox/db/add_sub_jgh.tdf                                ;         ;
 ; db/mult_6at.tdf                                         ; yes             ; Auto-Generated Megafunction                           ; /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/systems/singleCore/sandbox/db/mult_6at.tdf                                   ;         ;
 ; db/mult_4at.tdf                                         ; yes             ; Auto-Generated Megafunction                           ; /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/systems/singleCore/sandbox/db/mult_4at.tdf                                   ;         ;
 +---------------------------------------------------------+-----------------+-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+---------+
@@ -374,17 +398,17 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+---------------------------------------------------------------------+
 ; Resource                                    ; Usage                                                               ;
 +---------------------------------------------+---------------------------------------------------------------------+
-; Estimated Total logic elements              ; 15,240                                                              ;
+; Estimated Total logic elements              ; 15,398                                                              ;
 ;                                             ;                                                                     ;
-; Total combinational functions               ; 13249                                                               ;
+; Total combinational functions               ; 13407                                                               ;
 ; Logic element usage by number of LUT inputs ;                                                                     ;
-;     -- 4 input functions                    ; 7789                                                                ;
-;     -- 3 input functions                    ; 3958                                                                ;
-;     -- <=2 input functions                  ; 1502                                                                ;
+;     -- 4 input functions                    ; 7820                                                                ;
+;     -- 3 input functions                    ; 4023                                                                ;
+;     -- <=2 input functions                  ; 1564                                                                ;
 ;                                             ;                                                                     ;
 ; Logic elements by mode                      ;                                                                     ;
-;     -- normal mode                          ; 12004                                                               ;
-;     -- arithmetic mode                      ; 1245                                                                ;
+;     -- normal mode                          ; 12062                                                               ;
+;     -- arithmetic mode                      ; 1345                                                                ;
 ;                                             ;                                                                     ;
 ; Total registers                             ; 6563                                                                ;
 ;     -- Dedicated logic registers            ; 6563                                                                ;
@@ -400,7 +424,7 @@ https://fpgasoftware.intel.com/eula.
 ;                                             ;                                                                     ;
 ; Maximum fan-out node                        ; altpll:altpll_component|test_altpll:auto_generated|wire_pll1_clk[0] ;
 ; Maximum fan-out                             ; 6688                                                                ;
-; Total fan-out                               ; 69474                                                               ;
+; Total fan-out                               ; 69909                                                               ;
 ; Average fan-out                             ; 3.41                                                                ;
 +---------------------------------------------+---------------------------------------------------------------------+
 
@@ -410,7 +434,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------------+--------------------+--------------+
 ; Compilation Hierarchy Node                      ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                  ; Entity Name        ; Library Name ;
 +-------------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------------+--------------------+--------------+
-; |or1420SingleCore                               ; 13249 (496)         ; 6563 (5)                  ; 290976      ; 9            ; 3       ; 3         ; 113  ; 0            ; |or1420SingleCore                                                                                                                    ; or1420SingleCore   ; work         ;
+; |or1420SingleCore                               ; 13407 (498)         ; 6563 (5)                  ; 290976      ; 9            ; 3       ; 3         ; 113  ; 0            ; |or1420SingleCore                                                                                                                    ; or1420SingleCore   ; work         ;
 ;    |altpll:altpll_component|                    ; 1 (0)               ; 1 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|altpll:altpll_component                                                                                            ; altpll             ; work         ;
 ;       |test_altpll:auto_generated|              ; 1 (1)               ; 1 (1)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|altpll:altpll_component|test_altpll:auto_generated                                                                 ; test_altpll        ; work         ;
 ;    |bios:start|                                 ; 79 (79)             ; 103 (103)                 ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|bios:start                                                                                                         ; bios               ; work         ;
@@ -421,10 +445,40 @@ https://fpgasoftware.intel.com/eula.
 ;       |queueMemory:queue|                       ; 0 (0)               ; 0 (0)                     ; 160         ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|busArbiter:arbiter|queueMemory:queue                                                                               ; queueMemory        ; work         ;
 ;          |altsyncram:s_memory_rtl_0|            ; 0 (0)               ; 0 (0)                     ; 160         ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|busArbiter:arbiter|queueMemory:queue|altsyncram:s_memory_rtl_0                                                     ; altsyncram         ; work         ;
 ;             |altsyncram_epg1:auto_generated|    ; 0 (0)               ; 0 (0)                     ; 160         ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|busArbiter:arbiter|queueMemory:queue|altsyncram:s_memory_rtl_0|altsyncram_epg1:auto_generated                      ; altsyncram_epg1    ; work         ;
-;    |camera:camIf|                               ; 346 (340)           ; 333 (289)                 ; 16384       ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf                                                                                                       ; camera             ; work         ;
+;    |camera:camIf|                               ; 518 (388)           ; 333 (289)                 ; 16384       ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf                                                                                                       ; camera             ; work         ;
 ;       |dualPortRam2k:lineBuffer|                ; 0 (0)               ; 32 (32)                   ; 16384       ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|dualPortRam2k:lineBuffer                                                                              ; dualPortRam2k      ; work         ;
 ;          |altsyncram:memory_rtl_0|              ; 0 (0)               ; 0 (0)                     ; 16384       ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|dualPortRam2k:lineBuffer|altsyncram:memory_rtl_0                                                      ; altsyncram         ; work         ;
 ;             |altsyncram_23d1:auto_generated|    ; 0 (0)               ; 0 (0)                     ; 16384       ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|dualPortRam2k:lineBuffer|altsyncram:memory_rtl_0|altsyncram_23d1:auto_generated                       ; altsyncram_23d1    ; work         ;
+;       |lpm_mult:Mult0|                          ; 17 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|lpm_mult:Mult0                                                                                        ; lpm_mult           ; work         ;
+;          |multcore:mult_core|                   ; 17 (8)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|lpm_mult:Mult0|multcore:mult_core                                                                     ; multcore           ; work         ;
+;             |mpar_add:padder|                   ; 9 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder                                                     ; mpar_add           ; work         ;
+;                |lpm_add_sub:adder[0]|           ; 9 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]                                ; lpm_add_sub        ; work         ;
+;                   |add_sub_jgh:auto_generated|  ; 9 (9)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]|add_sub_jgh:auto_generated     ; add_sub_jgh        ; work         ;
+;       |lpm_mult:Mult1|                          ; 27 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|lpm_mult:Mult1                                                                                        ; lpm_mult           ; work         ;
+;          |multcore:mult_core|                   ; 27 (15)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|lpm_mult:Mult1|multcore:mult_core                                                                     ; multcore           ; work         ;
+;             |mpar_add:padder|                   ; 12 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|lpm_mult:Mult1|multcore:mult_core|mpar_add:padder                                                     ; mpar_add           ; work         ;
+;                |lpm_add_sub:adder[0]|           ; 12 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|lpm_mult:Mult1|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]                                ; lpm_add_sub        ; work         ;
+;                   |add_sub_lgh:auto_generated|  ; 12 (12)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|lpm_mult:Mult1|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]|add_sub_lgh:auto_generated     ; add_sub_lgh        ; work         ;
+;       |lpm_mult:Mult2|                          ; 18 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|lpm_mult:Mult2                                                                                        ; lpm_mult           ; work         ;
+;          |multcore:mult_core|                   ; 18 (9)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|lpm_mult:Mult2|multcore:mult_core                                                                     ; multcore           ; work         ;
+;             |mpar_add:padder|                   ; 9 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|lpm_mult:Mult2|multcore:mult_core|mpar_add:padder                                                     ; mpar_add           ; work         ;
+;                |lpm_add_sub:adder[0]|           ; 9 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|lpm_mult:Mult2|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]                                ; lpm_add_sub        ; work         ;
+;                   |add_sub_bfh:auto_generated|  ; 9 (9)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|lpm_mult:Mult2|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]|add_sub_bfh:auto_generated     ; add_sub_bfh        ; work         ;
+;       |lpm_mult:Mult3|                          ; 17 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|lpm_mult:Mult3                                                                                        ; lpm_mult           ; work         ;
+;          |multcore:mult_core|                   ; 17 (8)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|lpm_mult:Mult3|multcore:mult_core                                                                     ; multcore           ; work         ;
+;             |mpar_add:padder|                   ; 9 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|lpm_mult:Mult3|multcore:mult_core|mpar_add:padder                                                     ; mpar_add           ; work         ;
+;                |lpm_add_sub:adder[0]|           ; 9 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|lpm_mult:Mult3|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]                                ; lpm_add_sub        ; work         ;
+;                   |add_sub_jgh:auto_generated|  ; 9 (9)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|lpm_mult:Mult3|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]|add_sub_jgh:auto_generated     ; add_sub_jgh        ; work         ;
+;       |lpm_mult:Mult4|                          ; 27 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|lpm_mult:Mult4                                                                                        ; lpm_mult           ; work         ;
+;          |multcore:mult_core|                   ; 27 (15)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|lpm_mult:Mult4|multcore:mult_core                                                                     ; multcore           ; work         ;
+;             |mpar_add:padder|                   ; 12 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|lpm_mult:Mult4|multcore:mult_core|mpar_add:padder                                                     ; mpar_add           ; work         ;
+;                |lpm_add_sub:adder[0]|           ; 12 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|lpm_mult:Mult4|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]                                ; lpm_add_sub        ; work         ;
+;                   |add_sub_lgh:auto_generated|  ; 12 (12)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|lpm_mult:Mult4|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]|add_sub_lgh:auto_generated     ; add_sub_lgh        ; work         ;
+;       |lpm_mult:Mult5|                          ; 18 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|lpm_mult:Mult5                                                                                        ; lpm_mult           ; work         ;
+;          |multcore:mult_core|                   ; 18 (9)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|lpm_mult:Mult5|multcore:mult_core                                                                     ; multcore           ; work         ;
+;             |mpar_add:padder|                   ; 9 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|lpm_mult:Mult5|multcore:mult_core|mpar_add:padder                                                     ; mpar_add           ; work         ;
+;                |lpm_add_sub:adder[0]|           ; 9 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|lpm_mult:Mult5|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]                                ; lpm_add_sub        ; work         ;
+;                   |add_sub_bfh:auto_generated|  ; 9 (9)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|lpm_mult:Mult5|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]|add_sub_bfh:auto_generated     ; add_sub_bfh        ; work         ;
 ;       |synchroFlop:sfps|                        ; 2 (2)               ; 3 (3)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|synchroFlop:sfps                                                                                      ; synchroFlop        ; work         ;
 ;       |synchroFlop:snl|                         ; 1 (1)               ; 3 (3)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|synchroFlop:snl                                                                                       ; synchroFlop        ; work         ;
 ;       |synchroFlop:sns|                         ; 1 (1)               ; 3 (3)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|camera:camIf|synchroFlop:sns                                                                                       ; synchroFlop        ; work         ;
@@ -435,7 +489,7 @@ https://fpgasoftware.intel.com/eula.
 ;    |gpio:sevenSegDipSwitch|                     ; 49 (49)             ; 43 (43)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|gpio:sevenSegDipSwitch                                                                                             ; gpio               ; work         ;
 ;    |i2cCustomInstr:i2cm|                        ; 93 (5)              ; 78 (26)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|i2cCustomInstr:i2cm                                                                                                ; i2cCustomInstr     ; work         ;
 ;       |i2cMaster:master|                        ; 88 (88)             ; 52 (52)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|i2cCustomInstr:i2cm|i2cMaster:master                                                                               ; i2cMaster          ; work         ;
-;    |or1420Top:cpu1|                             ; 8264 (76)           ; 3608 (33)                 ; 81920       ; 6            ; 0       ; 3         ; 0    ; 0            ; |or1420SingleCore|or1420Top:cpu1                                                                                                     ; or1420Top          ; work         ;
+;    |or1420Top:cpu1|                             ; 8251 (76)           ; 3608 (33)                 ; 81920       ; 6            ; 0       ; 3         ; 0    ; 0            ; |or1420SingleCore|or1420Top:cpu1                                                                                                     ; or1420Top          ; work         ;
 ;       |dCache:loadStore|                        ; 170 (170)           ; 129 (129)                 ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|or1420Top:cpu1|dCache:loadStore                                                                                    ; dCache             ; work         ;
 ;          |dCacheSpm:spm|                        ; 0 (0)               ; 0 (0)                     ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|or1420Top:cpu1|dCache:loadStore|dCacheSpm:spm                                                                      ; dCacheSpm          ; work         ;
 ;             |altsyncram:byteRam0_rtl_0|         ; 0 (0)               ; 0 (0)                     ; 16384       ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|or1420Top:cpu1|dCache:loadStore|dCacheSpm:spm|altsyncram:byteRam0_rtl_0                                            ; altsyncram         ; work         ;
@@ -447,14 +501,14 @@ https://fpgasoftware.intel.com/eula.
 ;             |altsyncram:byteRam3_rtl_0|         ; 0 (0)               ; 0 (0)                     ; 16384       ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|or1420Top:cpu1|dCache:loadStore|dCacheSpm:spm|altsyncram:byteRam3_rtl_0                                            ; altsyncram         ; work         ;
 ;                |altsyncram_9f81:auto_generated| ; 0 (0)               ; 0 (0)                     ; 16384       ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|or1420Top:cpu1|dCache:loadStore|dCacheSpm:spm|altsyncram:byteRam3_rtl_0|altsyncram_9f81:auto_generated             ; altsyncram_9f81    ; work         ;
 ;       |decodeStage:decode|                      ; 309 (309)           ; 160 (160)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|or1420Top:cpu1|decodeStage:decode                                                                                  ; decodeStage        ; work         ;
-;       |executeStage:exe|                        ; 1203 (596)          ; 174 (174)                 ; 0           ; 6            ; 0       ; 3         ; 0    ; 0            ; |or1420SingleCore|or1420Top:cpu1|executeStage:exe                                                                                    ; executeStage       ; work         ;
+;       |executeStage:exe|                        ; 1210 (603)          ; 174 (174)                 ; 0           ; 6            ; 0       ; 3         ; 0    ; 0            ; |or1420SingleCore|or1420Top:cpu1|executeStage:exe                                                                                    ; executeStage       ; work         ;
 ;          |adder:addSub|                         ; 163 (163)           ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|or1420Top:cpu1|executeStage:exe|adder:addSub                                                                       ; adder              ; work         ;
 ;          |logicUnit:logicU|                     ; 90 (90)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|or1420Top:cpu1|executeStage:exe|logicUnit:logicU                                                                   ; logicUnit          ; work         ;
 ;          |multiplier:mul|                       ; 28 (0)              ; 0 (0)                     ; 0           ; 6            ; 0       ; 3         ; 0    ; 0            ; |or1420SingleCore|or1420Top:cpu1|executeStage:exe|multiplier:mul                                                                     ; multiplier         ; work         ;
 ;             |lpm_mult:Mult0|                    ; 28 (0)              ; 0 (0)                     ; 0           ; 6            ; 0       ; 3         ; 0    ; 0            ; |or1420SingleCore|or1420Top:cpu1|executeStage:exe|multiplier:mul|lpm_mult:Mult0                                                      ; lpm_mult           ; work         ;
 ;                |mult_7dt:auto_generated|        ; 28 (28)             ; 0 (0)                     ; 0           ; 6            ; 0       ; 3         ; 0    ; 0            ; |or1420SingleCore|or1420Top:cpu1|executeStage:exe|multiplier:mul|lpm_mult:Mult0|mult_7dt:auto_generated                              ; mult_7dt           ; work         ;
 ;          |shifter:shift|                        ; 326 (326)           ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|or1420Top:cpu1|executeStage:exe|shifter:shift                                                                      ; shifter            ; work         ;
-;       |fetchStage:fetch|                        ; 1000 (1000)         ; 882 (882)                 ; 16384       ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|or1420Top:cpu1|fetchStage:fetch                                                                                    ; fetchStage         ; work         ;
+;       |fetchStage:fetch|                        ; 980 (980)           ; 882 (882)                 ; 16384       ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|or1420Top:cpu1|fetchStage:fetch                                                                                    ; fetchStage         ; work         ;
 ;          |altsyncram:s_dataMemory_rtl_0|        ; 0 (0)               ; 0 (0)                     ; 16384       ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|or1420Top:cpu1|fetchStage:fetch|altsyncram:s_dataMemory_rtl_0                                                      ; altsyncram         ; work         ;
 ;             |altsyncram_nd81:auto_generated|    ; 0 (0)               ; 0 (0)                     ; 16384       ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|or1420Top:cpu1|fetchStage:fetch|altsyncram:s_dataMemory_rtl_0|altsyncram_nd81:auto_generated                       ; altsyncram_nd81    ; work         ;
 ;       |memoryStage:mem|                         ; 39 (39)             ; 39 (39)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|or1420Top:cpu1|memoryStage:mem                                                                                     ; memoryStage        ; work         ;
@@ -532,7 +586,7 @@ https://fpgasoftware.intel.com/eula.
 ;       |decimalCounter:cnt[4].dcount|            ; 10 (10)             ; 4 (4)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|processorId:cpuFreq|decimalCounter:cnt[4].dcount                                                                   ; decimalCounter     ; work         ;
 ;       |decimalCounter:cnt[5].dcount|            ; 7 (7)               ; 4 (4)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|processorId:cpuFreq|decimalCounter:cnt[5].dcount                                                                   ; decimalCounter     ; work         ;
 ;       |synchroFlop:msync|                       ; 2 (2)               ; 3 (3)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|processorId:cpuFreq|synchroFlop:msync                                                                              ; synchroFlop        ; work         ;
-;    |profileCi:profiler|                         ; 211 (81)            ; 132 (4)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|profileCi:profiler                                                                                                 ; profileCi          ; work         ;
+;    |profileCi:profiler|                         ; 209 (79)            ; 132 (4)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|profileCi:profiler                                                                                                 ; profileCi          ; work         ;
 ;       |counter:counter0|                        ; 32 (32)             ; 32 (32)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|profileCi:profiler|counter:counter0                                                                                ; counter            ; work         ;
 ;       |counter:counter1|                        ; 33 (33)             ; 32 (32)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|profileCi:profiler|counter:counter1                                                                                ; counter            ; work         ;
 ;       |counter:counter2|                        ; 33 (33)             ; 32 (32)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|profileCi:profiler|counter:counter2                                                                                ; counter            ; work         ;
@@ -541,9 +595,9 @@ https://fpgasoftware.intel.com/eula.
 ;       |dualPortSSRAM:memory|                    ; 0 (0)               ; 0 (0)                     ; 16384       ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|ramDmaCi:ramDma|dualPortSSRAM:memory                                                                               ; dualPortSSRAM      ; work         ;
 ;          |altsyncram:memoryContent_rtl_0|       ; 0 (0)               ; 0 (0)                     ; 16384       ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|ramDmaCi:ramDma|dualPortSSRAM:memory|altsyncram:memoryContent_rtl_0                                                ; altsyncram         ; work         ;
 ;             |altsyncram_m9n1:auto_generated|    ; 0 (0)               ; 0 (0)                     ; 16384       ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|ramDmaCi:ramDma|dualPortSSRAM:memory|altsyncram:memoryContent_rtl_0|altsyncram_m9n1:auto_generated                 ; altsyncram_m9n1    ; work         ;
-;    |rgb565GrayscaleIse:converter|               ; 330 (2)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|rgb565GrayscaleIse:converter                                                                                       ; rgb565GrayscaleIse ; work         ;
-;       |rgb565Grayscale:pixel1|                  ; 83 (83)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|rgb565GrayscaleIse:converter|rgb565Grayscale:pixel1                                                                ; rgb565Grayscale    ; work         ;
-;       |rgb565Grayscale:pixel2|                  ; 82 (82)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|rgb565GrayscaleIse:converter|rgb565Grayscale:pixel2                                                                ; rgb565Grayscale    ; work         ;
+;    |rgb565GrayscaleIse:converter|               ; 331 (2)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|rgb565GrayscaleIse:converter                                                                                       ; rgb565GrayscaleIse ; work         ;
+;       |rgb565Grayscale:pixel1|                  ; 85 (85)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|rgb565GrayscaleIse:converter|rgb565Grayscale:pixel1                                                                ; rgb565Grayscale    ; work         ;
+;       |rgb565Grayscale:pixel2|                  ; 81 (81)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|rgb565GrayscaleIse:converter|rgb565Grayscale:pixel2                                                                ; rgb565Grayscale    ; work         ;
 ;       |rgb565Grayscale:pixel3|                  ; 82 (82)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|rgb565GrayscaleIse:converter|rgb565Grayscale:pixel3                                                                ; rgb565Grayscale    ; work         ;
 ;       |rgb565Grayscale:pixel4|                  ; 81 (81)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|rgb565GrayscaleIse:converter|rgb565Grayscale:pixel4                                                                ; rgb565Grayscale    ; work         ;
 ;    |screens:hdmi|                               ; 1043 (291)          ; 468 (69)                  ; 94208       ; 3            ; 3       ; 0         ; 0    ; 0            ; |or1420SingleCore|screens:hdmi                                                                                                       ; screens            ; work         ;
@@ -578,13 +632,13 @@ https://fpgasoftware.intel.com/eula.
 ;          |sram512X32Dp:readMem|                 ; 0 (0)               ; 0 (0)                     ; 16384       ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|sdramController:sdram|sdramFifo:buffer|sram512X32Dp:readMem                                                        ; sram512X32Dp       ; work         ;
 ;             |altsyncram:memory_rtl_0|           ; 0 (0)               ; 0 (0)                     ; 16384       ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|sdramController:sdram|sdramFifo:buffer|sram512X32Dp:readMem|altsyncram:memory_rtl_0                                ; altsyncram         ; work         ;
 ;                |altsyncram_23d1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 16384       ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|sdramController:sdram|sdramFifo:buffer|sram512X32Dp:readMem|altsyncram:memory_rtl_0|altsyncram_23d1:auto_generated ; altsyncram_23d1    ; work         ;
-;    |spiBus:flash|                               ; 749 (202)           ; 554 (299)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|spiBus:flash                                                                                                       ; spiBus             ; work         ;
+;    |spiBus:flash|                               ; 746 (199)           ; 554 (299)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|spiBus:flash                                                                                                       ; spiBus             ; work         ;
 ;       |spiShiftQuad:quad|                       ; 148 (148)           ; 95 (95)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|spiBus:flash|spiShiftQuad:quad                                                                                     ; spiShiftQuad       ; work         ;
 ;       |spiShiftSingle:single|                   ; 399 (399)           ; 160 (160)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|spiBus:flash|spiShiftSingle:single                                                                                 ; spiShiftSingle     ; work         ;
 ;    |swapByte:ise1|                              ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|swapByte:ise1                                                                                                      ; swapByte           ; work         ;
-;    |uartBus:uart1|                              ; 704 (130)           ; 541 (127)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|uartBus:uart1                                                                                                      ; uartBus            ; work         ;
+;    |uartBus:uart1|                              ; 705 (130)           ; 541 (127)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|uartBus:uart1                                                                                                      ; uartBus            ; work         ;
 ;       |baudGenerator:bdg|                       ; 27 (27)             ; 22 (22)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|uartBus:uart1|baudGenerator:bdg                                                                                    ; baudGenerator      ; work         ;
-;       |uartRx:RXC|                              ; 80 (80)             ; 41 (41)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|uartBus:uart1|uartRx:RXC                                                                                           ; uartRx             ; work         ;
+;       |uartRx:RXC|                              ; 81 (81)             ; 41 (41)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|uartBus:uart1|uartRx:RXC                                                                                           ; uartRx             ; work         ;
 ;       |uartRxFifo:RXF|                          ; 286 (174)           ; 192 (64)                  ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|uartBus:uart1|uartRxFifo:RXF                                                                                       ; uartRxFifo         ; work         ;
 ;          |uartFifoMemory:fifoMem|               ; 112 (112)           ; 128 (128)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|uartBus:uart1|uartRxFifo:RXF|uartFifoMemory:fifoMem                                                                ; uartFifoMemory     ; work         ;
 ;       |uartTx:TXC|                              ; 47 (47)             ; 21 (21)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |or1420SingleCore|uartBus:uart1|uartTx:TXC                                                                                           ; uartTx             ; work         ;
@@ -3467,6 +3521,216 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
++-------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: camera:camIf|lpm_mult:Mult5        ;
++------------------------------------------------+--------------+---------------------+
+; Parameter Name                                 ; Value        ; Type                ;
++------------------------------------------------+--------------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON           ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF          ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON           ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF          ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 8            ; Untyped             ;
+; LPM_WIDTHB                                     ; 5            ; Untyped             ;
+; LPM_WIDTHP                                     ; 13           ; Untyped             ;
+; LPM_WIDTHR                                     ; 13           ; Untyped             ;
+; LPM_WIDTHS                                     ; 1            ; Untyped             ;
+; LPM_REPRESENTATION                             ; UNSIGNED     ; Untyped             ;
+; LPM_PIPELINE                                   ; 0            ; Untyped             ;
+; LATENCY                                        ; 0            ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO           ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; YES          ; Untyped             ;
+; USE_EAB                                        ; OFF          ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 5            ; Untyped             ;
+; DEVICE_FAMILY                                  ; Cyclone IV E ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL       ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT          ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO         ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0            ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0            ; Untyped             ;
+; CBXI_PARAMETER                                 ; NOTHING      ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF          ; Untyped             ;
++------------------------------------------------+--------------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: camera:camIf|lpm_mult:Mult2        ;
++------------------------------------------------+--------------+---------------------+
+; Parameter Name                                 ; Value        ; Type                ;
++------------------------------------------------+--------------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON           ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF          ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON           ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF          ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 8            ; Untyped             ;
+; LPM_WIDTHB                                     ; 5            ; Untyped             ;
+; LPM_WIDTHP                                     ; 13           ; Untyped             ;
+; LPM_WIDTHR                                     ; 13           ; Untyped             ;
+; LPM_WIDTHS                                     ; 1            ; Untyped             ;
+; LPM_REPRESENTATION                             ; UNSIGNED     ; Untyped             ;
+; LPM_PIPELINE                                   ; 0            ; Untyped             ;
+; LATENCY                                        ; 0            ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO           ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; YES          ; Untyped             ;
+; USE_EAB                                        ; OFF          ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 5            ; Untyped             ;
+; DEVICE_FAMILY                                  ; Cyclone IV E ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL       ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT          ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO         ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0            ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0            ; Untyped             ;
+; CBXI_PARAMETER                                 ; NOTHING      ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF          ; Untyped             ;
++------------------------------------------------+--------------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: camera:camIf|lpm_mult:Mult4        ;
++------------------------------------------------+--------------+---------------------+
+; Parameter Name                                 ; Value        ; Type                ;
++------------------------------------------------+--------------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON           ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF          ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON           ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF          ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 8            ; Untyped             ;
+; LPM_WIDTHB                                     ; 8            ; Untyped             ;
+; LPM_WIDTHP                                     ; 16           ; Untyped             ;
+; LPM_WIDTHR                                     ; 16           ; Untyped             ;
+; LPM_WIDTHS                                     ; 1            ; Untyped             ;
+; LPM_REPRESENTATION                             ; UNSIGNED     ; Untyped             ;
+; LPM_PIPELINE                                   ; 0            ; Untyped             ;
+; LATENCY                                        ; 0            ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO           ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; YES          ; Untyped             ;
+; USE_EAB                                        ; OFF          ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 5            ; Untyped             ;
+; DEVICE_FAMILY                                  ; Cyclone IV E ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL       ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT          ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO         ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0            ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0            ; Untyped             ;
+; CBXI_PARAMETER                                 ; NOTHING      ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF          ; Untyped             ;
++------------------------------------------------+--------------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: camera:camIf|lpm_mult:Mult3        ;
++------------------------------------------------+--------------+---------------------+
+; Parameter Name                                 ; Value        ; Type                ;
++------------------------------------------------+--------------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON           ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF          ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON           ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF          ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 8            ; Untyped             ;
+; LPM_WIDTHB                                     ; 6            ; Untyped             ;
+; LPM_WIDTHP                                     ; 14           ; Untyped             ;
+; LPM_WIDTHR                                     ; 14           ; Untyped             ;
+; LPM_WIDTHS                                     ; 1            ; Untyped             ;
+; LPM_REPRESENTATION                             ; UNSIGNED     ; Untyped             ;
+; LPM_PIPELINE                                   ; 0            ; Untyped             ;
+; LATENCY                                        ; 0            ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO           ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; YES          ; Untyped             ;
+; USE_EAB                                        ; OFF          ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 5            ; Untyped             ;
+; DEVICE_FAMILY                                  ; Cyclone IV E ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL       ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT          ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO         ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0            ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0            ; Untyped             ;
+; CBXI_PARAMETER                                 ; NOTHING      ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF          ; Untyped             ;
++------------------------------------------------+--------------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: camera:camIf|lpm_mult:Mult1        ;
++------------------------------------------------+--------------+---------------------+
+; Parameter Name                                 ; Value        ; Type                ;
++------------------------------------------------+--------------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON           ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF          ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON           ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF          ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 8            ; Untyped             ;
+; LPM_WIDTHB                                     ; 8            ; Untyped             ;
+; LPM_WIDTHP                                     ; 16           ; Untyped             ;
+; LPM_WIDTHR                                     ; 16           ; Untyped             ;
+; LPM_WIDTHS                                     ; 1            ; Untyped             ;
+; LPM_REPRESENTATION                             ; UNSIGNED     ; Untyped             ;
+; LPM_PIPELINE                                   ; 0            ; Untyped             ;
+; LATENCY                                        ; 0            ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO           ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; YES          ; Untyped             ;
+; USE_EAB                                        ; OFF          ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 5            ; Untyped             ;
+; DEVICE_FAMILY                                  ; Cyclone IV E ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL       ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT          ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO         ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0            ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0            ; Untyped             ;
+; CBXI_PARAMETER                                 ; NOTHING      ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF          ; Untyped             ;
++------------------------------------------------+--------------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: camera:camIf|lpm_mult:Mult0        ;
++------------------------------------------------+--------------+---------------------+
+; Parameter Name                                 ; Value        ; Type                ;
++------------------------------------------------+--------------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON           ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF          ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON           ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF          ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 8            ; Untyped             ;
+; LPM_WIDTHB                                     ; 6            ; Untyped             ;
+; LPM_WIDTHP                                     ; 14           ; Untyped             ;
+; LPM_WIDTHR                                     ; 14           ; Untyped             ;
+; LPM_WIDTHS                                     ; 1            ; Untyped             ;
+; LPM_REPRESENTATION                             ; UNSIGNED     ; Untyped             ;
+; LPM_PIPELINE                                   ; 0            ; Untyped             ;
+; LATENCY                                        ; 0            ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO           ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; YES          ; Untyped             ;
+; USE_EAB                                        ; OFF          ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 5            ; Untyped             ;
+; DEVICE_FAMILY                                  ; Cyclone IV E ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL       ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT          ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO         ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0            ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0            ; Untyped             ;
+; CBXI_PARAMETER                                 ; NOTHING      ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF          ; Untyped             ;
++------------------------------------------------+--------------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
 +----------------------------------------------------------------------------------------------------+
 ; Parameter Settings for Inferred Entity Instance: screens:hdmi|textController:textC1|lpm_mult:Mult0 ;
 +------------------------------------------------+--------------+------------------------------------+
@@ -3768,7 +4032,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +---------------------------------------+---------------------------------------------------------------+
 ; Name                                  ; Value                                                         ;
 +---------------------------------------+---------------------------------------------------------------+
-; Number of entity instances            ; 4                                                             ;
+; Number of entity instances            ; 10                                                            ;
 ; Entity Instance                       ; or1420Top:cpu1|executeStage:exe|multiplier:mul|lpm_mult:Mult0 ;
 ;     -- LPM_WIDTHA                     ; 32                                                            ;
 ;     -- LPM_WIDTHB                     ; 32                                                            ;
@@ -3776,6 +4040,72 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     -- LPM_REPRESENTATION             ; UNSIGNED                                                      ;
 ;     -- INPUT_A_IS_CONSTANT            ; NO                                                            ;
 ;     -- INPUT_B_IS_CONSTANT            ; NO                                                            ;
+;     -- USE_EAB                        ; OFF                                                           ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                                          ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                                            ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                                            ;
+; Entity Instance                       ; camera:camIf|lpm_mult:Mult5                                   ;
+;     -- LPM_WIDTHA                     ; 8                                                             ;
+;     -- LPM_WIDTHB                     ; 5                                                             ;
+;     -- LPM_WIDTHP                     ; 13                                                            ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                                                      ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                                                            ;
+;     -- INPUT_B_IS_CONSTANT            ; YES                                                           ;
+;     -- USE_EAB                        ; OFF                                                           ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                                          ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                                            ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                                            ;
+; Entity Instance                       ; camera:camIf|lpm_mult:Mult2                                   ;
+;     -- LPM_WIDTHA                     ; 8                                                             ;
+;     -- LPM_WIDTHB                     ; 5                                                             ;
+;     -- LPM_WIDTHP                     ; 13                                                            ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                                                      ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                                                            ;
+;     -- INPUT_B_IS_CONSTANT            ; YES                                                           ;
+;     -- USE_EAB                        ; OFF                                                           ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                                          ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                                            ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                                            ;
+; Entity Instance                       ; camera:camIf|lpm_mult:Mult4                                   ;
+;     -- LPM_WIDTHA                     ; 8                                                             ;
+;     -- LPM_WIDTHB                     ; 8                                                             ;
+;     -- LPM_WIDTHP                     ; 16                                                            ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                                                      ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                                                            ;
+;     -- INPUT_B_IS_CONSTANT            ; YES                                                           ;
+;     -- USE_EAB                        ; OFF                                                           ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                                          ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                                            ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                                            ;
+; Entity Instance                       ; camera:camIf|lpm_mult:Mult3                                   ;
+;     -- LPM_WIDTHA                     ; 8                                                             ;
+;     -- LPM_WIDTHB                     ; 6                                                             ;
+;     -- LPM_WIDTHP                     ; 14                                                            ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                                                      ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                                                            ;
+;     -- INPUT_B_IS_CONSTANT            ; YES                                                           ;
+;     -- USE_EAB                        ; OFF                                                           ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                                          ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                                            ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                                            ;
+; Entity Instance                       ; camera:camIf|lpm_mult:Mult1                                   ;
+;     -- LPM_WIDTHA                     ; 8                                                             ;
+;     -- LPM_WIDTHB                     ; 8                                                             ;
+;     -- LPM_WIDTHP                     ; 16                                                            ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                                                      ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                                                            ;
+;     -- INPUT_B_IS_CONSTANT            ; YES                                                           ;
+;     -- USE_EAB                        ; OFF                                                           ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                                          ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                                            ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                                            ;
+; Entity Instance                       ; camera:camIf|lpm_mult:Mult0                                   ;
+;     -- LPM_WIDTHA                     ; 8                                                             ;
+;     -- LPM_WIDTHB                     ; 6                                                             ;
+;     -- LPM_WIDTHP                     ; 14                                                            ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                                                      ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                                                            ;
+;     -- INPUT_B_IS_CONSTANT            ; YES                                                           ;
 ;     -- USE_EAB                        ; OFF                                                           ;
 ;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                                          ;
 ;     -- INPUT_A_FIXED_VALUE            ; Bx                                                            ;
@@ -3997,23 +4327,23 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     SLD               ; 95                          ;
 ;     plain             ; 2633                        ;
 ; cycloneiii_io_obuf    ; 21                          ;
-; cycloneiii_lcell_comb ; 13249                       ;
-;     arith             ; 1245                        ;
-;         2 data inputs ; 770                         ;
-;         3 data inputs ; 475                         ;
-;     normal            ; 12004                       ;
+; cycloneiii_lcell_comb ; 13407                       ;
+;     arith             ; 1345                        ;
+;         2 data inputs ; 804                         ;
+;         3 data inputs ; 541                         ;
+;     normal            ; 12062                       ;
 ;         0 data inputs ; 21                          ;
-;         1 data inputs ; 83                          ;
-;         2 data inputs ; 628                         ;
-;         3 data inputs ; 3483                        ;
-;         4 data inputs ; 7789                        ;
+;         1 data inputs ; 91                          ;
+;         2 data inputs ; 648                         ;
+;         3 data inputs ; 3482                        ;
+;         4 data inputs ; 7820                        ;
 ; cycloneiii_mac_mult   ; 6                           ;
 ; cycloneiii_mac_out    ; 6                           ;
 ; cycloneiii_pll        ; 1                           ;
 ; cycloneiii_ram_block  ; 275                         ;
 ;                       ;                             ;
 ; Max LUT depth         ; 18.90                       ;
-; Average LUT depth     ; 6.82                        ;
+; Average LUT depth     ; 6.76                        ;
 +-----------------------+-----------------------------+
 
 
@@ -4022,7 +4352,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:33     ;
+; Top            ; 00:00:34     ;
 +----------------+--------------+
 
 
@@ -4046,7 +4376,7 @@ Info: Running Quartus Prime Analysis & Synthesis
     Info: Intel and sold by Intel or its authorized distributors.  Please
     Info: refer to the applicable agreement for further details, at
     Info: https://fpgasoftware.intel.com/eula.
-    Info: Processing started: Fri May 10 13:42:28 2024
+    Info: Processing started: Sat May 11 20:02:20 2024
 Info: Command: quartus_map --family="Cyclone IV E" or1420SingleCore
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 6 of the 6 processors detected
@@ -4305,8 +4635,10 @@ Info (12128): Elaborating entity "dualPortSSRAM" for hierarchy "ramDmaCi:ramDma|
 Info (12128): Elaborating entity "gpio" for hierarchy "gpio:sevenSegDipSwitch" File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/systems/singleCore/verilog/or1420SingleCore.v Line: 533
 Info (12128): Elaborating entity "camera" for hierarchy "camera:camIf" File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/systems/singleCore/verilog/or1420SingleCore.v Line: 570
 Warning (10230): Verilog HDL assignment warning at camera.v(75): truncated value with size 32 to match size of target (17) File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/camera/verilog/camera.v Line: 75
-Info (10264): Verilog HDL Case Statement information at camera.v(208): all case item expressions in this case statement are onehot File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/camera/verilog/camera.v Line: 208
-Info (12128): Elaborating entity "dualPortRam2k" for hierarchy "camera:camIf|dualPortRam2k:lineBuffer" File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/camera/verilog/camera.v Line: 184
+Warning (10230): Verilog HDL assignment warning at camera.v(185): truncated value with size 32 to match size of target (8) File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/camera/verilog/camera.v Line: 185
+Warning (10230): Verilog HDL assignment warning at camera.v(186): truncated value with size 32 to match size of target (8) File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/camera/verilog/camera.v Line: 186
+Info (10264): Verilog HDL Case Statement information at camera.v(235): all case item expressions in this case statement are onehot File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/camera/verilog/camera.v Line: 235
+Info (12128): Elaborating entity "dualPortRam2k" for hierarchy "camera:camIf|dualPortRam2k:lineBuffer" File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/camera/verilog/camera.v Line: 211
 Info (12128): Elaborating entity "screens" for hierarchy "screens:hdmi" File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/systems/singleCore/verilog/or1420SingleCore.v Line: 638
 Info (12128): Elaborating entity "hdmi_720p" for hierarchy "screens:hdmi|hdmi_720p:generator" File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/hdmi_720p/verilog/screens.v Line: 116
 Info (10264): Verilog HDL Case Statement information at hdmi_720p.v(113): all case item expressions in this case statement are onehot File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/hdmi_720p/verilog/hdmi_720p.v Line: 113
@@ -4609,8 +4941,14 @@ Info (19000): Inferred 15 megafunctions from design logic
         Info (286033): Parameter ADDRESS_REG_B set to CLOCK1
         Info (286033): Parameter INDATA_ACLR_A set to NONE
         Info (286033): Parameter WRCONTROL_ACLR_A set to NONE
-Info (278001): Inferred 4 megafunctions from design logic
+Info (278001): Inferred 10 megafunctions from design logic
     Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "or1420Top:cpu1|executeStage:exe|multiplier:mul|Mult0" File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/or1420/verilog/multiplier.v Line: 5
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "camera:camIf|Mult5" File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/camera/verilog/camera.v Line: 186
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "camera:camIf|Mult2" File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/camera/verilog/camera.v Line: 185
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "camera:camIf|Mult4" File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/camera/verilog/camera.v Line: 186
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "camera:camIf|Mult3" File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/camera/verilog/camera.v Line: 186
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "camera:camIf|Mult1" File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/camera/verilog/camera.v Line: 185
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "camera:camIf|Mult0" File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/camera/verilog/camera.v Line: 185
     Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "screens:hdmi|textController:textC1|Mult0" File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/hdmi_720p/verilog/textController.v Line: 242
     Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "screens:hdmi|textController:textC1|Mult2" File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/hdmi_720p/verilog/textController.v Line: 243
     Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "screens:hdmi|textController:textC1|Mult1" File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/hdmi_720p/verilog/textController.v Line: 243
@@ -4777,6 +5115,57 @@ Info (12133): Instantiated megafunction "or1420Top:cpu1|executeStage:exe|multipl
     Info (12134): Parameter "MAXIMIZE_SPEED" = "5"
 Info (12021): Found 1 design units, including 1 entities, in source file db/mult_7dt.tdf
     Info (12023): Found entity 1: mult_7dt File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/systems/singleCore/sandbox/db/mult_7dt.tdf Line: 31
+Info (12130): Elaborated megafunction instantiation "camera:camIf|lpm_mult:Mult5" File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/camera/verilog/camera.v Line: 186
+Info (12133): Instantiated megafunction "camera:camIf|lpm_mult:Mult5" with the following parameter: File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/camera/verilog/camera.v Line: 186
+    Info (12134): Parameter "LPM_WIDTHA" = "8"
+    Info (12134): Parameter "LPM_WIDTHB" = "5"
+    Info (12134): Parameter "LPM_WIDTHP" = "13"
+    Info (12134): Parameter "LPM_WIDTHR" = "13"
+    Info (12134): Parameter "LPM_WIDTHS" = "1"
+    Info (12134): Parameter "LPM_REPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "NO"
+    Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "YES"
+    Info (12134): Parameter "MAXIMIZE_SPEED" = "5"
+Info (12131): Elaborated megafunction instantiation "camera:camIf|lpm_mult:Mult5|multcore:mult_core", which is child of megafunction instantiation "camera:camIf|lpm_mult:Mult5" File: /home/ismael/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/lpm_mult.tdf Line: 309
+Info (12131): Elaborated megafunction instantiation "camera:camIf|lpm_mult:Mult5|multcore:mult_core|mpar_add:padder", which is child of megafunction instantiation "camera:camIf|lpm_mult:Mult5" File: /home/ismael/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/multcore.tdf Line: 229
+Info (12131): Elaborated megafunction instantiation "camera:camIf|lpm_mult:Mult5|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]", which is child of megafunction instantiation "camera:camIf|lpm_mult:Mult5" File: /home/ismael/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/mpar_add.tdf Line: 78
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_bfh.tdf
+    Info (12023): Found entity 1: add_sub_bfh File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/systems/singleCore/sandbox/db/add_sub_bfh.tdf Line: 23
+Info (12131): Elaborated megafunction instantiation "camera:camIf|lpm_mult:Mult5|altshift:external_latency_ffs", which is child of megafunction instantiation "camera:camIf|lpm_mult:Mult5" File: /home/ismael/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/lpm_mult.tdf Line: 352
+Info (12130): Elaborated megafunction instantiation "camera:camIf|lpm_mult:Mult4" File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/camera/verilog/camera.v Line: 186
+Info (12133): Instantiated megafunction "camera:camIf|lpm_mult:Mult4" with the following parameter: File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/camera/verilog/camera.v Line: 186
+    Info (12134): Parameter "LPM_WIDTHA" = "8"
+    Info (12134): Parameter "LPM_WIDTHB" = "8"
+    Info (12134): Parameter "LPM_WIDTHP" = "16"
+    Info (12134): Parameter "LPM_WIDTHR" = "16"
+    Info (12134): Parameter "LPM_WIDTHS" = "1"
+    Info (12134): Parameter "LPM_REPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "NO"
+    Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "YES"
+    Info (12134): Parameter "MAXIMIZE_SPEED" = "5"
+Info (12131): Elaborated megafunction instantiation "camera:camIf|lpm_mult:Mult4|multcore:mult_core", which is child of megafunction instantiation "camera:camIf|lpm_mult:Mult4" File: /home/ismael/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/lpm_mult.tdf Line: 309
+Info (12131): Elaborated megafunction instantiation "camera:camIf|lpm_mult:Mult4|multcore:mult_core|mpar_add:padder", which is child of megafunction instantiation "camera:camIf|lpm_mult:Mult4" File: /home/ismael/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/multcore.tdf Line: 229
+Info (12131): Elaborated megafunction instantiation "camera:camIf|lpm_mult:Mult4|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]", which is child of megafunction instantiation "camera:camIf|lpm_mult:Mult4" File: /home/ismael/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/mpar_add.tdf Line: 78
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_lgh.tdf
+    Info (12023): Found entity 1: add_sub_lgh File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/systems/singleCore/sandbox/db/add_sub_lgh.tdf Line: 23
+Info (12131): Elaborated megafunction instantiation "camera:camIf|lpm_mult:Mult4|altshift:external_latency_ffs", which is child of megafunction instantiation "camera:camIf|lpm_mult:Mult4" File: /home/ismael/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/lpm_mult.tdf Line: 352
+Info (12130): Elaborated megafunction instantiation "camera:camIf|lpm_mult:Mult3" File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/camera/verilog/camera.v Line: 186
+Info (12133): Instantiated megafunction "camera:camIf|lpm_mult:Mult3" with the following parameter: File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/camera/verilog/camera.v Line: 186
+    Info (12134): Parameter "LPM_WIDTHA" = "8"
+    Info (12134): Parameter "LPM_WIDTHB" = "6"
+    Info (12134): Parameter "LPM_WIDTHP" = "14"
+    Info (12134): Parameter "LPM_WIDTHR" = "14"
+    Info (12134): Parameter "LPM_WIDTHS" = "1"
+    Info (12134): Parameter "LPM_REPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "NO"
+    Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "YES"
+    Info (12134): Parameter "MAXIMIZE_SPEED" = "5"
+Info (12131): Elaborated megafunction instantiation "camera:camIf|lpm_mult:Mult3|multcore:mult_core", which is child of megafunction instantiation "camera:camIf|lpm_mult:Mult3" File: /home/ismael/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/lpm_mult.tdf Line: 309
+Info (12131): Elaborated megafunction instantiation "camera:camIf|lpm_mult:Mult3|multcore:mult_core|mpar_add:padder", which is child of megafunction instantiation "camera:camIf|lpm_mult:Mult3" File: /home/ismael/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/multcore.tdf Line: 229
+Info (12131): Elaborated megafunction instantiation "camera:camIf|lpm_mult:Mult3|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]", which is child of megafunction instantiation "camera:camIf|lpm_mult:Mult3" File: /home/ismael/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/mpar_add.tdf Line: 78
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_jgh.tdf
+    Info (12023): Found entity 1: add_sub_jgh File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/systems/singleCore/sandbox/db/add_sub_jgh.tdf Line: 23
+Info (12131): Elaborated megafunction instantiation "camera:camIf|lpm_mult:Mult3|altshift:external_latency_ffs", which is child of megafunction instantiation "camera:camIf|lpm_mult:Mult3" File: /home/ismael/intelFPGA_lite/23.1std/quartus/libraries/megafunctions/lpm_mult.tdf Line: 352
 Info (12130): Elaborated megafunction instantiation "screens:hdmi|textController:textC1|lpm_mult:Mult0" File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/hdmi_720p/verilog/textController.v Line: 242
 Info (12133): Instantiated megafunction "screens:hdmi|textController:textC1|lpm_mult:Mult0" with the following parameter: File: /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/modules/hdmi_720p/verilog/textController.v Line: 242
     Info (12134): Parameter "LPM_WIDTHA" = "7"
@@ -4814,19 +5203,19 @@ Info (17049): 153 registers lost all their fanouts during netlist optimizations.
 Info (144001): Generated suppressed messages file /home/ismael/Desktop/EmbeddedSystemsDesign/PW6/virtual_prototype/systems/singleCore/sandbox/or1420SingleCore.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 1 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 16012 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 16170 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 24 input pins
     Info (21059): Implemented 68 output pins
     Info (21060): Implemented 21 bidirectional pins
-    Info (21061): Implemented 15614 logic cells
+    Info (21061): Implemented 15772 logic cells
     Info (21064): Implemented 275 RAM segments
     Info (21065): Implemented 1 PLLs
     Info (21062): Implemented 9 DSP elements
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 20 warnings
-    Info: Peak virtual memory: 539 megabytes
-    Info: Processing ended: Fri May 10 13:43:13 2024
-    Info: Elapsed time: 00:00:45
-    Info: Total CPU time (on all processors): 00:00:56
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 22 warnings
+    Info: Peak virtual memory: 588 megabytes
+    Info: Processing ended: Sat May 11 20:03:06 2024
+    Info: Elapsed time: 00:00:46
+    Info: Total CPU time (on all processors): 00:01:00
 
 
 +------------------------------------------+

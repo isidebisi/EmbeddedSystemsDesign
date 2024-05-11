@@ -167,7 +167,34 @@ module camera #(parameter [7:0] customInstructionId = 8'd0,
   wire [31:0] s_busPixelWord;
   wire [31:0] s_pixelWord = {s_byte1Reg,camData,s_byte3Reg,s_byte2Reg};
   wire s_weLineBuffer = (s_pixelCountReg[1:0] == 2'b11) ? hsync : 1'b0;
-  
+
+  //PW6 TASK 2
+  wire [31:0] s_grayscalePixelWord;
+
+  wire [7:0] s_grayscalePixel1, s_grayscalePixel2;
+  wire [7:0] s_grayscalePixel1Red, s_grayscalePixel1Blue, s_grayscalePixel2Red, s_grayscalePixel2Blue;
+  wire [7:0] s_grayscalePixel1Green, s_grayscalePixel2Green;
+
+  assign s_grayscalePixel1Red   = {s_pixelWord[31:27],3'b0};
+  assign s_grayscalePixel1Green = {s_pixelWord[26:21],2'b0};
+  assign s_grayscalePixel1Blue  = {s_pixelWord[20:16],3'b0};
+  assign s_grayscalePixel2Red   = {s_pixelWord[15:11],3'b0};
+  assign s_grayscalePixel2Green = {s_pixelWord[10:5],2'b0};
+  assign s_grayscalePixel2Blue  = {s_pixelWord[4:0],3'b0};
+
+  assign s_grayscalePixel1 = ((s_grayscalePixel1Red*54 + s_grayscalePixel1Green*183 + s_grayscalePixel1Blue*19) >> 8);
+  assign s_grayscalePixel2 = ((s_grayscalePixel2Red*54 + s_grayscalePixel2Green*183 + s_grayscalePixel2Blue*19) >> 8);
+
+  assign s_grayscalePixelWord[31:27] = s_grayscalePixel1[7:3]; // Red channel for pixel 1
+  assign s_grayscalePixelWord[26:21] = s_grayscalePixel1[7:2]; // Green channel for pixel 1
+  assign s_grayscalePixelWord[20:16] = s_grayscalePixel1[7:3]; // Blue channel for pixel 1
+
+  assign s_grayscalePixelWord[15:11] = s_grayscalePixel2[7:3]; // Red channel for pixel 2
+  assign s_grayscalePixelWord[10:5]  = s_grayscalePixel2[7:2]; // Green channel for pixel 2
+  assign s_grayscalePixelWord[4:0]   = s_grayscalePixel2[7:3]; // Blue channel for pixel 2
+
+  //Task 2 End
+
   always @(posedge pclk)
     begin
       s_byte3Reg <= (s_pixelCountReg[1:0] == 2'b00 && hsync == 1'b1) ? camData : s_byte3Reg;
@@ -180,7 +207,7 @@ module camera #(parameter [7:0] customInstructionId = 8'd0,
                              .clock1(pclk),
                              .clock2(clock),
                              .writeEnable(s_weLineBuffer),
-                             .dataIn1(s_pixelWord),
+                             .dataIn1(s_grayscalePixelWord),
                              .dataOut2(s_busPixelWord));
 
   /*
