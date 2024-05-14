@@ -70,11 +70,19 @@ int main () {
   
   printf("DMA initialized with MemoryStart: %d, BlockSize: %d, BurstSize: %d\n", dma_readMemoryStart(), dma_readBlockSize(), dma_readBurstSize());
 
-  uint32_t ping_pong_start_Addr = 0;
 
   while(1) {
+
+    //take picture
     takeSingleImageBlocking((uint32_t) &grayscale_in[0]);
 
+
+    /*
+     * insert sobel algorithm here
+    */
+
+
+    //copy grayscale_in to grayscale_out
     memcpy((uint32_t) &grayscale_out[0], (uint32_t) &grayscale_in[0], SCREEN_SIZE);
 
     asm volatile ("l.nios_rrr %[out1],r0,%[in2],0xC":[out1]"=r"(cycles):[in2]"r"(1<<8|7<<4));
