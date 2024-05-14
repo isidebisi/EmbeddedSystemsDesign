@@ -1,5 +1,5 @@
 Timing Analyzer report for or1420SingleCore
-Sun May 12 00:19:52 2024
+Tue May 14 14:19:01 2024
 Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 
 
@@ -156,15 +156,15 @@ https://fpgasoftware.intel.com/eula.
 ; Number detected on machine ; 12          ;
 ; Maximum allowed            ; 6           ;
 ;                            ;             ;
-; Average used               ; 1.65        ;
+; Average used               ; 1.57        ;
 ; Maximum used               ; 6           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;  22.8%      ;
-;     Processor 3            ;  17.5%      ;
-;     Processor 4            ;  13.7%      ;
-;     Processors 5-6         ;   5.4%      ;
+;     Processor 2            ;  19.8%      ;
+;     Processor 3            ;  14.4%      ;
+;     Processor 4            ;  11.9%      ;
+;     Processors 5-6         ;   5.3%      ;
 +----------------------------+-------------+
 
 
@@ -173,7 +173,7 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------+--------+--------------------------+
 ; SDC File Path             ; Status ; Read at                  ;
 +---------------------------+--------+--------------------------+
-; ../scripts/clocks_sdc.tcl ; OK     ; Sun May 12 00:19:38 2024 ;
+; ../scripts/clocks_sdc.tcl ; OK     ; Tue May 14 14:18:55 2024 ;
 +---------------------------+--------+--------------------------+
 
 
@@ -414,8 +414,8 @@ HTML report is unavailable in plain text report export.
 ; -1.197 ; or1420Top:cpu1|decodeStage:decode|exeForwardCntrlA[0] ; or1420Top:cpu1|executeStage:exe|wbWriteData[28]   ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 13.467       ; -0.081     ; 14.584     ;
 ; -1.174 ; or1420Top:cpu1|decodeStage:decode|exeForwardCntrlB[0] ; or1420Top:cpu1|executeStage:exe|wbWriteData[29]   ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 13.467       ; -0.112     ; 14.530     ;
 ; -1.172 ; or1420Top:cpu1|decodeStage:decode|exeForwardCntrlB[1] ; or1420Top:cpu1|executeStage:exe|wbWriteData[29]   ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 13.467       ; -0.112     ; 14.528     ;
-; -1.167 ; or1420Top:cpu1|decodeStage:decode|exeForwardCntrlB[0] ; or1420Top:cpu1|fetchStage:fetch|s_hitReg          ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 13.467       ; 0.380      ; 15.015     ;
 ; -1.167 ; or1420Top:cpu1|decodeStage:decode|exePortAData[8]     ; or1420Top:cpu1|executeStage:exe|wbWriteData[18]   ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 13.467       ; -0.102     ; 14.533     ;
+; -1.167 ; or1420Top:cpu1|decodeStage:decode|exeForwardCntrlB[0] ; or1420Top:cpu1|fetchStage:fetch|s_hitReg          ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 13.467       ; 0.380      ; 15.015     ;
 ; -1.156 ; or1420Top:cpu1|s_wbDataReg[0]                         ; or1420Top:cpu1|executeStage:exe|wbWriteData[18]   ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 13.467       ; -0.125     ; 14.499     ;
 ; -1.148 ; or1420Top:cpu1|decodeStage:decode|exeForwardCntrlB[1] ; or1420Top:cpu1|executeStage:exe|wbWriteData[6]    ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 13.467       ; -0.090     ; 14.526     ;
 ; -1.132 ; or1420Top:cpu1|decodeStage:decode|exeForwardCntrlB[0] ; or1420Top:cpu1|executeStage:exe|wbWriteData[31]   ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 13.467       ; -0.081     ; 14.519     ;
@@ -453,8 +453,8 @@ HTML report is unavailable in plain text report export.
 ; -0.864 ; or1420Top:cpu1|memoryStage:mem|wbWriteData[21]        ; or1420Top:cpu1|executeStage:exe|wbWriteData[30]   ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 13.467       ; -0.065     ; 14.267     ;
 ; -0.860 ; or1420Top:cpu1|executeStage:exe|wbWriteData[8]        ; or1420Top:cpu1|executeStage:exe|wbWriteData[18]   ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 13.467       ; -0.099     ; 14.229     ;
 ; -0.859 ; or1420Top:cpu1|memoryStage:mem|wbWriteData[15]        ; or1420Top:cpu1|executeStage:exe|wbWriteData[30]   ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 13.467       ; -0.097     ; 14.230     ;
-; -0.851 ; or1420Top:cpu1|decodeStage:decode|exePortBData[2]     ; or1420Top:cpu1|fetchStage:fetch|s_hitReg          ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 13.467       ; 0.380      ; 14.699     ;
 ; -0.851 ; or1420Top:cpu1|memoryStage:mem|wbWriteData[21]        ; or1420Top:cpu1|executeStage:exe|wbWriteData[28]   ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 13.467       ; -0.089     ; 14.230     ;
+; -0.851 ; or1420Top:cpu1|decodeStage:decode|exePortBData[2]     ; or1420Top:cpu1|fetchStage:fetch|s_hitReg          ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 13.467       ; 0.380      ; 14.699     ;
 ; -0.849 ; or1420Top:cpu1|decodeStage:decode|exeForwardCntrlB[0] ; or1420Top:cpu1|executeStage:exe|wbWriteData[11]   ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 13.467       ; -0.098     ; 14.219     ;
 ; -0.847 ; or1420Top:cpu1|decodeStage:decode|exeForwardCntrlB[1] ; or1420Top:cpu1|executeStage:exe|wbWriteData[11]   ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 13.467       ; -0.098     ; 14.217     ;
 ; -0.846 ; or1420Top:cpu1|memoryStage:mem|wbWriteData[15]        ; or1420Top:cpu1|executeStage:exe|wbWriteData[6]    ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 13.467       ; -0.090     ; 14.224     ;
@@ -483,8 +483,8 @@ HTML report is unavailable in plain text report export.
 ; -0.739 ; or1420Top:cpu1|decodeStage:decode|exeForwardCntrlB[0] ; or1420Top:cpu1|executeStage:exe|wbWriteData[7]    ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 13.467       ; -0.083     ; 14.124     ;
 ; -0.739 ; or1420Top:cpu1|executeStage:exe|wbWriteData[16]       ; or1420Top:cpu1|executeStage:exe|wbWriteData[28]   ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 13.467       ; -0.073     ; 14.134     ;
 ; -0.732 ; or1420Top:cpu1|s_wbDataReg[3]                         ; or1420Top:cpu1|executeStage:exe|wbWriteData[30]   ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 13.467       ; -0.118     ; 14.082     ;
-; -0.731 ; or1420Top:cpu1|memoryStage:mem|wbWriteData[7]         ; or1420Top:cpu1|executeStage:exe|wbWriteData[30]   ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 13.467       ; -0.097     ; 14.102     ;
 ; -0.731 ; or1420Top:cpu1|decodeStage:decode|exePortAData[17]    ; or1420Top:cpu1|executeStage:exe|wbWriteData[29]   ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 13.467       ; -0.545     ; 13.654     ;
+; -0.731 ; or1420Top:cpu1|memoryStage:mem|wbWriteData[7]         ; or1420Top:cpu1|executeStage:exe|wbWriteData[30]   ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 13.467       ; -0.097     ; 14.102     ;
 ; -0.729 ; or1420Top:cpu1|decodeStage:decode|exePortAData[17]    ; or1420Top:cpu1|executeStage:exe|wbWriteData[31]   ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 13.467       ; -0.554     ; 13.643     ;
 ; -0.723 ; or1420Top:cpu1|s_wbDataReg[13]                        ; or1420Top:cpu1|executeStage:exe|wbWriteData[18]   ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 13.467       ; -0.134     ; 14.057     ;
 ; -0.723 ; or1420Top:cpu1|fetchStage:fetch|instruction[29]       ; or1420Top:cpu1|fetchStage:fetch|s_hitReg          ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 13.467       ; 0.368      ; 14.559     ;
@@ -3105,8 +3105,8 @@ No synchronizer chains to report.
 ; 4.438  ; bios:start|biosRom:rom|altsyncram:Ram0_rtl_0|altsyncram_5r71:auto_generated|ram_block1a8~porta_address_reg0                   ; bios:start|addressDataOut[11]                     ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 6.734        ; -0.248     ; 2.035      ;
 ; 4.441  ; ramDmaCi:ramDma|dualPortSSRAM:memory|altsyncram:memoryContent_rtl_0|altsyncram_m9n1:auto_generated|ram_block1a0~portb_we_reg  ; ramDmaCi:ramDma|s_addressDataOutReg[1]            ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 6.734        ; -0.233     ; 2.047      ;
 ; 4.442  ; ramDmaCi:ramDma|dualPortSSRAM:memory|altsyncram:memoryContent_rtl_0|altsyncram_m9n1:auto_generated|ram_block1a0~portb_we_reg  ; ramDmaCi:ramDma|s_addressDataOutReg[0]            ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 6.734        ; -0.233     ; 2.046      ;
-; 4.447  ; ramDmaCi:ramDma|dualPortSSRAM:memory|altsyncram:memoryContent_rtl_0|altsyncram_m9n1:auto_generated|ram_block1a18~portb_we_reg ; ramDmaCi:ramDma|s_addressDataOutReg[26]           ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 6.734        ; -0.225     ; 2.049      ;
 ; 4.447  ; ramDmaCi:ramDma|dualPortSSRAM:memory|altsyncram:memoryContent_rtl_0|altsyncram_m9n1:auto_generated|ram_block1a0~portb_we_reg  ; ramDmaCi:ramDma|s_addressDataOutReg[14]           ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 6.734        ; -0.213     ; 2.061      ;
+; 4.447  ; ramDmaCi:ramDma|dualPortSSRAM:memory|altsyncram:memoryContent_rtl_0|altsyncram_m9n1:auto_generated|ram_block1a18~portb_we_reg ; ramDmaCi:ramDma|s_addressDataOutReg[26]           ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 6.734        ; -0.225     ; 2.049      ;
 ; 4.450  ; bios:start|biosRom:rom|altsyncram:Ram0_rtl_0|altsyncram_5r71:auto_generated|ram_block1a20~porta_address_reg0                  ; bios:start|addressDataOut[23]                     ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 6.734        ; -0.235     ; 2.036      ;
 ; 4.453  ; bios:start|biosRom:rom|altsyncram:Ram0_rtl_0|altsyncram_5r71:auto_generated|ram_block1a0~porta_address_reg0                   ; bios:start|addressDataOut[2]                      ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 6.734        ; -0.225     ; 2.043      ;
 ; 4.465  ; ramDmaCi:ramDma|dualPortSSRAM:memory|altsyncram:memoryContent_rtl_0|altsyncram_m9n1:auto_generated|ram_block1a0~portb_we_reg  ; ramDmaCi:ramDma|s_addressDataOutReg[9]            ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 6.734        ; -0.214     ; 2.042      ;
@@ -3140,8 +3140,8 @@ No synchronizer chains to report.
 ; 4.560  ; bios:start|biosRom:rom|altsyncram:Ram0_rtl_0|altsyncram_5r71:auto_generated|ram_block1a16~porta_address_reg0                  ; bios:start|addressDataOut[18]                     ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 6.734        ; -0.236     ; 1.925      ;
 ; 4.561  ; bios:start|biosRom:rom|altsyncram:Ram0_rtl_0|altsyncram_5r71:auto_generated|ram_block1a16~porta_address_reg0                  ; bios:start|addressDataOut[17]                     ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 6.734        ; -0.236     ; 1.924      ;
 ; 4.601  ; bios:start|biosRom:rom|altsyncram:Ram0_rtl_0|altsyncram_5r71:auto_generated|ram_block1a25~porta_address_reg0                  ; bios:start|addressDataOut[28]                     ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 6.734        ; -0.233     ; 1.887      ;
-; 4.614  ; ramDmaCi:ramDma|dualPortSSRAM:memory|altsyncram:memoryContent_rtl_0|altsyncram_m9n1:auto_generated|ram_block1a18~portb_we_reg ; ramDmaCi:ramDma|s_addressDataOutReg[21]           ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 6.734        ; -0.225     ; 1.882      ;
 ; 4.614  ; ramDmaCi:ramDma|dualPortSSRAM:memory|altsyncram:memoryContent_rtl_0|altsyncram_m9n1:auto_generated|ram_block1a0~portb_we_reg  ; ramDmaCi:ramDma|s_addressDataOutReg[3]            ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 6.734        ; -0.227     ; 1.880      ;
+; 4.614  ; ramDmaCi:ramDma|dualPortSSRAM:memory|altsyncram:memoryContent_rtl_0|altsyncram_m9n1:auto_generated|ram_block1a18~portb_we_reg ; ramDmaCi:ramDma|s_addressDataOutReg[21]           ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 6.734        ; -0.225     ; 1.882      ;
 ; 4.627  ; ramDmaCi:ramDma|dualPortSSRAM:memory|altsyncram:memoryContent_rtl_0|altsyncram_m9n1:auto_generated|ram_block1a0~portb_we_reg  ; ramDmaCi:ramDma|s_addressDataOutReg[16]           ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 6.734        ; -0.214     ; 1.880      ;
 ; 4.635  ; ramDmaCi:ramDma|dualPortSSRAM:memory|altsyncram:memoryContent_rtl_0|altsyncram_m9n1:auto_generated|ram_block1a0~portb_we_reg  ; ramDmaCi:ramDma|s_addressDataOutReg[4]            ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 6.734        ; -0.214     ; 1.872      ;
 ; 4.642  ; bios:start|biosRom:rom|altsyncram:Ram0_rtl_0|altsyncram_5r71:auto_generated|ram_block1a25~porta_address_reg0                  ; bios:start|addressDataOut[27]                     ; altpll_component|auto_generated|pll1|clk[2] ; altpll_component|auto_generated|pll1|clk[2] ; 6.734        ; -0.234     ; 1.845      ;
@@ -5162,7 +5162,7 @@ Info: Running Quartus Prime Timing Analyzer
     Info: Intel and sold by Intel or its authorized distributors.  Please
     Info: refer to the applicable agreement for further details, at
     Info: https://fpgasoftware.intel.com/eula.
-    Info: Processing started: Sun May 12 00:19:34 2024
+    Info: Processing started: Tue May 14 14:18:53 2024
 Info: Command: quartus_sta or1420SingleCore
 Info: qsta_default_script.tcl version: #1
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
@@ -5323,9 +5323,9 @@ Info (332146): Worst-case minimum pulse width slack is 3.150
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus Prime Timing Analyzer was successful. 0 errors, 7 warnings
-    Info: Peak virtual memory: 705 megabytes
-    Info: Processing ended: Sun May 12 00:19:52 2024
-    Info: Elapsed time: 00:00:18
-    Info: Total CPU time (on all processors): 00:00:26
+    Info: Peak virtual memory: 709 megabytes
+    Info: Processing ended: Tue May 14 14:19:01 2024
+    Info: Elapsed time: 00:00:08
+    Info: Total CPU time (on all processors): 00:00:11
 
 
