@@ -102,5 +102,7 @@ int main () {
       for (int i = 0; i < camParams.nrOfPixelsPerLine * camParams.nrOfLinesPerImage; i++) {
         previous_floyd[i] = floyd[i];
       }
+      vga[2] = swap_u32(2);
+      vga[3] = swap_u32((uint32_t) &floyd[0]);
   }
 }
