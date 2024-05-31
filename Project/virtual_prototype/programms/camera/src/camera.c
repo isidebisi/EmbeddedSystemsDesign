@@ -5,7 +5,7 @@
 #include <floyd_steinberg.h>
 #include <sobel.h>
 
-#define threshold 4000
+#define THRESHOLD 4000
 
 volatile uint16_t rgb565[640*480];
 volatile uint8_t grayscale[640*480];
@@ -94,7 +94,7 @@ int main () {
       }
 
       // If there are changed pixels, movement is detected
-      if (changed_pixels > threshold) {
+      if (changed_pixels > THRESHOLD) {
         printf("Movement detected! %d times\n", ++movement_detected_counter);
         // Do something here, e.g., sound an alarm, send a notification, etc.
       }
