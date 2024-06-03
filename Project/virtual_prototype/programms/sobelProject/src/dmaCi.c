@@ -5,13 +5,14 @@
 
 
 
-void ci_writeToMemory(uint32_t address, uint32_t value){
-  asm volatile("l.nios_rrr r0, %[in1],%[in2],20" ::[in1] "r"(address | 0x400), [in2] "r"(value));
+void ci_writeToMemory(uint32_t address, uint32_t value, uint32_t offset){
+  asm volatile("l.nios_rrr r0, %[in1],%[in2],20" ::[in1] "r"(address | 0x400 | offset <<30), [in2] "r"(value));
 }
 
-uint32_t ci_readFromMemory(uint32_t address){
+uint32_t ci_readFromMemory(uint32_t address, uint32_t offset){
   uint32_t res = 0;
-  asm volatile("l.nios_rrr %[out1],%[in1],r0,20" : [out1] "=r"(res) : [in1] "r"(address));
+
+  asm volatile("l.nios_rrr %[out1],%[in1],r0,20" : [out1] "=r"(res) : [in1] "r"(address | offset <<30));
   return res;
 }
 
@@ -78,5 +79,19 @@ void dma_waitTransferComplete(){
 }
 
 uint32_t dma_switchBuffer(int buffer){
-  return buffer == 0 ? (uint32_t)256 : (uint32_t)0;
+  switch (buffer)
+  {
+  case 0:
+    return 160;
+    break;
+  case 160:
+    return 320;
+    break;
+  case 320:
+    return 480;
+    break;
+  default:
+    return 0;
+    break;
+  }
 }

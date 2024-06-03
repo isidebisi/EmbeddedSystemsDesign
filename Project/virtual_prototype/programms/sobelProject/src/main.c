@@ -12,6 +12,16 @@
 #define SOBEL_THRESHOLD 64
 #define MOVEMENT_THRESHOLD 4000
 
+//Dma parameters
+#define BLOCKSIZE 160
+#define BURSTSIZE 15
+#define SCREEN_WIDTH  640
+#define SCREEN_HEIGHT 480
+#define SCREEN_SIZE   (SCREEN_WIDTH*SCREEN_HEIGHT)
+#define SSRAM_SIZE 640
+#define PI_PO_BUFFER_SIZE_32B 160     // 640 PIXELS / 4 BYTES_PER_WORD * 4 LINES / 4 BUFFER_ZONES
+#define BUFFER_ITERATIONS (SCREEN_HEIGHT) // WE NEED TO ITERATE OVER EVERY LINE BUT THE FIRST AND LAST
+
 
 
 
@@ -55,16 +65,108 @@ int main () {
   vga[2] = swap_u32(2);
   vga[3] = swap_u32((uint32_t) &sobel[0]);
 
+  //Initialize DMA
+  dma_writeMemoryStart(0);
+  dma_writeBlockSize(BLOCKSIZE);
+  dma_writeBurstSize(BURSTSIZE);
+
   while(1) {
 
     takeSingleImageBlocking((uint32_t) &grayscale[0]);
+    uint32_t ping_pong_start_Addr = 0;
+    uint32_t iter_address = 0;
+    uint32_t row1, row2, row3;
+    uint32_t valueA1, valueB1, valueA2, valueB2, resultSobel, writePixels;
+    uint8_t pixel1, pixel2;
+    uint16_t keep2pixels;
 
+
+    for(uint16_t i=0; i < BUFFER_ITERATIONS; i++){
+    
+      iter_address = &grayscale[0] + 4*i* PI_PO_BUFFER_SIZE_32B;
+      dma_writeBusAddress(iter_address);
+      dma_writeBlockSize(BLOCKSIZE);
+
+/*
+      dma_startWriteTransfer();
+      dma_waitTransferComplete();
+
+      for(uint16_t j=0; j<=PI_PO_BUFFER_SIZE_32B; j++){
+        uint32_t row1 = ci_readFromMemory(ping_pong_start_Addr+j, 0);
+
+        sobel[i*SCREEN_WIDTH+ 4*j] = row1 & 0x000000FF;
+        sobel[i*SCREEN_WIDTH + 4*j+1] = (row1 >> 8) & 0x000000FF;
+        sobel[i*SCREEN_WIDTH + 4*j+2] = (row1 >> 16) & 0x000000FF;
+        sobel[i*SCREEN_WIDTH + 4*j+3] = (row1 >> 24) & 0x000000FF;
+      }
+    }
+vga[3] = swap_u32((uint32_t) &sobel[0]);
+int a = 0;
+while (a<100000000) a++;
+*/
+      if(i < BUFFER_ITERATIONS){
+      if(i<3){
+        //do the first 3 rows before starting the sobel algorithm
+        dma_startWriteTransfer();
+        dma_waitTransferComplete();
+        ping_pong_start_Addr = dma_switchBuffer(ping_pong_start_Addr);
+        
+        dma_writeMemoryStart(ping_pong_start_Addr);
+        continue;
+      }
+        dma_startWriteTransfer();
+      }
+     
+      ping_pong_start_Addr = dma_switchBuffer(ping_pong_start_Addr);
+
+      //sobel algorithm
+      // note that as we take 4 pixels per row instead of 3 we can do apply sobel for 2 pixels at the time
+      for(uint16_t j=0; j < SCREEN_WIDTH-3; j+=2){
+        
+
+        uint32_t row3 = (ci_readFromMemory(ping_pong_start_Addr+j/4, j%4));
+        uint32_t row2 = (ci_readFromMemory((ping_pong_start_Addr+j/4+PI_PO_BUFFER_SIZE_32B)%SSRAM_SIZE, j%4));
+        uint32_t row1 = (ci_readFromMemory((ping_pong_start_Addr+j/4+2*PI_PO_BUFFER_SIZE_32B)%SSRAM_SIZE, j%4));
+        
+        //if(i%4==0) printf("At i=%d, j=%d row1=%d, row2=%d, row3=%d, jMod=%d \n", i, j, ping_pong_start_Addr+j/4, (ping_pong_start_Addr+j/4+PI_PO_BUFFER_SIZE_32B)%SSRAM_SIZE, (ping_pong_start_Addr+j/4+2*PI_PO_BUFFER_SIZE_32B)%SSRAM_SIZE, j%4);
+        
+        valueA1 = (row1 & 0xFFFFFF00) + ((row2 >> 24)&0x000000FF);
+        valueB1 = ((row2 << 16)&0xFF000000) + ((row3 >>8) & 0x00FFFFFF);
+        valueA2 = ((row1 << 8) & 0xFFFFFF00) + ((row2 >> 16)&0x000000FF);
+        valueB2 = ((row2 << 24)&0xFF000000) + (row3 & 0x00FFFFFF);
+
+        resultSobel = sobelCi(valueA1, valueB1);
+        pixel1 = (resultSobel>SOBEL_THRESHOLD) ? 0xFF : 0;
+        resultSobel = sobelCi(valueA2, valueB2);
+        pixel2 = (resultSobel>SOBEL_THRESHOLD) ? 0xFF : 0;
+
+        
+        //sobel[(i-2) * SCREEN_WIDTH + j-1] = (uint8_t)pixel1;
+        //sobel[(i-2) * SCREEN_WIDTH + j] = (uint8_t)pixel2;
+        
+        
+        if(j%4 != 0){
+          writePixels = (keep2pixels << 16) + (pixel1 << 8) + pixel2;
+          ci_writeToMemory(ping_pong_start_Addr+j/4, swap_u32(writePixels), 0);
+        } else {
+          keep2pixels = (pixel1 << 8) + pixel2;
+        }
+      }
+        
+      dma_waitTransferComplete();
+      dma_writeMemoryStart(ping_pong_start_Addr);
+      dma_writeBusAddress(&sobel[0] + (i-2) * SCREEN_WIDTH);
+      dma_writeBlockSize(BLOCKSIZE);
+      dma_writeBurstSize(BURSTSIZE);
+      dma_startReadTransfer();
+      dma_waitTransferComplete();
+    }
   #if ENABLE_PROFILING
     printf("Starting HW Sobel\n");
     profileCiResetCounters();
     profileCiEnableCounters();
   #endif
-    doSobelHW(grayscale, sobel, camParams.nrOfPixelsPerLine, camParams.nrOfLinesPerImage);
+    //doSobelHW(grayscale, sobel, camParams.nrOfPixelsPerLine, camParams.nrOfLinesPerImage);
   #if ENABLE_PROFILING
     profileCiDisableCounters();
     profileCiPrintCounters();
@@ -99,11 +201,6 @@ int main () {
     }
   }
 }
-
-
-
-
-
 
 
 uint32_t sobelCi(uint32_t valueA, uint32_t valueB)
@@ -215,7 +312,7 @@ uint32_t movmentDetectHW(uint8_t sobel[], uint8_t previous_sobel[], uint32_t wid
     changed_pixels += movementDetectCi(valueA, valueB);
   }
 
-  printf("changed_pixels HW = %d\n", changed_pixels);
+  //printf("changed_pixels HW = %d\n", changed_pixels);
   if(changed_pixels > MOVEMENT_THRESHOLD) return 1;
   return 0;
 }

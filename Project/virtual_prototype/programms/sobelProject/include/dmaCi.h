@@ -3,8 +3,8 @@
 
 #include <stdint.h>
 
-void      ci_writeToMemory(uint32_t address, uint32_t value);
-uint32_t  ci_readFromMemory(uint32_t address);
+void      ci_writeToMemory(uint32_t address, uint32_t value, uint32_t offset);
+uint32_t  ci_readFromMemory(uint32_t address, uint32_t offset);
 
 void      dma_writeBusAddress(uint32_t address);
 uint32_t  dma_readBusAddress();

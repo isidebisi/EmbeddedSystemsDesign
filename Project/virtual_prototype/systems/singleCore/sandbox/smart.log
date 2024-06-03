@@ -15,15 +15,16 @@ Info: Running Quartus Prime Shell
     Info: Intel and sold by Intel or its authorized distributors.  Please
     Info: refer to the applicable agreement for further details, at
     Info: https://fpgasoftware.intel.com/eula.
-    Info: Processing started: Mon Jun  3 17:14:17 2024
+    Info: Processing started: Mon Jun  3 18:17:29 2024
 Info: Command: quartus_sh --determine_smart_action or1420SingleCore
 Info: Quartus(args): or1420SingleCore
 Info (293032): Detected changes in source files.
-    Info (293027): Source file: /home/ismael/Desktop/EmbeddedSystemsDesign/Project/virtual_prototype/modules/camera/verilog/camera.v has changed.
+    Info (293027): Source file: /home/ismael/Desktop/EmbeddedSystemsDesign/Project/virtual_prototype/modules/ramDmaCi/verilog/dualPortSSram.v has changed.
+    Info (293027): Source file: /home/ismael/Desktop/EmbeddedSystemsDesign/Project/virtual_prototype/modules/ramDmaCi/verilog/ramDmaCi.v has changed.
 Info: SMART_ACTION = SOURCE
 Info (23030): Evaluation of Tcl script /home/ismael/intelFPGA_lite/23.1std/quartus/common/tcl/internal/qsh_smart.tcl was successful
 Info: Quartus Prime Shell was successful. 0 errors, 0 warnings
     Info: Peak virtual memory: 491 megabytes
-    Info: Processing ended: Mon Jun  3 17:14:18 2024
-    Info: Elapsed time: 00:00:01
+    Info: Processing ended: Mon Jun  3 18:17:29 2024
+    Info: Elapsed time: 00:00:00
     Info: Total CPU time (on all processors): 00:00:00
