@@ -8,8 +8,16 @@
 #define SOBEL_THRESHOLD 64
 #define MOVEMENT_THRESHOLD 4000
 
+
+void profileCiEnableCounters();
+void profileCiDisableCounters();
+void profileCiResetCounters();
+void profileCiPrintCounters();
+
 uint32_t sobelCi(uint32_t valueA, uint32_t valueB);
 void doSobelHW(uint8_t grayscale[], uint8_t sobel[], uint32_t width, uint32_t height);
+
+uint32_t profileCPUExecute, profileCPUStall, profileBusIdle;
 
 volatile uint16_t rgb565[640*480];
 volatile uint8_t grayscale[640*480];
@@ -47,12 +55,21 @@ int main () {
     do {
       takeSingleImageBlocking((uint32_t) &grayscale[0]);
 
+      printf("Starting HW Sobel\n");
+      profileCiResetCounters();
+      profileCiEnableCounters();
       doSobelHW(grayscale, sobel, camParams.nrOfPixelsPerLine, camParams.nrOfLinesPerImage);
-
+      profileCiDisableCounters();
+      profileCiPrintCounters();
       
 
-          
+      printf("\nStarting SW Sobel\n");
+      profileCiResetCounters();
+      profileCiEnableCounters();    
       edgeDetection(grayscale,sobel, camParams.nrOfPixelsPerLine, camParams.nrOfLinesPerImage,SOBEL_THRESHOLD);
+      profileCiDisableCounters();
+      profileCiPrintCounters();
+
       asm volatile ("l.nios_rrr %[out1],r0,%[in2],0x6":[out1]"=r"(result):[in2]"r"(3));
     } while (result != 0);
 
@@ -86,6 +103,41 @@ int main () {
       }
   }
 }
+
+void profileCiEnableCounters()
+{
+  asm volatile("l.nios_rrr r0,r0,%[in2],12"::[in2]"r"(0x000F));
+}
+
+void profileCiDisableCounters()
+{
+  asm volatile("l.nios_rrr r0,r0,%[in2],12"::[in2]"r"(0x00F0));
+}
+
+void profileCiResetCounters()
+{
+  asm volatile("l.nios_rrr r0,r0,%[in2],12"::[in2]"r"(0x0F00));
+}
+
+void profileCiPrintCounters()
+{
+  asm volatile("l.nios_rrr %[out1],%[in1],r0,12":
+                [out1]"=r"(profileCPUExecute):
+                [in1]"r"(0));
+  asm volatile("l.nios_rrr %[out1],%[in1],r0,12":
+                [out1]"=r"(profileCPUStall):
+                [in1]"r"(1));
+  asm volatile("l.nios_rrr %[out1],%[in1],r0,12":
+                [out1]"=r"(profileBusIdle):
+                [in1]"r"(2));
+
+  printf("CPU Execute cycles: %d\n", profileCPUExecute);
+  printf("CPU Stall cycles:   %d\n", profileCPUStall);
+  printf("Bus Idle cycles:    %d\n", profileBusIdle);
+
+}
+
+
 
 
 uint32_t sobelCi(uint32_t valueA, uint32_t valueB)
@@ -123,9 +175,7 @@ void doSobelHW(uint8_t grayscale[], uint8_t sobel[], uint32_t width, uint32_t he
                   ((valueB2 << 16) & 0x00FF0000) +
                   ((valueB3 << 8) & 0x0000FF00) +
                   (valueB4 & 0x000000FF);
-        if(line == 20 && pixel == 100){
-          printf("valueA = %d, valueB = %d\n", valueA, valueB);
-        }
+
         resultHW = sobelCi(valueA, valueB);
         sobel[line * width + pixel] = (resultHW>SOBEL_THRESHOLD) ? 0xFF : 0;
  /* DEBUGGING
