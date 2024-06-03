@@ -2,7 +2,8 @@
 #include <ov7670.h>
 #include <swap.h>
 #include <vga.h>
-#include <floyd_steinberg.h>
+#include <dmaCi.h>
+#include <profileCi.h>
 #include <sobel.h>
 
 #define ENABLE_PROFILING 0
@@ -12,10 +13,7 @@
 #define MOVEMENT_THRESHOLD 4000
 
 
-void profileCiEnableCounters();
-void profileCiDisableCounters();
-void profileCiResetCounters();
-void profileCiPrintCounters();
+
 
 uint32_t sobelCi(uint32_t valueA, uint32_t valueB);
 void doSobelHW(uint8_t grayscale[], uint8_t sobel[], uint32_t width, uint32_t height);
@@ -24,7 +22,7 @@ uint32_t movmentDetectSW(uint8_t sobel[], uint8_t previous_sobel[], uint32_t wid
 uint32_t movmentDetectHW(uint8_t sobel[], uint8_t previous_sobel[], uint32_t width, uint32_t height);
 
 
-uint32_t profileCPUExecute, profileCPUStall, profileBusIdle;
+
 
 volatile uint16_t rgb565[640*480];
 volatile uint8_t grayscale[640*480];
@@ -103,38 +101,7 @@ int main () {
 }
 
 
-void profileCiEnableCounters()
-{
-  asm volatile("l.nios_rrr r0,r0,%[in2],12"::[in2]"r"(0x000F));
-}
 
-void profileCiDisableCounters()
-{
-  asm volatile("l.nios_rrr r0,r0,%[in2],12"::[in2]"r"(0x00F0));
-}
-
-void profileCiResetCounters()
-{
-  asm volatile("l.nios_rrr r0,r0,%[in2],12"::[in2]"r"(0x0F00));
-}
-
-void profileCiPrintCounters()
-{
-  asm volatile("l.nios_rrr %[out1],%[in1],r0,12":
-                [out1]"=r"(profileCPUExecute):
-                [in1]"r"(0));
-  asm volatile("l.nios_rrr %[out1],%[in1],r0,12":
-                [out1]"=r"(profileCPUStall):
-                [in1]"r"(1));
-  asm volatile("l.nios_rrr %[out1],%[in1],r0,12":
-                [out1]"=r"(profileBusIdle):
-                [in1]"r"(2));
-
-  printf("CPU Execute cycles: %d\n", profileCPUExecute);
-  printf("CPU Stall cycles:   %d\n", profileCPUStall);
-  printf("Bus Idle cycles:    %d\n", profileBusIdle);
-
-}
 
 
 
@@ -213,7 +180,7 @@ uint32_t movmentDetectSW(uint8_t sobel[], uint8_t previous_sobel[], uint32_t wid
     }
   }
 
-  printf("changed_pixels SW = %d\n", changed_pixels);
+  //printf("changed_pixels SW = %d\n", changed_pixels);
   // If there are changed pixels, movement is detected
   if (changed_pixels > MOVEMENT_THRESHOLD) {
     return 1;

@@ -31,11 +31,11 @@ module ramDmaCi #( parameter [7:0] customId = 8'h00 )
    *
    */
   wire s_isMyCi = (ciN == customId) ? start : 1'b0;
-  wire s_isSramWrite = (valueA[31:10] == 22'd0) ? s_isMyCi & valueA[9] : 1'b0;
-  wire s_isSramRead  = s_isMyCi & ~valueA[9];
+  wire s_isSramWrite = (valueA[31:11] == 21'd0) ? s_isMyCi & valueA[10] : 1'b0;
+  wire s_isSramRead  = s_isMyCi & ~valueA[10];
   reg s_isSramReadReg;
   
-  assign done   = (s_isMyCi & valueA[9]) | s_isSramReadReg;
+  assign done   = (s_isMyCi & valueA[10]) | s_isSramReadReg;
   
   always @(posedge clock) s_isSramReadReg = ~reset & s_isSramRead;
 
@@ -52,13 +52,13 @@ module ramDmaCi #( parameter [7:0] customId = 8'h00 )
   always @(posedge clock)
     begin
       s_busStartAddressReg    <= (reset == 1'b1) ? 32'd0 :
-                                 (s_isMyCi == 1'b1 && valueA[12:9] == 4'b0011) ? valueB : s_busStartAddressReg;
+                                 (s_isMyCi == 1'b1 && valueA[13:10] == 4'b0011) ? valueB : s_busStartAddressReg;
       s_memoryStartAddressReg <= (reset == 1'b1) ? 9'd0 :
-                                 (s_isMyCi == 1'b1 && valueA[12:9] == 4'b0101) ? valueB[8:0] : s_memoryStartAddressReg;
+                                 (s_isMyCi == 1'b1 && valueA[13:10] == 4'b0101) ? valueB[8:0] : s_memoryStartAddressReg;
       s_blockSizeReg          <= (reset == 1'b1) ? 10'd0 :
-                                 (s_isMyCi == 1'b1 && valueA[12:9] == 4'b0111) ? valueB[9:0] : s_blockSizeReg;
+                                 (s_isMyCi == 1'b1 && valueA[13:10] == 4'b0111) ? valueB[9:0] : s_blockSizeReg;
       s_usedBurstSizeReg      <= (reset == 1'b1) ? 8'd0 :
-                                 (s_isMyCi == 1'b1 && valueA[12:9] == 4'b1001) ? valueB[7:0] : s_usedBurstSizeReg;
+                                 (s_isMyCi == 1'b1 && valueA[13:10] == 4'b1001) ? valueB[7:0] : s_usedBurstSizeReg;
     end
 
   /*
@@ -82,17 +82,18 @@ module ramDmaCi #( parameter [7:0] customId = 8'h00 )
    *
    */
   
-  reg [8:0] s_ramCiAddressReg;
+  reg [9:0] s_ramCiAddressReg;
   wire s_ramCiWriteEnable;
   wire [31:0] s_busRamData;
   
   dualPortSSRAM #( .bitwidth(32),
-                   .nrOfEntries(512)) memory
+                   .nrOfEntries(640)) memory
                  ( .clockA(clock), 
                    .clockB(~clock),
                    .writeEnableA(s_isSramWrite), 
                    .writeEnableB(s_ramCiWriteEnable),
-                   .addressA(valueA[8:0]), 
+                   .offsetA(valueA[31:30]),
+                   .addressA(valueA[9:0]), 
                    .addressB(s_ramCiAddressReg),
                    .dataInA(valueB), 
                    .dataInB(s_addressDataInReg),
@@ -121,8 +122,8 @@ module ramDmaCi #( parameter [7:0] customId = 8'h00 )
   reg[8:0]  s_wordsWrittenReg;
   
   // a dma action is requested by the ci:
-  wire s_requestDmaIn = (valueA[12:9] == 4'b1011) ? s_isMyCi & valueB[0] & ~valueB[1] : 1'b0;
-  wire s_requestDmaOut = (valueA[12:9] == 4'b1011) ? s_isMyCi & ~valueB[0] & valueB[1] : 1'b0;
+  wire s_requestDmaIn = (valueA[13:10] == 4'b1011) ? s_isMyCi & valueB[0] & ~valueB[1] : 1'b0;
+  wire s_requestDmaOut = (valueA[13:10] == 4'b1011) ? s_isMyCi & ~valueB[0] & valueB[1] : 1'b0;
   wire s_dmaIsBusy = (s_dmaCurrentStateReg == IDLE) ? 1'b0 : 1'b1;
   wire s_dmaDone;
   
@@ -173,7 +174,7 @@ module ramDmaCi #( parameter [7:0] customId = 8'h00 )
       s_blockSizeShadowReg       <= (s_dmaCurrentStateReg == INIT) ? s_blockSizeReg :
                                     (s_ramCiWriteEnable == 1'b1 || s_doBusWrite == 1'b1) ? s_blockSizeShadowReg - 10'd1 : s_blockSizeShadowReg;
       s_ramCiAddressReg          <= (s_dmaCurrentStateReg == INIT) ? s_memoryStartAddressReg :
-                                    (s_ramCiWriteEnable == 1'b1 || s_doBusWrite == 1'b1) ? s_ramCiAddressReg + 9'd1 : s_ramCiAddressReg;
+                                    (s_ramCiWriteEnable == 1'b1 || s_doBusWrite == 1'b1) ? s_ramCiAddressReg + 10'd1 : s_ramCiAddressReg;
     end
   
   /*
@@ -214,7 +215,7 @@ module ramDmaCi #( parameter [7:0] customId = 8'h00 )
   reg[31:0] s_result;
   
   always @*
-    case (valueA[12:10])
+    case (valueA[13:11])
       3'b000    : s_result <= s_sramDataValue;
       3'b001    : s_result <= s_busStartAddressReg;
       3'b010    : s_result <= {23'd0,s_memoryStartAddressReg};
