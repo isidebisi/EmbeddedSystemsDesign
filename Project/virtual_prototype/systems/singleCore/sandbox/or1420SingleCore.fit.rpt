@@ -1,5 +1,5 @@
 Fitter report for or1420SingleCore
-Mon Jun  3 09:31:41 2024
+Mon Jun  3 11:18:28 2024
 Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 
 
@@ -78,7 +78,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------------+
 ; Fitter Summary                                                                      ;
 +------------------------------------+------------------------------------------------+
-; Fitter Status                      ; Successful - Mon Jun  3 09:31:41 2024          ;
+; Fitter Status                      ; Successful - Mon Jun  3 11:18:28 2024          ;
 ; Quartus Prime Version              ; 23.1std.0 Build 991 11/28/2023 SC Lite Edition ;
 ; Revision Name                      ; or1420SingleCore                               ;
 ; Top-level Entity Name              ; or1420SingleCore                               ;
@@ -162,16 +162,16 @@ https://fpgasoftware.intel.com/eula.
 ; Number detected on machine ; 12          ;
 ; Maximum allowed            ; 6           ;
 ;                            ;             ;
-; Average used               ; 1.18        ;
+; Average used               ; 1.20        ;
 ; Maximum used               ; 6           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   3.9%      ;
-;     Processor 3            ;   3.8%      ;
-;     Processor 4            ;   3.7%      ;
-;     Processor 5            ;   3.6%      ;
-;     Processor 6            ;   3.5%      ;
+;     Processor 2            ;   4.1%      ;
+;     Processor 3            ;   4.0%      ;
+;     Processor 4            ;   3.9%      ;
+;     Processor 5            ;   3.8%      ;
+;     Processor 6            ;   3.7%      ;
 +----------------------------+-------------+
 
 
@@ -3201,8 +3201,8 @@ Info (170192): Fitter placement operations ending: elapsed time is 00:00:34
 Info (170193): Fitter routing operations beginning
 Info (170195): Router estimated average interconnect usage is 11% of the available device resources
     Info (170196): Router estimated peak interconnect usage is 45% of the available device resources in the region that extends from location X34_Y22 to location X44_Y32
-Info (170194): Fitter routing operations ending: elapsed time is 00:00:35
-Info (11888): Total time spent on timing analysis during the Fitter is 17.61 seconds.
+Info (170194): Fitter routing operations ending: elapsed time is 00:00:32
+Info (11888): Total time spent on timing analysis during the Fitter is 16.91 seconds.
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Info (334003): Started post-fitting delay annotation
@@ -3210,8 +3210,8 @@ Info (334004): Delay annotation completed successfully
 Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:07
 Info (144001): Generated suppressed messages file /home/ismael/Desktop/EmbeddedSystemsDesign/Project/virtual_prototype/systems/singleCore/sandbox/or1420SingleCore.fit.smsg
 Info: Quartus Prime Fitter was successful. 0 errors, 8 warnings
-    Info: Peak virtual memory: 1436 megabytes
-    Info: Processing ended: Mon Jun  3 09:31:44 2024
+    Info: Peak virtual memory: 1428 megabytes
+    Info: Processing ended: Mon Jun  3 11:18:31 2024
     Info: Elapsed time: 00:01:49
     Info: Total CPU time (on all processors): 00:03:47
 

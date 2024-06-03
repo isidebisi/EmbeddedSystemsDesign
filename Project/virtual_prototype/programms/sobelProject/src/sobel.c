@@ -34,6 +34,18 @@ void edgeDetection( volatile uint8_t *grayscale,
       result = (valueX < 0) ? -valueX : valueX;
       result += (valueY < 0) ? -valueY : valueY;
       sobelResult[line*width+pixel] = (result > threshold) ? 0xFF : 0;
+      if(line == 20 && pixel== 100){
+        printf("edgeDetect pixel result: %d \n", result);
+        printf("edgeDetect pixels: %d %d %d %d %d %d %d %d %d \n", grayscale[((line-1)*width)+pixel-1],
+                                                                  grayscale[((line-1)*width)+pixel],
+                                                                  grayscale[((line-1)*width)+pixel+1],
+                                                                  grayscale[(line*width)+pixel-1],
+                                                                  grayscale[(line*width)+pixel],
+                                                                  grayscale[(line*width)+pixel+1],
+                                                                  grayscale[((line+1)*width)+pixel-1],
+                                                                  grayscale[((line+1)*width)+pixel],
+                                                                  grayscale[((line+1)*width)+pixel+1]);
+      }
     }
   }
 }
