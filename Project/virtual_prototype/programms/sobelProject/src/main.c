@@ -19,6 +19,10 @@ void profileCiPrintCounters();
 
 uint32_t sobelCi(uint32_t valueA, uint32_t valueB);
 void doSobelHW(uint8_t grayscale[], uint8_t sobel[], uint32_t width, uint32_t height);
+uint32_t movementDetectCi(uint32_t valueA, uint32_t valueB);
+uint32_t movmentDetectSW(uint8_t sobel[], uint8_t previous_sobel[], uint32_t width, uint32_t height);
+uint32_t movmentDetectHW(uint8_t sobel[], uint8_t previous_sobel[], uint32_t width, uint32_t height);
+
 
 uint32_t profileCPUExecute, profileCPUStall, profileBusIdle;
 
@@ -68,34 +72,36 @@ int main () {
     profileCiPrintCounters();
   #endif
 
-  if (first_frame) {
+    if (first_frame) {
+      // first frame has nothing to compare to so we wait for the second frame for movement detection
+      memcpy(previous_sobel, sobel, camParams.nrOfPixelsPerLine * camParams.nrOfLinesPerImage * sizeof(*sobel));
 
-    memcpy(previous_sobel, sobel, camParams.nrOfPixelsPerLine * camParams.nrOfLinesPerImage * sizeof(*sobel));
-    
-    first_frame = 0; // Update the flag
-    
-  } else {
-    // Compare the current frame with the previous frame
-    int changed_pixels = 0;
-    for (int i = 0; i < camParams.nrOfPixelsPerLine * camParams.nrOfLinesPerImage; i++) {
-      // Subtract corresponding pixels and check if the difference is significant
-      int diff = sobel[i] - previous_sobel[i];
-      if (diff != 0) {
-        changed_pixels++;
+      first_frame = 0; // Update the flag
+
+    } else {
+
+      uint32_t movement_result;
+
+#if ENABLE_PROFILING
+    printf("Starting HW Movement\n");
+    profileCiResetCounters();
+    profileCiEnableCounters();
+#endif
+      movement_result = movmentDetectHW(sobel, previous_sobel, camParams.nrOfPixelsPerLine, camParams.nrOfLinesPerImage);
+  #if ENABLE_PROFILING
+    profileCiDisableCounters();
+    profileCiPrintCounters();
+  #endif
+
+      if(movement_result){
+        printf("Movement detected ! %d times\n", ++movement_detected_counter);
       }
-    }
-
-    // If there are changed pixels, movement is detected
-    if (changed_pixels > MOVEMENT_THRESHOLD) {
-      printf("Movement detected! %d times\n", ++movement_detected_counter);
-      // Do something here, e.g., sound an alarm, send a notification, etc.
+      // Update the previous frame with the current frame
+      memcpy(previous_sobel, sobel, camParams.nrOfPixelsPerLine * camParams.nrOfLinesPerImage * sizeof(*sobel));
     }
   }
+}
 
-    // Update the previous frame with the current frame
-    memcpy(previous_sobel, sobel, camParams.nrOfPixelsPerLine * camParams.nrOfLinesPerImage * sizeof(*sobel));
-  }
-  }
 
 void profileCiEnableCounters()
 {
@@ -193,4 +199,56 @@ void doSobelHW(uint8_t grayscale[], uint8_t sobel[], uint32_t width, uint32_t he
       }
     }
   }
+}
+
+uint32_t movmentDetectSW(uint8_t sobel[], uint8_t previous_sobel[], uint32_t width, uint32_t height)
+{
+// Compare the current frame with the previous frame
+  int changed_pixels = 0;
+  for (int i = 0; i < width * height; i++) {
+    // Subtract corresponding pixels and check if the difference is significant
+    int diff = sobel[i] - previous_sobel[i];
+    if (diff != 0) {
+      changed_pixels++;
+    }
+  }
+
+  printf("changed_pixels SW = %d\n", changed_pixels);
+  // If there are changed pixels, movement is detected
+  if (changed_pixels > MOVEMENT_THRESHOLD) {
+    return 1;
+    //printf("Movement detected! %d times\n", ++movement_detected_counter);
+    // Do something here, e.g., sound an alarm, send a notification, etc.
+  }
+  return 0;
+}
+
+uint32_t movementDetectCi(uint32_t valueA, uint32_t valueB)
+{
+  uint32_t result;
+  asm volatile ("l.nios_rrr %[out1],%[in1],%[in2],11":[out1]"=r"(result):[in1]"r"(valueA),[in2]"r"(valueB));
+  return result;
+}
+
+uint32_t movmentDetectHW(uint8_t sobel[], uint8_t previous_sobel[], uint32_t width, uint32_t height)
+{
+  uint32_t changed_pixels = 0;
+  uint32_t valueA, valueB;
+  for (int i = 0; i < width * height; i=i+4) {
+    // Subtract corresponding pixels and check if the difference is significant
+    valueA = ((sobel[i] << 24) & 0xFF000000) +
+              ((sobel[i+1] << 16) & 0x00FF0000) +
+              ((sobel[i+2] << 8) & 0x0000FF00) +
+              (sobel[i+3] & 0x000000FF);
+    valueB = ((previous_sobel[i] << 24) & 0xFF000000) +
+              ((previous_sobel[i+1] << 16) & 0x00FF0000) +
+              ((previous_sobel[i+2] << 8) & 0x0000FF00) +
+              (previous_sobel[i+3] & 0x000000FF);
+    
+    changed_pixels += movementDetectCi(valueA, valueB);
+  }
+
+  printf("changed_pixels HW = %d\n", changed_pixels);
+  if(changed_pixels > MOVEMENT_THRESHOLD) return 1;
+  return 0;
 }
