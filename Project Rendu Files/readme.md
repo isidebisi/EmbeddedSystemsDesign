@@ -56,13 +56,21 @@ Idea: Use a DMA controller and with a SRAM as a pingpong buffer. But instead of 
 The sobel algorithm needs 3 rows of pixels to calculate the edges. With 4 buffers we could roll from row to row. \
 That means that 3 rows are in the buffer and worked with while one new row is added to the buffer by the background. \
 The results overwrite the buffer space of the highest row. \
-Each buffer needs 640 bytes of space, which means that in total we need 640 words for the four buffers (2560 bytes). \
+Each buffer needs 640 bytes of space, which means that in total we need 640 words for the four buffers (2560 bytes). 
 
-We can take the ramDmaCi.v as a template but need to adapt it to have one more byte in the address space. \
+We can take the ramDmaCi.v as a template but need to adapt it to have one more byte in the address space.
 1. All the bits in valueA are shifted to the left by 1 bit. (example: ValueA\[10] stores read/Write now instead of valueA\[9])
 2. Customize the DualPort SSRAM to be able to read from specific addresses with byte offset (for example from adress 4 with a byte offset of 1 to get bytes 1-3 from adress 4 and byte 0 from address 5).
 
 visualization of RAM:
 Word 0 | Word 1 | Word 2 | Word 3 |
 --- | --- | --- | ---
-B0 B1 B3 B4 | B0 B1 B2 B3 | B0 B1 B2 B3 | B0 B1 B2 B3
+B0 B1 B2 B3 | B0 B1 B2 B3 | B0 B1 B2 B3 | B0 B1 B2 B3
+
+#### Results of Sobel algorithm with optimized HW acceleration: 
+
+Results | cycles without HW acceleration | cycles with HW acceleration | cycles with optimized HW acceleration
+--- | --- | --- | ---
+CPU execution cycles | 334'856'828 | 101'867'190 | 22'353'305
+CPU stall cycles | 255'656'675 | 80'459'872 | 18'282'876
+CPU bus-idle cycles | 155'509'118 | 46'030'981 | 9'571'337

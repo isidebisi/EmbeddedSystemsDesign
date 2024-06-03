@@ -6,7 +6,7 @@
 #include <profileCi.h>
 #include <sobel.h>
 
-#define ENABLE_PROFILING 0
+#define ENABLE_PROFILING 1
 
 
 #define SOBEL_THRESHOLD 64
@@ -79,31 +79,17 @@ int main () {
     uint32_t valueA1, valueB1, valueA2, valueB2, resultSobel, writePixels;
     uint8_t pixel1, pixel2;
     uint16_t keep2pixels;
-
-
+#if ENABLE_PROFILING
+    printf("Starting HW (with DMA) Sobel\n");
+    profileCiResetCounters();
+    profileCiEnableCounters();
+#endif
     for(uint16_t i=0; i < BUFFER_ITERATIONS; i++){
     
       iter_address = &grayscale[0] + 4*i* PI_PO_BUFFER_SIZE_32B;
       dma_writeBusAddress(iter_address);
       dma_writeBlockSize(BLOCKSIZE);
 
-/*
-      dma_startWriteTransfer();
-      dma_waitTransferComplete();
-
-      for(uint16_t j=0; j<=PI_PO_BUFFER_SIZE_32B; j++){
-        uint32_t row1 = ci_readFromMemory(ping_pong_start_Addr+j, 0);
-
-        sobel[i*SCREEN_WIDTH+ 4*j] = row1 & 0x000000FF;
-        sobel[i*SCREEN_WIDTH + 4*j+1] = (row1 >> 8) & 0x000000FF;
-        sobel[i*SCREEN_WIDTH + 4*j+2] = (row1 >> 16) & 0x000000FF;
-        sobel[i*SCREEN_WIDTH + 4*j+3] = (row1 >> 24) & 0x000000FF;
-      }
-    }
-vga[3] = swap_u32((uint32_t) &sobel[0]);
-int a = 0;
-while (a<100000000) a++;
-*/
       if(i < BUFFER_ITERATIONS){
       if(i<3){
         //do the first 3 rows before starting the sobel algorithm
@@ -161,12 +147,16 @@ while (a<100000000) a++;
       dma_startReadTransfer();
       dma_waitTransferComplete();
     }
+#if ENABLE_PROFILING
+    profileCiDisableCounters();
+    profileCiPrintCounters();
+#endif
   #if ENABLE_PROFILING
-    printf("Starting HW Sobel\n");
+    printf("Starting HW (pixel per pixel) Sobel\n");
     profileCiResetCounters();
     profileCiEnableCounters();
   #endif
-    //doSobelHW(grayscale, sobel, camParams.nrOfPixelsPerLine, camParams.nrOfLinesPerImage);
+    doSobelHW(grayscale, sobel, camParams.nrOfPixelsPerLine, camParams.nrOfLinesPerImage);
   #if ENABLE_PROFILING
     profileCiDisableCounters();
     profileCiPrintCounters();
