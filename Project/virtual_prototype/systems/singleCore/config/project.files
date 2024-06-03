@@ -19,6 +19,7 @@
 ../../../modules/profileCi/verilog/profileCi.v
 ../../../modules/grayscaleCi/verilog/rgb565Grayscale.v
 ../../../modules/grayscaleCi/verilog/rgb565ISE.v
+../../../modules/sobelCi/verilog/sobelCi.v
 ../../../modules/gpio/verilog/gpio.v
 ../../../modules/ramDmaCi/verilog/dualPortSSram.v
 ../../../modules/ramDmaCi/verilog/ramDmaCi.v
@@ -58,3 +59,4 @@
 ../../../modules/support/verilog/sram_1024x16_dp.v
 ../../../modules/support/verilog/sram2048x8Dp.v
 ../verilog/or1420SingleCore.v
+

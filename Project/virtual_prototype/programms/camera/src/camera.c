@@ -35,6 +35,9 @@ int main () {
   printf("PCLK (kHz) : %d\n", camParams.pixelClockInkHz );
   printf("FPS        : %d\n", camParams.framesPerSecond );
 
+  vga[2] = swap_u32(2);
+  vga[3] = swap_u32((uint32_t) &sobel[0]);
+
   while(1) {
     // vga[2] = swap_u32(2);
     // vga[3] = swap_u32((uint32_t) &grayscale[0]);
@@ -72,7 +75,7 @@ int main () {
 
     do {
       takeSingleImageBlocking((uint32_t) &grayscale[0]);
-      edgeDetection(grayscale,sobel, camParams.nrOfPixelsPerLine, camParams.nrOfLinesPerImage,128);
+      edgeDetection(grayscale,sobel, camParams.nrOfPixelsPerLine, camParams.nrOfLinesPerImage,64);
       asm volatile ("l.nios_rrr %[out1],r0,%[in2],0x6":[out1]"=r"(result):[in2]"r"(3));
     } while (result != 0);
 
@@ -104,7 +107,5 @@ int main () {
       for (int i = 0; i < camParams.nrOfPixelsPerLine * camParams.nrOfLinesPerImage; i++) {
         previous_sobel[i] = sobel[i];
       }
-      vga[2] = swap_u32(2);
-      vga[3] = swap_u32((uint32_t) &sobel[0]);
   }
 }

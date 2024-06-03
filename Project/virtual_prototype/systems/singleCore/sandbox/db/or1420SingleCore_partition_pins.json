@@ -412,6 +412,10 @@
 					"strict" : false
 				},
 				{
+					"name" : "camData[4]",
+					"strict" : false
+				},
+				{
 					"name" : "camData[3]",
 					"strict" : false
 				},
@@ -425,10 +429,6 @@
 				},
 				{
 					"name" : "camData[0]",
-					"strict" : false
-				},
-				{
-					"name" : "camData[4]",
 					"strict" : false
 				},
 				{
