@@ -5,6 +5,9 @@
 #include <floyd_steinberg.h>
 #include <sobel.h>
 
+#define ENABLE_PROFILING 0
+
+
 #define SOBEL_THRESHOLD 64
 #define MOVEMENT_THRESHOLD 4000
 
@@ -52,57 +55,47 @@ int main () {
 
   while(1) {
 
-    do {
-      takeSingleImageBlocking((uint32_t) &grayscale[0]);
+    takeSingleImageBlocking((uint32_t) &grayscale[0]);
 
-      printf("Starting HW Sobel\n");
-      profileCiResetCounters();
-      profileCiEnableCounters();
-      doSobelHW(grayscale, sobel, camParams.nrOfPixelsPerLine, camParams.nrOfLinesPerImage);
-      profileCiDisableCounters();
-      profileCiPrintCounters();
-      
+  #if ENABLE_PROFILING
+    printf("Starting HW Sobel\n");
+    profileCiResetCounters();
+    profileCiEnableCounters();
+  #endif
+    doSobelHW(grayscale, sobel, camParams.nrOfPixelsPerLine, camParams.nrOfLinesPerImage);
+  #if ENABLE_PROFILING
+    profileCiDisableCounters();
+    profileCiPrintCounters();
+  #endif
 
-      printf("\nStarting SW Sobel\n");
-      profileCiResetCounters();
-      profileCiEnableCounters();    
-      edgeDetection(grayscale,sobel, camParams.nrOfPixelsPerLine, camParams.nrOfLinesPerImage,SOBEL_THRESHOLD);
-      profileCiDisableCounters();
-      profileCiPrintCounters();
+  if (first_frame) {
 
-      asm volatile ("l.nios_rrr %[out1],r0,%[in2],0x6":[out1]"=r"(result):[in2]"r"(3));
-    } while (result != 0);
-
-    if (first_frame) {
-      for (int i = 0; i < camParams.nrOfPixelsPerLine * camParams.nrOfLinesPerImage; i++) {
-        previous_sobel[i] = sobel[i];
-      }
-      first_frame = 0; // Update the flag
-      
-    } else {
-      // Compare the current frame with the previous frame
-      int changed_pixels = 0;
-      for (int i = 0; i < camParams.nrOfPixelsPerLine * camParams.nrOfLinesPerImage; i++) {
-        // Subtract corresponding pixels and check if the difference is significant
-        int diff = sobel[i] - previous_sobel[i];
-        if (diff != 0) {
-          changed_pixels++;
-        }
-      }
-
-      // If there are changed pixels, movement is detected
-      if (changed_pixels > MOVEMENT_THRESHOLD) {
-        printf("Movement detected! %d times\n", ++movement_detected_counter);
-        // Do something here, e.g., sound an alarm, send a notification, etc.
+    memcpy(previous_sobel, sobel, camParams.nrOfPixelsPerLine * camParams.nrOfLinesPerImage * sizeof(*sobel));
+    
+    first_frame = 0; // Update the flag
+    
+  } else {
+    // Compare the current frame with the previous frame
+    int changed_pixels = 0;
+    for (int i = 0; i < camParams.nrOfPixelsPerLine * camParams.nrOfLinesPerImage; i++) {
+      // Subtract corresponding pixels and check if the difference is significant
+      int diff = sobel[i] - previous_sobel[i];
+      if (diff != 0) {
+        changed_pixels++;
       }
     }
 
-      // Update the previous frame with the current frame
-      for (int i = 0; i < camParams.nrOfPixelsPerLine * camParams.nrOfLinesPerImage; i++) {
-        previous_sobel[i] = sobel[i];
-      }
+    // If there are changed pixels, movement is detected
+    if (changed_pixels > MOVEMENT_THRESHOLD) {
+      printf("Movement detected! %d times\n", ++movement_detected_counter);
+      // Do something here, e.g., sound an alarm, send a notification, etc.
+    }
   }
-}
+
+    // Update the previous frame with the current frame
+    memcpy(previous_sobel, sobel, camParams.nrOfPixelsPerLine * camParams.nrOfLinesPerImage * sizeof(*sobel));
+  }
+  }
 
 void profileCiEnableCounters()
 {
