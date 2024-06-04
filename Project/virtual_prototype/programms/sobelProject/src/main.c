@@ -7,7 +7,7 @@
 #include <sobel.h>
 
 
-#define ENABLE_PROFILING 1  //Feel free to enable/disable profiling
+#define ENABLE_PROFILING 0  //Feel free to enable/disable profiling
 #define ENABLE_SOBEL_HW_NO_DMA 0 //Enable the sobel algorithm without DMA
 #define ENABLE_DYNAMIC_THRESHOLD 1 //Enable dynamic thresholding
 
@@ -289,11 +289,9 @@ uint32_t movmentDetectSW(uint8_t sobel[], uint8_t previous_sobel[], uint32_t wid
     }
   }
 
-  //printf("changed_pixels SW = %d\n", changed_pixels);
   // If there are changed pixels, movement is detected
   if (changed_pixels > MOVEMENT_THRESHOLD) {
     return 1;
-    //printf("Movement detected! %d times\n", ++movement_detected_counter);
     // Do something here, e.g., sound an alarm, send a notification, etc.
   }
   return 0;
@@ -324,7 +322,6 @@ uint32_t movmentDetectHW(uint8_t sobel[], uint8_t previous_sobel[], uint32_t wid
     changed_pixels += movementDetectCi(valueA, valueB);
   }
 
-  //printf("changed_pixels HW = %d\n", changed_pixels);
   if(changed_pixels > MOVEMENT_THRESHOLD) return 1;
   return 0;
 }
