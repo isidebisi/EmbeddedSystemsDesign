@@ -6,10 +6,16 @@
 #include <profileCi.h>
 #include <sobel.h>
 
-#define ENABLE_PROFILING 1
 
+#define ENABLE_PROFILING 1  //Feel free to enable/disable profiling
+#define ENABLE_SOBEL_HW_NO_DMA 0 //Enable the sobel algorithm without DMA
+#define ENABLE_DYNAMIC_THRESHOLD 1 //Enable dynamic thresholding
 
-#define SOBEL_THRESHOLD 64
+#define SOBEL_MIN 5000
+#define SOBEL_MAX 30000
+uint16_t sobel_thresholds[6] = {16, 32, 64, 128, 256, 512};
+uint8_t sobel_threshold_index = 3;
+
 #define MOVEMENT_THRESHOLD 4000
 
 //Dma parameters
@@ -24,13 +30,12 @@
 
 
 
-
+//function prototypes
 uint32_t sobelCi(uint32_t valueA, uint32_t valueB);
-void doSobelHW(uint8_t grayscale[], uint8_t sobel[], uint32_t width, uint32_t height);
+void doSobelHW(uint8_t grayscale[], uint8_t sobel[], uint32_t width, uint32_t height, uint32_t threshold);
 uint32_t movementDetectCi(uint32_t valueA, uint32_t valueB);
 uint32_t movmentDetectSW(uint8_t sobel[], uint8_t previous_sobel[], uint32_t width, uint32_t height);
 uint32_t movmentDetectHW(uint8_t sobel[], uint8_t previous_sobel[], uint32_t width, uint32_t height);
-
 
 
 
@@ -78,7 +83,7 @@ int main () {
     uint32_t row1, row2, row3;
     uint32_t valueA1, valueB1, valueA2, valueB2, resultSobel, writePixels;
     uint8_t pixel1, pixel2;
-    uint16_t keep2pixels;
+    uint16_t keep2pixels, sobelEdgeCount = 0;
 #if ENABLE_PROFILING
     printf("Starting HW (with DMA) Sobel\n");
     profileCiResetCounters();
@@ -109,28 +114,24 @@ int main () {
       // note that as we take 4 pixels per row instead of 3 we can do apply sobel for 2 pixels at the time
       for(uint16_t j=0; j < SCREEN_WIDTH-3; j+=2){
         
-
         uint32_t row3 = (ci_readFromMemory(ping_pong_start_Addr+j/4, j%4));
         uint32_t row2 = (ci_readFromMemory((ping_pong_start_Addr+j/4+PI_PO_BUFFER_SIZE_32B)%SSRAM_SIZE, j%4));
         uint32_t row1 = (ci_readFromMemory((ping_pong_start_Addr+j/4+2*PI_PO_BUFFER_SIZE_32B)%SSRAM_SIZE, j%4));
-        
-        //if(i%4==0) printf("At i=%d, j=%d row1=%d, row2=%d, row3=%d, jMod=%d \n", i, j, ping_pong_start_Addr+j/4, (ping_pong_start_Addr+j/4+PI_PO_BUFFER_SIZE_32B)%SSRAM_SIZE, (ping_pong_start_Addr+j/4+2*PI_PO_BUFFER_SIZE_32B)%SSRAM_SIZE, j%4);
-        
+                
         valueA1 = (row1 & 0xFFFFFF00) + ((row2 >> 24)&0x000000FF);
         valueB1 = ((row2 << 16)&0xFF000000) + ((row3 >>8) & 0x00FFFFFF);
         valueA2 = ((row1 << 8) & 0xFFFFFF00) + ((row2 >> 16)&0x000000FF);
         valueB2 = ((row2 << 24)&0xFF000000) + (row3 & 0x00FFFFFF);
 
         resultSobel = sobelCi(valueA1, valueB1);
-        pixel1 = (resultSobel>SOBEL_THRESHOLD) ? 0xFF : 0;
+        pixel1 = (resultSobel>sobel_thresholds[sobel_threshold_index]) ? 0xFF : 0;
         resultSobel = sobelCi(valueA2, valueB2);
-        pixel2 = (resultSobel>SOBEL_THRESHOLD) ? 0xFF : 0;
+        pixel2 = (resultSobel>sobel_thresholds[sobel_threshold_index]) ? 0xFF : 0;
 
-        
-        //sobel[(i-2) * SCREEN_WIDTH + j-1] = (uint8_t)pixel1;
-        //sobel[(i-2) * SCREEN_WIDTH + j] = (uint8_t)pixel2;
-        
-        
+#if ENABLE_DYNAMIC_THRESHOLD          
+        sobelEdgeCount += (pixel1 == 0xFF) + (pixel2 == 0xFF);
+#endif
+        //We only write 4 pixels at a time into the memory so we need to keep 2 pixels for the next iteration
         if(j%4 != 0){
           writePixels = (keep2pixels << 16) + (pixel1 << 8) + pixel2;
           ci_writeToMemory(ping_pong_start_Addr+j/4, swap_u32(writePixels), 0);
@@ -147,20 +148,29 @@ int main () {
       dma_startReadTransfer();
       dma_waitTransferComplete();
     }
+    
+
+
 #if ENABLE_PROFILING
     profileCiDisableCounters();
     profileCiPrintCounters();
 #endif
+
+#if ENABLE_SOBEL_HW_NO_DMA
   #if ENABLE_PROFILING
     printf("Starting HW (pixel per pixel) Sobel\n");
     profileCiResetCounters();
     profileCiEnableCounters();
   #endif
-    doSobelHW(grayscale, sobel, camParams.nrOfPixelsPerLine, camParams.nrOfLinesPerImage);
+
+    //That's the non-optimized sobel algorithm. It is already a Ci function but without DMA and buffer use.
+    doSobelHW(grayscale, sobel, camParams.nrOfPixelsPerLine, camParams.nrOfLinesPerImage, sobel_thresholds[sobel_threshold_index]);
+
   #if ENABLE_PROFILING
     profileCiDisableCounters();
     profileCiPrintCounters();
   #endif
+#endif
 
     if (first_frame) {
       // first frame has nothing to compare to so we wait for the second frame for movement detection
@@ -189,6 +199,18 @@ int main () {
       // Update the previous frame with the current frame
       memcpy(previous_sobel, sobel, camParams.nrOfPixelsPerLine * camParams.nrOfLinesPerImage * sizeof(*sobel));
     }
+
+#if ENABLE_DYNAMIC_THRESHOLD    
+      if(sobelEdgeCount < SOBEL_MIN){
+        sobel_threshold_index = (sobel_threshold_index - 1) % 6;
+        printf("Sobel threshold dynamically decreased to %d because edgeCounter=%d \n", sobel_thresholds[sobel_threshold_index], sobelEdgeCount);
+        first_frame = 1; // Reset the movement detect flag
+      } else if(sobelEdgeCount > SOBEL_MAX){
+        sobel_threshold_index = (sobel_threshold_index + 1) % 6;
+        printf("Sobel threshold dynamically increased to %d because edgeCounter=%d\n", sobel_thresholds[sobel_threshold_index], sobelEdgeCount);
+        first_frame = 1; // Reset the movement detect flag
+      }
+#endif
   }
 }
 
@@ -200,7 +222,7 @@ uint32_t sobelCi(uint32_t valueA, uint32_t valueB)
   return result;
 }
 
-void doSobelHW(uint8_t grayscale[], uint8_t sobel[], uint32_t width, uint32_t height)
+void doSobelHW(uint8_t grayscale[], uint8_t sobel[], uint32_t width, uint32_t height, uint32_t threshold)
 {
   uint8_t valueA1, valueA2, valueA3, valueA4, valueB1, valueB2, valueB3, valueB4;
   uint32_t valueA, valueB, result, resultHW;
@@ -230,7 +252,7 @@ void doSobelHW(uint8_t grayscale[], uint8_t sobel[], uint32_t width, uint32_t he
                   (valueB4 & 0x000000FF);
 
         resultHW = sobelCi(valueA, valueB);
-        sobel[line * width + pixel] = (resultHW>SOBEL_THRESHOLD) ? 0xFF : 0;
+        sobel[line * width + pixel] = (resultHW>threshold) ? 0xFF : 0;
  /* DEBUGGING
           if (line ==20 && pixel == 100) {
             printf("At pixel %d \n", pixel);
