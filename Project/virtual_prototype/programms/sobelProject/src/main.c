@@ -75,22 +75,6 @@ int main () {
   dma_writeBlockSize(BLOCKSIZE);
   dma_writeBurstSize(BURSTSIZE);
 
-  //Test Write and read to memory
-  ci_writeToMemory(0,   (0x01234567), 0);
-  ci_writeToMemory(1,   (0x89ABCDEF), 0);
-  uint32_t readValue =  (ci_readFromMemory(0,0));
-  uint32_t readValue2 = (ci_readFromMemory(1,0));
-  uint32_t readValue3 = (ci_readFromMemory(0,1));
-  uint32_t readValue4 = (ci_readFromMemory(0,2));
-  uint32_t readValue5 = (ci_readFromMemory(0,3));
-
-  printf("Write value  : %x\n", 0x01234567);
-  printf("Write value2 (none): %x\n", 0x89ABCDEF);
-  printf("Read value  (0,offset 0): %x\n", readValue);
-  printf("Read value2 (1,offset 0): %x\n", readValue2);
-  printf("Read value3 (0,offset 1): %x\n", readValue3);
-  printf("Read value4 (0,offset 2): %x\n", readValue4);
-  printf("Read value5 (0,offset 3): %x\n", readValue5);
 
   while(1) {
 
@@ -112,44 +96,25 @@ int main () {
       iter_address = &grayscale[0] + 4*i* PI_PO_BUFFER_SIZE_32B;
       dma_writeBusAddress(iter_address);
       dma_writeBlockSize(BLOCKSIZE);
-
-
-
       dma_startWriteTransfer();
-      dma_waitTransferComplete();
-/*
-      for(uint16_t j=0; j<=PI_PO_BUFFER_SIZE_32B; j++){
-        uint32_t row1 = ci_readFromMemory(ping_pong_start_Addr+j, 0);
 
-        sobel[i*SCREEN_WIDTH+ 4*j] = row1 & 0x000000FF;
-        sobel[i*SCREEN_WIDTH + 4*j+1] = (row1 >> 8) & 0x000000FF;
-        sobel[i*SCREEN_WIDTH + 4*j+2] = (row1 >> 16) & 0x000000FF;
-        sobel[i*SCREEN_WIDTH + 4*j+3] = (row1 >> 24) & 0x000000FF;
-      }
-*/
-
-      if(i < BUFFER_ITERATIONS){
       if(i<3){
         //do the first 3 rows before starting the sobel algorithm
-        dma_startWriteTransfer();
-        dma_waitTransferComplete();
         ping_pong_start_Addr = dma_switchBuffer(ping_pong_start_Addr);
-        
+        dma_waitTransferComplete();
         dma_writeMemoryStart(ping_pong_start_Addr);
         continue;
       }
-        dma_startWriteTransfer();
-      }
-     
+
       ping_pong_start_Addr = dma_switchBuffer(ping_pong_start_Addr);
 
       //sobel algorithm
       // note that as we take 4 pixels per row instead of 3 we can apply sobel for 2 pixels at the time
       for(uint16_t j=0; j < SCREEN_WIDTH-3; j+=2){
         
-        uint32_t row3 = (ci_readFromMemory(ping_pong_start_Addr+j/4, j%4));
+        uint32_t row1 = (ci_readFromMemory(ping_pong_start_Addr+j/4, j%4));
         uint32_t row2 = (ci_readFromMemory((ping_pong_start_Addr+j/4+PI_PO_BUFFER_SIZE_32B)%SSRAM_SIZE, j%4));
-        uint32_t row1 = (ci_readFromMemory((ping_pong_start_Addr+j/4+2*PI_PO_BUFFER_SIZE_32B)%SSRAM_SIZE, j%4));
+        uint32_t row3 = (ci_readFromMemory((ping_pong_start_Addr+j/4+2*PI_PO_BUFFER_SIZE_32B)%SSRAM_SIZE, j%4));
                 
         valueA1 = (row1 & 0xFFFFFF00) + ((row2 >> 24)&0x000000FF);
         valueB1 = ((row2 << 16)&0xFF000000) + ((row3 >>8) & 0x00FFFFFF);
@@ -171,13 +136,8 @@ int main () {
         } else {
           keep2pixels = (pixel1 << 8) + pixel2;
         }
-
-
-        sobel[(i-2) * SCREEN_WIDTH + j-1] = (uint8_t) pixel2;//(row2>>8);//pixel1;
-        sobel[(i-2) * SCREEN_WIDTH + j] = (uint8_t) pixel1;//(row2>>16);//pixel2;
       }
         
-
 
       dma_waitTransferComplete();
       dma_writeMemoryStart(ping_pong_start_Addr);

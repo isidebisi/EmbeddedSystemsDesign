@@ -76,9 +76,9 @@ However, for our usecase where we want to break the words in the RAM up there is
 
 The second strategy would then be to just implement the two ports in one single always loop. The problem there was, however, that it didn't recognize it as a memory block and wanted to implement it in logic. We don't have enough space in logic to store so many bytes and it would take a huge space on the FPGA for nothing.
 
-**Conclusion:** The synthesizer is not able to implement the RAM in memory blocks if we add some fancy bitshift functionnality.
+**Conclusion:** The synthesizer is not able to implement the RAM in memory blocks if we add some fancy bitshift functionality.
 
-**Solution:** We create instead of one single RAM with 4 buffers, 4 RAMs with 4 buffers each. Each RAMs stores 1 byte. There is an interface layer between the DMA and the RAMs that assembles the signals together to form a word. This solution is not the most efficient neither the most elegant, and certainly not worth the effort of fighting the uphill battle of managing adresses, memory blocks and byteshifts. But as it was already presented in this way we felt the need to make it right and prove our concept.
+**Solution:** We create instead of one single RAM with 4 buffers, 4 RAMs with 4 buffers each. Each RAMs stores 1 byte. There is an interface layer between the DMA and the RAMs that assembles the signals together to form a word. This solution is not the most elegant, and certainly not worth the effort of fighting the uphill battle of managing adresses, memory blocks and byteshifts. But as it was already presented in this way we felt the need to make it right and prove our concept. And the interface is pure logic, so it shouldn't take a whole lot of space in the FPGA.
 
 
 
@@ -89,3 +89,12 @@ Results | cycles without HW acceleration | cycles with HW acceleration | cycles 
 CPU execution cycles | 334'856'828 | 101'867'190 | 22'353'305
 CPU stall cycles | 255'656'675 | 80'459'872 | 18'282'876
 CPU bus-idle cycles | 155'509'118 | 46'030'981 | 9'571'337
+
+
+## What else could be done ?
+There are a few things that could still be done to accelerate the project:
+
+- Implement the sobel algorithm for the whole picture in hardware. This would mean that the the DMA controller instanciates a Sobel calculator that iterates directly on all the values in the RAM. This could also be done for a whole line instead of the whole picture. **Cost:** Work to implement (development cost) and FPGA space.
+
+- Right now we read 3 words and then calculate 2 pixels from it (957 reads for 638 pixels in a line). In the 3 words are, however pixels needed for other calculations. If we calculate for a whole line continuously through software we could reduce the number of reads per calculated pixel to less than 1 read per pixel (480 reads for 640 pixels in a line). This would reduce the number of reads by a factor of 2. **Cost:** Work to implement (development cost).
+
