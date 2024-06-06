@@ -67,6 +67,21 @@ Word 0 | Word 1 | Word 2 | Word 3 |
 --- | --- | --- | ---
 B0 B1 B2 B3 | B0 B1 B2 B3 | B0 B1 B2 B3 | B0 B1 B2 B3
 
+#### That was the plan for the RAM anyway. - Deep dive into RAM Architecture in verilog
+Right after the presentation, we realized that our solution woth a RAM with byte offset didn't synthesize. The demo ran effectively on a previous version without byte offset.
+
+When defining a DualPort SSRAM, the synthesizer recognizes it and automatically implements it in optimized memory blocks.
+
+However, for our usecase where we want to break the words in the RAM up there is a problem. Any tried configuration with clockA and clockB in separate always loops produced some net errors stating that the reg `memoryContent[]` is potentially written by two signals at the same time. This is understandable as Port A and B could write to the same address at the same time if they are badly configured. But even when taking care of those cases by creating conditions that prevent this, the error still occurs.
+
+The second strategy would then be to just implement the two ports in one single always loop. The problem there was, however, that it didn't recognize it as a memory block and wanted to implement it in logic. We don't have enough space in logic to store so many bytes and it would take a huge space on the FPGA for nothing.
+
+**Conclusion:** The synthesizer is not able to implement the RAM in memory blocks if we add some fancy bitshift functionnality.
+
+**Solution:** We create instead of one single RAM with 4 buffers, 4 RAMs with 4 buffers each. Each RAMs stores 1 byte. There is an interface layer between the DMA and the RAMs that assembles the signals together to form a word. This solution is not the most efficient neither the most elegant, and certainly not worth the effort of fighting the uphill battle of managing adresses, memory blocks and byteshifts. But as it was already presented in this way we felt the need to make it right and prove our concept.
+
+
+
 #### Results of Sobel algorithm with optimized HW acceleration: 
 
 Results | cycles without HW acceleration | cycles with HW acceleration | cycles with optimized HW acceleration

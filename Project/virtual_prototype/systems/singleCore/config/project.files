@@ -23,7 +23,7 @@
 ../../../modules/pixelDifferenceCi/verilog/pixelDifferenceCi.v
 ../../../modules/gpio/verilog/gpio.v
 ../../../modules/ramDmaCi/verilog/dualPortSSram.v
-../../../modules/ramDmaCi/verilog/dualPortSSramWoffset.v
+../../../modules/ramDmaCi/verilog/dualPortSSRAMOffsetInterface.v
 ../../../modules/ramDmaCi/verilog/ramDmaCi.v
 ../../../modules/camera/verilog/camera.v
 ../../../modules/delay/verilog/delayIse.v

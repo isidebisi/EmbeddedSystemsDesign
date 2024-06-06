@@ -75,7 +75,25 @@ int main () {
   dma_writeBlockSize(BLOCKSIZE);
   dma_writeBurstSize(BURSTSIZE);
 
+  //Test Write and read to memory
+  ci_writeToMemory(0,   (0x01234567), 0);
+  ci_writeToMemory(1,   (0x89ABCDEF), 0);
+  uint32_t readValue =  (ci_readFromMemory(0,0));
+  uint32_t readValue2 = (ci_readFromMemory(1,0));
+  uint32_t readValue3 = (ci_readFromMemory(0,1));
+  uint32_t readValue4 = (ci_readFromMemory(0,2));
+  uint32_t readValue5 = (ci_readFromMemory(0,3));
+
+  printf("Write value  : %x\n", 0x01234567);
+  printf("Write value2 (none): %x\n", 0x89ABCDEF);
+  printf("Read value  (0,offset 0): %x\n", readValue);
+  printf("Read value2 (1,offset 0): %x\n", readValue2);
+  printf("Read value3 (0,offset 1): %x\n", readValue3);
+  printf("Read value4 (0,offset 2): %x\n", readValue4);
+  printf("Read value5 (0,offset 3): %x\n", readValue5);
+
   while(1) {
+
 
     takeSingleImageBlocking((uint32_t) &grayscale[0]);
     uint32_t ping_pong_start_Addr = 0;
@@ -95,6 +113,21 @@ int main () {
       dma_writeBusAddress(iter_address);
       dma_writeBlockSize(BLOCKSIZE);
 
+
+
+      dma_startWriteTransfer();
+      dma_waitTransferComplete();
+/*
+      for(uint16_t j=0; j<=PI_PO_BUFFER_SIZE_32B; j++){
+        uint32_t row1 = ci_readFromMemory(ping_pong_start_Addr+j, 0);
+
+        sobel[i*SCREEN_WIDTH+ 4*j] = row1 & 0x000000FF;
+        sobel[i*SCREEN_WIDTH + 4*j+1] = (row1 >> 8) & 0x000000FF;
+        sobel[i*SCREEN_WIDTH + 4*j+2] = (row1 >> 16) & 0x000000FF;
+        sobel[i*SCREEN_WIDTH + 4*j+3] = (row1 >> 24) & 0x000000FF;
+      }
+*/
+
       if(i < BUFFER_ITERATIONS){
       if(i<3){
         //do the first 3 rows before starting the sobel algorithm
@@ -111,7 +144,7 @@ int main () {
       ping_pong_start_Addr = dma_switchBuffer(ping_pong_start_Addr);
 
       //sobel algorithm
-      // note that as we take 4 pixels per row instead of 3 we can do apply sobel for 2 pixels at the time
+      // note that as we take 4 pixels per row instead of 3 we can apply sobel for 2 pixels at the time
       for(uint16_t j=0; j < SCREEN_WIDTH-3; j+=2){
         
         uint32_t row3 = (ci_readFromMemory(ping_pong_start_Addr+j/4, j%4));
@@ -124,22 +157,28 @@ int main () {
         valueB2 = ((row2 << 24)&0xFF000000) + (row3 & 0x00FFFFFF);
 
         resultSobel = sobelCi(valueA1, valueB1);
-        pixel1 = (resultSobel>sobel_thresholds[sobel_threshold_index]) ? 0xFF : 0;
+        pixel1 = (resultSobel>sobel_thresholds[sobel_threshold_index]) ? 0xFF : 0; //(row2>>8);
         resultSobel = sobelCi(valueA2, valueB2);
-        pixel2 = (resultSobel>sobel_thresholds[sobel_threshold_index]) ? 0xFF : 0;
+        pixel2 = (resultSobel>sobel_thresholds[sobel_threshold_index]) ? 0xFF : 0; //(row2>>16);
 
 #if ENABLE_DYNAMIC_THRESHOLD          
         sobelEdgeCount += (pixel1 == 0xFF) + (pixel2 == 0xFF);
 #endif
         //We only write 4 pixels at a time into the memory so we need to keep 2 pixels for the next iteration
         if(j%4 != 0){
-          writePixels = (keep2pixels << 16) + (pixel1 << 8) + pixel2;
-          ci_writeToMemory(ping_pong_start_Addr+j/4, swap_u32(writePixels), 0);
+          writePixels = (uint32_t)(keep2pixels << 16) + (uint32_t)(pixel1 << 8) + pixel2;
+          ci_writeToMemory(ping_pong_start_Addr+j/4, writePixels, 0);
         } else {
           keep2pixels = (pixel1 << 8) + pixel2;
         }
+
+
+        sobel[(i-2) * SCREEN_WIDTH + j-1] = (uint8_t) pixel2;//(row2>>8);//pixel1;
+        sobel[(i-2) * SCREEN_WIDTH + j] = (uint8_t) pixel1;//(row2>>16);//pixel2;
       }
         
+
+
       dma_waitTransferComplete();
       dma_writeMemoryStart(ping_pong_start_Addr);
       dma_writeBusAddress(&sobel[0] + (i-2) * SCREEN_WIDTH);
@@ -202,13 +241,17 @@ int main () {
 
 #if ENABLE_DYNAMIC_THRESHOLD    
       if(sobelEdgeCount < SOBEL_MIN){
-        sobel_threshold_index = (sobel_threshold_index - 1) % 6;
-        printf("Sobel threshold dynamically decreased to %d because edgeCounter=%d \n", sobel_thresholds[sobel_threshold_index], sobelEdgeCount);
-        first_frame = 1; // Reset the movement detect flag
+        if (sobel_threshold_index!=0){
+          sobel_threshold_index--;
+          printf("Sobel threshold dynamically decreased to %d because edgeCounter=%d \n", sobel_thresholds[sobel_threshold_index], sobelEdgeCount);
+          first_frame = 1; // Reset the movement detect flag
+        }
       } else if(sobelEdgeCount > SOBEL_MAX){
-        sobel_threshold_index = (sobel_threshold_index + 1) % 6;
-        printf("Sobel threshold dynamically increased to %d because edgeCounter=%d\n", sobel_thresholds[sobel_threshold_index], sobelEdgeCount);
-        first_frame = 1; // Reset the movement detect flag
+        if (sobel_threshold_index!=5){
+          sobel_threshold_index++; ;
+          printf("Sobel threshold dynamically increased to %d because edgeCounter=%d\n", sobel_thresholds[sobel_threshold_index], sobelEdgeCount);
+          first_frame = 1; // Reset the movement detect flag
+        }
       }
 #endif
   }

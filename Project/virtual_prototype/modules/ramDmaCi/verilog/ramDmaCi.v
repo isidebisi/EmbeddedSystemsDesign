@@ -86,7 +86,7 @@ module ramDmaCi #( parameter [7:0] customId = 8'h00 )
   wire s_ramCiWriteEnable;
   wire [31:0] s_busRamData;
   
-  dualPortSSRAMWoffset #( .bitwidth(32),
+  dualPortSSRAMOffsetInterface #( .bitwidth(32),
                    .nrOfEntries(640)) memory
                  ( .clockA(clock), 
                    .clockB(~clock),
